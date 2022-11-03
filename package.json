@@ -1,0 +1,38 @@
+{
+  "name": "ustr-mdh-prochazka-budejovice",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jakubferenc/https://github.com/jakubferenc/ustr-mdh-prochazka-budejovice"
+  },
+  "license": "UNLICENSED",
+  "author": "Jakub A. Ferenc <hello@jakubferenc.cz> (https://jakubferenc.cz)",
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "start": "nuxt start"
+  },
+  "browserslist": [
+    "last 3 versions",
+    "> 3%"
+  ],
+  "engines": {
+    "node": ">= 16.0.0"
+  },
+  "dependencies": {
+    "@nuxtjs/bulma": "^1.3.0",
+    "@nuxtjs/firebase": "^7.5.0",
+    "@nuxtjs/style-resources": "^1.0.0",
+    "firebase": "^8.6.3",
+    "nuxt": "^2.15.6",
+    "nuxt-i18n": "^6.28.1"
+  },
+  "devDependencies": {
+    "@nuxtjs/eslint-config": "^6.0.1",
+    "eslint": "^7.28.0",
+    "pug": "^3.0.2",
+    "pug-plain-loader": "^1.1.0",
+    "sass": "^1.52.1",
+    "sass-loader": "^10"
+  }
+}
