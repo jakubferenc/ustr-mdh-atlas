@@ -22,7 +22,7 @@
       .recording-item(v-for="(recording, index) in audioRecordings" :key="index")
         .recording-item__player
           <audio controls>
-            <source :src="recording.audioUrl" type="audio/ogg">
+            <source :src="recording.audioUrl" type="audio/mpeg">
             | Your browser does not support the audio tag.
           </audio>
         .recording-item__actions
@@ -96,6 +96,11 @@ export default {
 
   computed: {
 
+    mimeType() {
+
+
+    }
+
   },
   watch: {
 
@@ -145,7 +150,7 @@ export default {
 
             this.currentMediaRecorder.addEventListener("stop", () => {
               console.log("recorder stopped");
-              const audioBlob = new Blob(this.audioChunks[chunkId], { type: "audio/ogg; codecs=opus" });
+              const audioBlob = new Blob(this.audioChunks[chunkId], { type: "audio/mpeg" });
               const audioUrl = URL.createObjectURL(audioBlob);
               // const audioObject = new Audio(audioUrl);
 

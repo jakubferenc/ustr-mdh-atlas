@@ -26,7 +26,7 @@
             .image-container(v-for="(recording, index) in getNovyObjekt[polozkaKey]" :key="index")
               .recording-item__player
                 <audio controls>
-                  <source :src="recording.audioUrl" type="audio/ogg">
+                  <source :src="recording.audioUrl" type="audio/mpeg">
                   Your browser does not support the audio tag.
                 </audio>
 
@@ -125,8 +125,8 @@ export default {
 
                   return {
                     ...audioObject,
-                    realURLNormalize: `https://firebasestorage.googleapis.com/v0/b/${this.$config.firebaseConfig.apiConfig.projectId}.appspot.com/o/${this.$config.name}/${prepareDatabaseObject.uzivatelske_jmeno}/${newDbObjectId}/${audioObject.id}.ogg?alt=media`,
-                    realURL: `https://firebasestorage.googleapis.com/v0/b/${this.$config.firebaseConfig.apiConfig.projectId}.appspot.com/o/${this.$config.name}%2F${prepareDatabaseObject.uzivatelske_jmeno}%2F${newDbObjectId}%2F${audioObject.id}.ogg?alt=media`,
+                    realURLNormalize: `https://firebasestorage.googleapis.com/v0/b/${this.$config.firebaseConfig.apiConfig.projectId}.appspot.com/o/${this.$config.name}/${prepareDatabaseObject.uzivatelske_jmeno}/${newDbObjectId}/${audioObject.id}.mp3?alt=media`,
+                    realURL: `https://firebasestorage.googleapis.com/v0/b/${this.$config.firebaseConfig.apiConfig.projectId}.appspot.com/o/${this.$config.name}%2F${prepareDatabaseObject.uzivatelske_jmeno}%2F${newDbObjectId}%2F${audioObject.id}.mp3?alt=media`,
                   };
 
                 }),
@@ -179,7 +179,7 @@ export default {
 
           for (const [index, audioObject] of prepareDatabaseObject.audio.entries()) {
 
-            const file_extension = 'ogg';
+            const file_extension = 'mp3';
 
             try {
               // upload audio files
