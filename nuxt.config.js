@@ -97,7 +97,9 @@ export default {
       '~assets/scss/main.sass',
     ],
     styleResources: {
-      sass: ['~bulma/sass/utilities/all']
+      sass: [
+        '~bulma/sass/utilities/all',
+      ]
     },
     head: {
         title: projectConfig.globalName,

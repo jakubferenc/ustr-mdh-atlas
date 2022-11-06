@@ -7,15 +7,13 @@
         :class="{'is-active': isRecording}"
         href="#"
       )
-        i(class="fa-solid fa-microphone")
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M192 0C139 0 96 43 96 96V256c0 53 43 96 96 96s96-43 96-96V96c0-53-43-96-96-96zM64 216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 89.1 66.2 162.7 152 174.4V464H120c-13.3 0-24 10.7-24 24s10.7 24 24 24h72 72c13.3 0 24-10.7 24-24s-10.7-24-24-24H216V430.4c85.8-11.7 152-85.3 152-174.4V216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 70.7-57.3 128-128 128s-128-57.3-128-128V216z"/></svg>
       a.button.audio-button(
         v-if="isRecording"
         @click="toggleRecording"
         href="#"
       )
-        i(
-          class="fa-solid fa-stop"
-        )
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M0 128C0 92.7 28.7 64 64 64H320c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z"/></svg>
     .column.status-info(v-if="isRecording")
       h3 Nahrávám...
   .columns.is-multiline
@@ -33,14 +31,8 @@
 
 
 <style lang="sass" scoped>
-
   @import "~/assets/scss/bulma"
   @import "~/assets/scss/variables"
-
-  $fa-font-path : "~@fortawesome/fontawesome-free/webfonts"
-  @import "~@fortawesome/fontawesome-free/scss/fontawesome.scss"
-  @import "~@fortawesome/fontawesome-free/scss/solid"
-  @import "~@fortawesome/fontawesome-free/scss/regular"
 
   .recording-item
     margin-bottom: 1rem
@@ -76,9 +68,8 @@
     &.is-active
       background-color: indianred
 
-    i
-      color: #000
-      font-size: 4rem
+    svg
+      width: 60%
 
 </style>
 
