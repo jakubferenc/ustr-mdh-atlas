@@ -113,6 +113,10 @@ export default {
 
     deleteRecording(itemToRemoveIndex) {
 
+      const confirm = confirm('Opravdu chcete nahrávku vymazat?');
+
+      if (!confirm) return;
+
       this.audioRecordings = this.audioRecordings.filter((item, index) => index !== itemToRemoveIndex);
       return false;
 
