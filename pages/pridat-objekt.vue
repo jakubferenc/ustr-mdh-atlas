@@ -15,32 +15,30 @@
 
         // Shared questions
 
-        .slide
+        .slide(v-for="(ukolKey, index) in Object.keys(obsahAplikace.mapovaniUkolu)" :key="index")
           .content-container
-            h1 {{obsahAplikace.mapovaniUkolu['q00_01'].title}}
-            <TaskTextovePole  :Id="'q00_01'" />
-
-        // task
-        .slide
-          .content-container
-            h1 {{obsahAplikace.mapovaniUkolu['q01_01'].title}}
-            <TaskMoznosti :Id="'q01_01'" :Zadani="false" :MoznostiContainer="obsahAplikace.typObjektu" :Inline="false" :Limit="1" />
-
-        // task
-
-        .slide
-          .content-container
-            h1 {{obsahAplikace.mapovaniUkolu['q01_02'].title}}
-            h2 Přečtěte si text, který předmět ve výstavě doprovází a v bodech si zapište poznámky o jeho účelu a minulosti.
-            <TaskTextovePole  :Id="'q01_02'" />
-
-
-        .slide
-          .content-container
-            h1 {{obsahAplikace.mapovaniUkolu['q01_03'].title}}
-            h2 udělejte jednu fotku předmětu jako celku a pokud potřebujete přidejte fotky detailů (max 3 snímky)
-            <TaskVyfotFoto  Id="q01_03" PocetFotek="3" />
-
+            h1 {{obsahAplikace.mapovaniUkolu[ukolKey].title}}
+            TaskTextovePole(
+              v-if="obsahAplikace.mapovaniUkolu[ukolKey].type === 'text'"
+              :Id="ukolKey"
+            )
+            TaskMoznosti(
+              v-if="obsahAplikace.mapovaniUkolu[ukolKey].type === 'array'"
+              :Id="ukolKey"
+              :Zadani="false"
+              :MoznostiContainer="obsahAplikace.mapovaniUkolu[ukolKey].itemsObj"
+              :Inline="obsahAplikace.mapovaniUkolu[ukolKey].inline"
+              :Limit="obsahAplikace.mapovaniUkolu[ukolKey].limit"
+            )
+            TaskVyfotFoto(
+              v-if="obsahAplikace.mapovaniUkolu[ukolKey].type === 'image'"
+              :Id="ukolKey"
+              :PocetFotek="obsahAplikace.mapovaniUkolu[ukolKey].pocetFotek"
+            )
+            TaskAudio(
+              v-if="obsahAplikace.mapovaniUkolu[ukolKey].type === 'audio'"
+              :Id="ukolKey"
+            )
 
         .slide
           .content-container
@@ -63,48 +61,8 @@ export default {
 
   layout: 'default',
 
-
-  computed: {
-
-    getSelectedMistoId () {
-
-      if (this.$store.state.novy_objekt['q01_01']) {
-        return obsahAplikaceConfig.typObjektu.items.filter(item => item.title == this.$store.state.novy_objekt?.['q01_01']?.[0])[0].id ;
-      } else {
-        return;
-      }
-
-    },
-
-
-    getSelectedMistoTitle () {
-
-      if (this.$store.state.novy_objekt['q01_01']) {
-        return this.$store.state.novy_objekt?.['q01_01']?.[0];
-      } else {
-        return;
-      }
-
-    },
-
-    // getGenderRoleIntentions() {
-    //   return this.$store.state.novy_objekt['q01_06'];
-    // },
-
-    // getSelectedIntentionKeywords() {
-    //   return this.$store.state.novy_objekt['q01_07'];
-    // },
-
-  },
   watch: {
 
-
-    getSelectedIntentionKeywords (newData, oldData) {
-
-      this.$nuxt.$emit('refresh-navigation');
-
-      return newData;
-    }
   },
   mounted() {
 

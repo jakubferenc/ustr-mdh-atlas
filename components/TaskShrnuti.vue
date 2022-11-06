@@ -4,7 +4,7 @@
     div.summary-container
       div.summary-item(v-for="polozkaKey in Object.keys(getNovyObjekt)")
 
-       div(v-if="MapovaniUkolu[polozkaKey]")
+        div(v-if="MapovaniUkolu[polozkaKey]")
 
           div(v-if="MapovaniUkolu[polozkaKey].type === 'text' ")
             span.title {{MapovaniUkolu[polozkaKey].title}}
@@ -20,6 +20,15 @@
             span.title {{MapovaniUkolu[polozkaKey].title}}
             .image-container(v-for="(itemImageObj, index) in getNovyObjekt[polozkaKey]" :key="index")
               img(class="summary-item-photo-raw" :src="itemImageObj.url")
+
+          div(v-if="MapovaniUkolu[polozkaKey].type === 'audio' ")
+            span.title {{MapovaniUkolu[polozkaKey].title}}
+            .image-container(v-for="(recording, index) in getNovyObjekt[polozkaKey]" :key="index")
+              .recording-item__player
+                <audio controls>
+                  <source :src="recording.audioUrl" type="audio/ogg">
+                  Your browser does not support the audio tag.
+                </audio>
 
 
     button.button(@click="submitAddNewObject($event)" data-submit) Uložit objekt
@@ -43,23 +52,23 @@
 import { resize } from '../utils/functions';
 
 export default {
-    props: ['Id', 'MapovaniUkolu'],
+  props: ['Id', 'MapovaniUkolu'],
 
-    computed: {
+  computed: {
 
-      getNovyObjekt() {
-        return this.$store.state.novy_objekt;
-      },
-
-
+    getNovyObjekt() {
+      return this.$store.state.novy_objekt;
     },
-    data() {
-      return {
-      }
-    },
-    mounted() {
 
-    },
+
+  },
+  data() {
+    return {
+    }
+  },
+  mounted() {
+
+  },
 
   watch: {
 
@@ -67,9 +76,9 @@ export default {
   methods: {
 
 
-     submitAddNewObject(e) {
+    submitAddNewObject(e) {
 
-      this.$store.dispatch('setLoading', {isLoading: true, message: 'Načítám...'});
+      this.$store.dispatch('setLoading', { isLoading: true, message: 'Načítám...' });
 
 
       /* :TODO: Upravit pro nahrání všech fotek */
@@ -97,9 +106,38 @@ export default {
 
       prepareDatabaseObject.id = newDbObjectId;
 
+
+      prepareDatabaseObject.audio = Object.keys(prepareDatabaseObject.data)
+        .filter(
+          key =>
+            this.MapovaniUkolu.hasOwnProperty(key) &&
+            this.MapovaniUkolu[key].type === 'audio'
+        )
+        .map(
+          key => {
+
+            return {
+
+              id: key,
+              objectID: newDbObjectId,
+              items: prepareDatabaseObject.data[key]
+                .map((audioObject, index) => {
+
+                  return {
+                    ...audioObject,
+                    realURLNormalize: `https://firebasestorage.googleapis.com/v0/b/${this.$config.firebaseConfig.apiConfig.projectId}.appspot.com/o/${this.$config.name}/${prepareDatabaseObject.uzivatelske_jmeno}/${newDbObjectId}/${audioObject.id}.ogg?alt=media`,
+                    realURL: `https://firebasestorage.googleapis.com/v0/b/${this.$config.firebaseConfig.apiConfig.projectId}.appspot.com/o/${this.$config.name}%2F${prepareDatabaseObject.uzivatelske_jmeno}%2F${newDbObjectId}%2F${audioObject.id}.ogg?alt=media`,
+                  };
+
+                }),
+
+            };
+
+          });
+
+
       /* Find images in the task and their attributes */
       // PLUS FILE URL FOR IMAGES!
-
       prepareDatabaseObject.obrazky = Object.keys(prepareDatabaseObject.data)
         .filter(
           key =>
@@ -138,6 +176,36 @@ export default {
         .commit()
         .then(async () => {
           // upload file to firestore cloud
+
+          for (const [index, audioObject] of prepareDatabaseObject.audio.entries()) {
+
+            const file_extension = 'ogg';
+
+            try {
+              // upload audio files
+              ////////////////////////////////////////////////////////////////////////////////////////////////
+              const items = audioObject.items;
+
+              for (const audioObjectItem of items) {
+                const response = await fetch(audioObjectItem.audioUrl);
+                const audioBlob = await response.blob();
+
+                this.$fire.storage
+                  .ref()
+                  .child(
+                    `${this.$config.name}/${prepareDatabaseObject.uzivatelske_jmeno}/${newDbObjectId}/${audioObjectItem.id}.${file_extension}`
+                  )
+                  .put(audioBlob);
+
+              }
+
+              ////////////////////////////////////////////////////////////////////////////////////////////////
+            } catch (e) {
+              console.log(e.message);
+            }
+
+
+          }
 
           for (const obrazekObjContainer of prepareDatabaseObject.obrazky) {
 

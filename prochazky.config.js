@@ -1,22 +1,3 @@
-const mapovaniUkolu = {
-  "q00_01": {
-    "title": "Uživatelské jméno",
-    "type": "text"
-},
-  "q01_01": {
-      "title": "Jaký typ předmětu jste vybrali? vyberte z následujících možností",
-      "type": "array"
-  },
-  "q01_02": {
-    "title": "Popište předmět",
-    "type": "text"
-  },
-  "q01_03": {
-    "title": "vyfoťte předmět",
-    "type": "image"
-  },
-};
-
 const typObjektu = {
   settings: {
     autoGenerateId: false,
@@ -36,6 +17,35 @@ const typObjektu = {
     { id: 'nábytek', title: 'nábytek' },
   ],
 };
+
+const mapovaniUkolu = {
+  "q00_01": {
+    "title": "Uživatelské jméno",
+    "type": "text"
+},
+  "q01_01": {
+    "title": "Jaký typ předmětu jste vybrali? vyberte z následujících možností",
+    "type": "array",
+    itemsObj: typObjektu,
+    limit: 1,
+    inline: false,
+  },
+  "q01_02": {
+    "title": "Popište předmět",
+    "type": "text"
+  },
+  "q01_03": {
+    "title": "Vyfoťte předmět",
+    "type": "image",
+    pocetFotek: 3,
+  },
+  "q01_04": {
+    "title": "Nahrajte záznam místa",
+    "type": "audio"
+  },
+};
+
+
 
 
 

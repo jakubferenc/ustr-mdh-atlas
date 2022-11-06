@@ -34,6 +34,16 @@
           .image-container(v-for="obrazekObj in objekt.obrazky.filter(obr => obr.id === polozkaKey)[0].items" :key="obrazekObj.id")
             img(class="summary-item-photo-raw" :src="obrazekObj.realURL" :data-id="obrazekObj.id")
 
+        div(v-if="MapovaniUkolu[polozkaKey].type === 'audio' " :data-type="MapovaniUkolu[polozkaKey].type" :data-path="`['data']['${polozkaKey}']`")
+          span.title {{MapovaniUkolu[polozkaKey].title}}
+
+          .audio-container(v-for="(recording, index) in objekt.audio.filter(audioObj => audioObj.id === polozkaKey)[0].items" :key="index")
+            .recording-item__player
+              <audio controls>
+                <source :src="recording.realURL" type="audio/ogg">
+                Your browser does not support the audio tag.
+              </audio>
+
 
       div.summary-item(v-if="objekt.timestamp")
         span.title Čas vyplnění
@@ -47,6 +57,8 @@
   .content-container
     padding-bottom: 60px
 
+  .audio-container
+    margin-bottom: 1rem
 
   .summary-container.summary-detail-container .image-container
     background: lightgray

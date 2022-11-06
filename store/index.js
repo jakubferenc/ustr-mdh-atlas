@@ -1,13 +1,7 @@
-/*
-this is where we will eventually hold the data for all of our posts
-*/
 /*eslint no-unsafe-optional-chaining: "error"*/
 
 export const state = () => ({
-  novy_objekt: {
-    q00_01: null,
-    q00_02: null,
-  },
+  novy_objekt: {},
   novy_objekt_nav_pozice: 0,
   objekty: [],
   objekt_detail: {},
@@ -18,6 +12,15 @@ export const state = () => ({
 /*
 this will update the state with the posts
 */
+
+export const getters = {
+
+  getCurrentNewObject(state) {
+    return state.novy_objekt;
+  }
+
+};
+
 export const mutations = {
 
   updateObjektDetail: (state, objekt_detail) => {
@@ -56,7 +59,7 @@ export const mutations = {
 
     state.novy_objekt = {
       ...state.novy_objekt,
-      ...newData
+      ...newData,
     };
 
   },
