@@ -7,15 +7,15 @@ const config = { dev, ...projectConfig, ...prochazkyConfig };
 
 export default {
   globalName: config.name,
-  target: 'static', // default is 'server'
-  ssr: true,
+  target: 'server', // default is 'server'
+  ssr: false, // SPA behaviour, only client-side
   components: true,
   server: {
     port: 8000, // default: 3000
     host: 'localhost', // default: localhost
   },
   router: {
-    trailingSlash: true,
+    trailingSlash: false,
   },
   publicRuntimeConfig: config,
   render: {
@@ -77,6 +77,7 @@ export default {
           firestore: true, // Just as example. Can be any other service.
           storage: true,
           database: true,
+          auth: true,
         }
       }],
     ],
@@ -89,7 +90,18 @@ export default {
       settings: {
         // Firestore Settings - currently only works in SPA mode
       }
+  },
+  auth: {
+    persistence: 'local', // default
+    initialize: {
+      onAuthStateChangedMutation: 'ON_AUTH_STATE_CHANGED_MUTATION',
+      onAuthStateChangedAction: 'onAuthStateChangedAction',
+      subscribeManually: false
     },
+    ssr: false, // default
+    emulatorPort: 9099,
+    emulatorHost: 'http://localhost',
+  },
     content: {
       // Options
     },

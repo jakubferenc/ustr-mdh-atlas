@@ -7,7 +7,7 @@ export const state = () => ({
   objekt_detail: {},
   loading: false,
   loadingMsg: '',
-  prihlaseny_uzivatel: ''
+  logged_user: null,
 });
 /*
 this will update the state with the posts
@@ -17,11 +17,24 @@ export const getters = {
 
   getCurrentNewObject(state) {
     return state.novy_objekt;
+  },
+
+  getCurrentLoggedInUser(state) {
+    return state.logged_user;
   }
 
 };
 
 export const mutations = {
+
+  ON_AUTH_STATE_CHANGED_MUTATION: (state, { authUser, claims }) => {
+    // Don't do this:
+    state.user = authUser
+
+    // Do this:
+    const { uid, email, emailVerified } = authUser
+    state.logged_user = { uid, email, emailVerified }
+  },
 
   updateObjektDetail: (state, objekt_detail) => {
 
@@ -33,13 +46,6 @@ export const mutations = {
 
     state.loading = isLoading;
     state.loadingMsg = message;
-
-  },
-
-
-  updatePrihlasenyUzivatel: (state, prihlaseny_uzivatel) => {
-
-    state.prihlaseny_uzivatel = prihlaseny_uzivatel;
 
   },
 
@@ -77,6 +83,12 @@ actions is where we will make an API call that gathers the posts,
 and then commits the mutation to update it
 */
 export const actions = {
+  onAuthStateLogoutAction: ({state, commit, dispatch}, { authUser }) => {
+
+  },
+  onAuthStateLoginAction: ({state, commit, dispatch}, { authUser }) => {
+
+  },
 
    async getObjekt({state, commit, dispatch}, objektId) {
 

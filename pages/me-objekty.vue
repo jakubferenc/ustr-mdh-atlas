@@ -32,68 +32,58 @@
 <style lang="sass">
 
 
-  @import "~/assets/scss/bulma"
-  @import "~/assets/scss/typography"
+@import "~/assets/scss/bulma"
+@import "~/assets/scss/typography"
 
-  .section-category
-    margin-bottom: 1.5em
+.section-category
+  margin-bottom: 1.5em
 
-  .user-form
-    margin-bottom: 2rem
-    input
-      width: 100%
-      height: 50px
-      border: 1px solid black
+.user-form
+  margin-bottom: 2rem
+  input
+    width: 100%
+    height: 50px
+    border: 1px solid black
 
-      +from($tablet)
-
-
-      +from($desktop)
-        width: 50%
-
-      +from($widescreen)
-
-      +from($fullhd)
+    +from($tablet)
 
 
+    +from($desktop)
+      width: 50%
+
+    +from($widescreen)
+
+    +from($fullhd)
 </style>
 
 <script>
-
 export default {
-
   // call fetch only on client-side
   fetchOnServer: false,
 
-
   async beforeMount() {
-    await this.$store.dispatch('setLoading', {
+    await this.$store.dispatch("setLoading", {
       isLoading: true,
-      message: 'Načítám...',
+      message: "Načítám...",
     });
-    await this.$store.dispatch('getVsechnyObjekty');
-    await this.$store.dispatch('setLoading', {
+    await this.$store.dispatch("getVsechnyObjekty");
+    await this.$store.dispatch("setLoading", {
       isLoading: false,
       message: false,
     });
   },
 
-  mounted() {
-
-  },
+  mounted() {},
 
   computed: {
-
     prihlaseny_uzivatel: {
-
-      get () {
+      get() {
         return this.$store.state.prihlaseny_uzivatel;
       },
 
-      set (value) {
-        this.$store.dispatch('setPrihlasenyUzivatel', value)
-      }
-
+      set(value) {
+        this.$store.dispatch("setPrihlasenyUzivatel", value);
+      },
     },
 
     loading() {
@@ -101,18 +91,16 @@ export default {
     },
 
     objekty() {
-
-      return this.$store.state.objekty.filter(item => item.uzivatelske_jmeno === this.prihlaseny_uzivatel);
-
-
-    }
-
+      return this.$store.state.objekty.filter(
+        (item) => item.uzivatelske_jmeno === this.prihlaseny_uzivatel
+      );
+    },
   },
 
   data() {
     return {
-      title: ''
-    }
-  }
-}
+      title: "",
+    };
+  },
+};
 </script>
