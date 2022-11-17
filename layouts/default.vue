@@ -43,7 +43,7 @@ export default {
   },
   async beforeCreate() {
     console.log("hello from layout");
-    const isUserSignedIn = this.$store.state.auth.user_logged?.uid;
+    const isUserSignedIn = this.$store.getters["auth/getCurrentUser"]?.uid;
     await this.$fire.auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         // User is signed in, see docs for a list of available properties
@@ -52,6 +52,7 @@ export default {
           const uid = authUser.uid;
           console.log("test log in event", uid);
           this.$store.dispatch("auth/login", { authUser });
+          console.log("haha from default", this.$route.path);
           this.$router.push("/");
         }
       } else {

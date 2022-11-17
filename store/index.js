@@ -148,37 +148,37 @@ export const actions = {
   },
 
 
-  async getVsechnyObjekty ({ state, commit, dispatch }) {
+  async getVsechnyObjekty ({ state, commit, dispatch }, { userId }) {
 
-    dispatch("setLoading", {isLoading: true, message: 'Nahrávám...'});
+    if (state.objekty.length) return;
+
+    dispatch("setLoading", {
+      isLoading: true,
+      message: "Načítám...",
+    });
 
     try {
 
       const db = this.$fire.firestore;
+      const collectionQuery = db
+        .collection(this.$config.firebaseConfig.collectionID)
+        .where('user_id', '==', userId);
 
-      db.collection(this.$config.firebaseConfig.collectionID)
-      .get()
-      .then((querySnapshot) => {
+      const querySnapshot = await collectionQuery.get();
+      const objekty = querySnapshot.docs.map( (doc) => {
 
-        let objekty = querySnapshot.docs.map( (doc) => {
+          const data = doc.data();
 
-            const data = doc.data();
+          const id = doc.id;
 
-            const id = doc.id;
-
-            return { id, ...data };
-
-        });
-
-
-        commit("updateObjekty", objekty);
-        dispatch("setLoading", {isLoading: false, message: false});
+          return { id, ...data };
 
       });
-
-
+      commit("updateObjekty", objekty);
     } catch (err) {
       console.log(err);
+    } finally {
+      dispatch("setLoading", {isLoading: false, message: false});
     }
 
   },

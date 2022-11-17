@@ -10,7 +10,7 @@ this will update the state with the posts
 export const getters = {
 
   getCurrentUser(state) {
-    return state.user_logged?.uid || localStorage.getItem('user_logged')?.uid;
+    return JSON.parse(localStorage.getItem('user_logged')) || state.user_logged;
   }
 
 };
@@ -19,8 +19,8 @@ export const mutations = {
 
   ON_LOGIN_USER: (state, authUser ) => {
     const { uid, email, emailVerified } = authUser;
-    state.user_logged = { uid, email, emailVerified }
-    localStorage.setItem('user_logged', state.user_logged);
+    state.user_logged = { uid, email, emailVerified };
+    localStorage.setItem('user_logged', JSON.stringify({ uid, email, emailVerified }));
   },
   ON_LOGOUT_USER: (state) => {
     state.user_logged = null;

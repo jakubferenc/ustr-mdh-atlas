@@ -19,10 +19,6 @@ const typObjektu = {
 };
 
 const mapovaniUkolu = {
-  "q00_01": {
-    "title": "Uživatelské jméno",
-    "type": "text"
-},
   "q01_01": {
     "title": "Jaký typ předmětu jste vybrali? vyberte z následujících možností",
     "type": "array",

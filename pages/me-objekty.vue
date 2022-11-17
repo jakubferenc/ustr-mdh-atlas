@@ -9,10 +9,6 @@
 
       h1.page-title.typo-main-title Mé objekty v aplikaci
 
-      .user-form
-
-        input(type="text" placeholder="Vaše uživatelské jméno" v-model.trim="prihlaseny_uzivatel")
-
       .section-category()
         .list-container.columns.is-multiline
           ObjektNahled(
@@ -20,7 +16,7 @@
             :key="objekt.id"
             :Id="objekt.id"
             :Timestamp="objekt.timestamp"
-            :Uzivatel="objekt.uzivatelske_jmeno"
+            :Uzivatel="objekt.user_email"
             :ObrazkyArray="objekt.obrazky[0].items"
           )
 
@@ -30,8 +26,6 @@
 </template>
 
 <style lang="sass">
-
-
 @import "~/assets/scss/bulma"
 @import "~/assets/scss/typography"
 
@@ -58,32 +52,17 @@
 
 <script>
 export default {
-  // call fetch only on client-side
-  fetchOnServer: false,
-
-  async beforeMount() {
-    await this.$store.dispatch("setLoading", {
-      isLoading: true,
-      message: "Načítám...",
-    });
-    await this.$store.dispatch("getVsechnyObjekty");
-    await this.$store.dispatch("setLoading", {
-      isLoading: false,
-      message: false,
+  async created() {
+    await this.$store.dispatch("getVsechnyObjekty", {
+      userId: this.currentLoggedUserId,
     });
   },
 
   mounted() {},
 
   computed: {
-    prihlaseny_uzivatel: {
-      get() {
-        return this.$store.state.prihlaseny_uzivatel;
-      },
-
-      set(value) {
-        this.$store.dispatch("setPrihlasenyUzivatel", value);
-      },
+    currentLoggedUserId() {
+      return this.$store.getters["auth/getCurrentUser"]?.uid;
     },
 
     loading() {
@@ -92,7 +71,7 @@ export default {
 
     objekty() {
       return this.$store.state.objekty.filter(
-        (item) => item.uzivatelske_jmeno === this.prihlaseny_uzivatel
+        (item) => item.user_id === this.currentLoggedUserId
       );
     },
   },

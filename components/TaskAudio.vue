@@ -16,7 +16,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M0 128C0 92.7 28.7 64 64 64H320c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z"/></svg>
     .column.status-info(v-if="isRecording")
       h3 Nahrávám...
-  .columns.is-multiline
+  .audio-list.columns.is-multiline
     .column
       h2 Vaše nahrávky
       .recording-item(v-for="(recording, index) in audioRecordings" :key="index")
@@ -29,97 +29,85 @@
           a.delete(href="#" @click="deleteRecording(index)") Odstranit nahrávku
 </template>
 
-
 <style lang="sass" scoped>
-  @import "~/assets/scss/bulma"
-  @import "~/assets/scss/variables"
+@import "~/assets/scss/bulma"
+@import "~/assets/scss/variables"
 
-  .recording-item
-    margin-bottom: 1rem
-  .recording-item__actions
-    .delete
-      color: indianred
-  .status-info
+.audio-list
+  h2
+    margin-bottom: 1em
+.recording-item
+  margin-bottom: 1rem
+.recording-item__actions
+  .delete
     color: indianred
-  .buttons-container
-    display: flex
-    justify-content: flex-start
-    flex-direction: row
-    column-gap: 2rem
-  .button
-    background-color: #efefef
-    &, &:hover
-      text-decoration: none
-  .source
-    font-style: italic
-    font-size: .9rem
+.status-info
+  color: indianred
+.buttons-container
+  display: flex
+  justify-content: flex-start
+  flex-direction: row
+  column-gap: 2rem
+.button
+  background-color: #efefef
+  &, &:hover
+    text-decoration: none
+.source
+  font-style: italic
+  font-size: .9rem
 
-  .task__audio
-    margin-top: 1rem
+.task__audio
+  margin-top: 1rem
 
-  .audio-button.button
-    width: 100px
-    height: 100px
-    display: flex
-    align-items: center
-    justify-content: center
-    flex-direction: column
+.audio-button.button
+  width: 100px
+  height: 100px
+  display: flex
+  align-items: center
+  justify-content: center
+  flex-direction: column
 
-    &.is-active
-      background-color: indianred
+  &.is-active
+    background-color: indianred
 
-    svg
-      width: 60%
-
+  svg
+    height: 70%
 </style>
 
 <script>
 export default {
-  props: ['Id'],
-  computed: {
-
-  },
+  props: ["Id"],
+  computed: {},
 
   data() {
-
     return {
       isRecording: false,
       audioChunks: {},
       currentMediaRecorder: null,
       timeLimit: 5000,
-      audioRecordings: []
-    }
+      audioRecordings: [],
+    };
   },
-  mounted() {
-
-  },
+  mounted() {},
 
   computed: {
-
-    mimeType() {
-
-
-    }
-
+    mimeType() {},
   },
   watch: {
-
     audioRecordings(newVal, oldVal) {
       this.updateStore();
-    }
-
+    },
   },
   methods: {
-
     deleteRecording(itemToRemoveIndex) {
-
-      const confirmResult = confirm('Opravdu chcete nahrávku vymazat?');
+      const confirmResult = confirm("Opravdu chcete nahrávku vymazat?");
 
       if (!confirmResult) return;
 
-      this.audioRecordings = this.audioRecordings.filter((item, index) => index !== itemToRemoveIndex);
+      this.audioRecordings = this.audioRecordings.filter(
+        (item, index) => index !== itemToRemoveIndex
+      );
       return false;
-
     },
     toggleRecording() {
       if (!this.isRecording) {
@@ -129,17 +117,14 @@ export default {
       }
     },
     stopRecording() {
-
       this.currentMediaRecorder.stop();
       this.isRecording = false;
-
     },
     startRecording() {
       if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-
-        navigator.mediaDevices.getUserMedia({ audio: true })
-          .then(stream => {
-
+        navigator.mediaDevices
+          .getUserMedia({ audio: true })
+          .then((stream) => {
             this.isRecording = true;
 
             this.currentMediaRecorder = new MediaRecorder(stream);
@@ -147,14 +132,16 @@ export default {
 
             const chunkId = new Date().getUTCMilliseconds();
             this.audioChunks[chunkId] = [];
-            this.currentMediaRecorder.addEventListener("dataavailable", event => {
+            this.currentMediaRecorder.addEventListener("dataavailable", (event) => {
               console.log("recorder recording");
               this.audioChunks[chunkId].push(event.data);
             });
 
             this.currentMediaRecorder.addEventListener("stop", () => {
               console.log("recorder stopped");
-              const audioBlob = new Blob(this.audioChunks[chunkId], { type: "audio/mpeg" });
+              const audioBlob = new Blob(this.audioChunks[chunkId], {
+                type: "audio/mpeg",
+              });
               const audioUrl = URL.createObjectURL(audioBlob);
               // const audioObject = new Audio(audioUrl);
 
@@ -162,18 +149,16 @@ export default {
 
               this.audioRecordings.push({
                 // title,
-                id: `${this.Id}_${this.audioRecordings.length+1}`,
+                id: `${this.Id}_${this.audioRecordings.length + 1}`,
                 audioUrl,
                 // audioObject,
               });
             });
-
           })
           // Error callback
           .catch((err) => {
             console.error(`The following getUserMedia error occurred: ${err}`);
           });
-
       } else {
         console.log("getUserMedia not supported on your browser!");
       }
@@ -184,7 +169,6 @@ export default {
         [this.Id]: [...this.audioRecordings],
       });
     },
-  }
-
-}
+  },
+};
 </script>
