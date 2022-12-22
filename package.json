@@ -1,5 +1,5 @@
 {
-  "name": "ustr-mdh-prochazka-budejovice",
+  "name": "ustr-mdh-prochazka-dev",
   "repository": {
     "type": "git",
     "url": "https://github.com/jakubferenc/https://github.com/jakubferenc/ustr-mdh-prochazka-budejovice"
@@ -10,7 +10,8 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "generate": "nuxt generate",
-    "start": "nuxt start"
+    "start": "nuxt start",
+    "deploy": "firebase deploy",
   },
   "browserslist": [
     "last 3 versions",
