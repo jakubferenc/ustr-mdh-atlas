@@ -20,7 +20,7 @@ npm-debug.log
 dist
 
 # firebase
-*.cache
+.firebase
 
 # storybook
 .nuxt-storybook
