@@ -1,5 +1,5 @@
 export default {
-  title: 'MDH aplikace',
+  title: 'MDH Atlas',
   subtitle: 'sběr jednotlivých artefaktů',
   error: {
     notDefined: 'Neuvedeno',

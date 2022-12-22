@@ -1,17 +1,19 @@
 <template lang="pug">
 
-  .app-container
+.app-container
 
-    .error-message(v-if="errorMessage") {{ errorMessage }}
+  .error-message(v-if="isShowAlert && errorMessage")
+    span.message {{ errorMessage }}
+    span.close(@click="closeMessage") Zavřít
 
-    <Nuxt />
+  <Nuxt />
 
-    #overlay-upload-progress.ui-widget__overlay.hidden
-      .content
+  #overlay-upload-progress.ui-widget__overlay.hidden
+    .content
 
-    <ProgressBar v-if="loading" :Zprava="loadingMsg" />
+  <ProgressBar v-if="loading" :Zprava="loadingMsg" />
 
-    .debug-bar.hidden
+  .debug-bar.hidden
 
 
 </template>
@@ -25,10 +27,25 @@
   background-color: #F08080
   border: 1px solid #B22222
   border-radius: 12px
+  position: relative
+  .close
+    position: absolute
+    right: 15px
+    cursor: pointer
 </style>
 <script>
 export default {
+  data() {
+    return {
+      isShowAlert: false,
+    };
+  },
   middleware: "auth",
+  watch: {
+    errorMessage(newVal, oldVal) {
+      this.isShowAlert = true;
+    },
+  },
   computed: {
     errorMessage() {
       return this.$store.state.alert.message;
@@ -41,8 +58,12 @@ export default {
       return this.$store.state.loading;
     },
   },
+  methods: {
+    closeMessage() {
+      this.isShowAlert = false;
+    },
+  },
   async beforeCreate() {
-    console.log("hello from layout");
     const isUserSignedIn = this.$store.getters["auth/getCurrentUser"]?.uid;
     await this.$fire.auth.onAuthStateChanged((authUser) => {
       if (authUser) {
@@ -50,19 +71,13 @@ export default {
         // https://firebase.google.com/docs/reference/js/firebase.User
         if (!isUserSignedIn) {
           const uid = authUser.uid;
-          console.log("test log in event", uid);
           this.$store.dispatch("auth/login", { authUser });
-          console.log("haha from default", this.$route.path);
           this.$router.push("/");
         }
       } else {
         // user is logged out by firebase
         if (isUserSignedIn) {
           this.$store.dispatch("auth/logout");
-          console.log("hello from logout");
-          if (this.$route.path !== "/prihlaseni") {
-            this.$router.push("/prihlaseni");
-          }
         }
       }
     });

@@ -7,14 +7,14 @@
 
   .grid.grid-2.form-spacer
     .form-container-wrap
-      FormLogin(
-        @submit="submitLoginHandler"
+      FormRegister(
+        @submit="submitRegistration"
+        @error="errorHandler"
       )
-      p Nebo <nuxt-link to="/registrace">nemáte účet?</nuxt-link>
-
+      p Nebo <NuxtLink to="/prihlaseni">máte účet?</NuxtLink>
 </template>
 
-<style lang="sass">
+<style lang="sass" scoped>
 
 .dashboard-container
   margin: 2rem 0
@@ -28,10 +28,12 @@
 </style>
 
 <script>
+import FormRegister from "~/components/FormRegister.vue";
+
 export default {
   data() {
     return {
-      subtitle: "Přihlášení",
+      subtitle: "Registrace",
     };
   },
   created() {},
@@ -40,9 +42,10 @@ export default {
     errorHandler(error) {
       this.$store.dispatch("alert/message", { error: error.message });
     },
-    async submitLoginHandler(payload) {
+    async submitRegistration(payload) {
+      this.$store.dispatch("alert/message", { error: false });
       try {
-        const loginResponse = await this.$fire.auth.signInWithEmailAndPassword(
+        const loginResponse = await this.$fire.auth.createUserWithEmailAndPassword(
           payload.email,
           payload.password
         );
@@ -52,5 +55,6 @@ export default {
       }
     },
   },
+  components: { FormRegister },
 };
 </script>
