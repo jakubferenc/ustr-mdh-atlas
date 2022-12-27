@@ -8,19 +8,19 @@ this will update the state with the posts
 */
 
 export const getters = {
-
   getCurrentUser(state) {
     return JSON.parse(localStorage.getItem('user_logged')) || state.user_logged;
-  }
-
+  },
 };
 
 export const mutations = {
-
-  ON_LOGIN_USER: (state, authUser ) => {
+  ON_LOGIN_USER: (state, authUser) => {
     const { uid, email, emailVerified } = authUser;
     state.user_logged = { uid, email, emailVerified };
-    localStorage.setItem('user_logged', JSON.stringify({ uid, email, emailVerified }));
+    localStorage.setItem(
+      'user_logged',
+      JSON.stringify({ uid, email, emailVerified })
+    );
   },
   ON_LOGOUT_USER: (state) => {
     state.user_logged = null;
@@ -29,8 +29,7 @@ export const mutations = {
 
   ON_AUTH_STATE_CHANGED_MUTATION: (state, authUser) => {
     console.log('ON_AUTH_STATE_CHANGED_MUTATION', authUser);
-  }
-
+  },
 };
 /*
 
@@ -38,13 +37,13 @@ actions is where we will make an API call that gathers the posts,
 and then commits the mutation to update it
 */
 export const actions = {
-  logout: ({state, commit, dispatch}) => {
+  logout: ({ state, commit, dispatch }) => {
     commit('ON_LOGOUT_USER');
   },
-  login: ({state, commit, dispatch}, { authUser }) => {
+  login: ({ state, commit, dispatch }, { authUser }) => {
     commit('ON_LOGIN_USER', authUser);
   },
-  onAuthStateChangedAction: ({state, commit, dispatch}, { authUser }) => {
+  onAuthStateChangedAction: ({ state, commit, dispatch }, { authUser }) => {
     console.log('onAuthStateChangedAction', authUser);
   },
 };

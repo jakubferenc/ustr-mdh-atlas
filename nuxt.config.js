@@ -59,74 +59,74 @@ export default {
       vue: { cacheBusting: false },
     },
   },
-    modules: [
-      ['nuxt-i18n', {
-        locales: [
-          {code: 'cs', iso: 'cs-CZ', file: 'cs-CZ.js', dir: 'ltr'}
-        ],
+  modules: [
+    [
+      'nuxt-i18n',
+      {
+        locales: [{ code: 'cs', iso: 'cs-CZ', file: 'cs-CZ.js', dir: 'ltr' }],
         lazy: true,
         langDir: '~lang/',
         defaultLocale: 'cs',
         vueI18n: {
           fallbackLocale: 'cs',
         },
-      }],
-      ['@nuxtjs/firebase', {
+      },
+    ],
+    [
+      '@nuxtjs/firebase',
+      {
         config: config.firebaseConfig.apiConfig,
         services: {
           firestore: true, // Just as example. Can be any other service.
           storage: true,
           database: true,
           auth: true,
-        }
-      }],
+        },
+      },
     ],
-    firestore: {
-      memoryOnly: false, // default
-      chunkName: process.env.NODE_ENV !== 'production' ? 'firebase-auth' : '[id]', // default
-      enablePersistence: true,
-      emulatorPort: 8080,
-      emulatorHost: 'localhost',
-      settings: {
-        // Firestore Settings - currently only works in SPA mode
-      }
+  ],
+  firestore: {
+    memoryOnly: false, // default
+    chunkName: process.env.NODE_ENV !== 'production' ? 'firebase-auth' : '[id]', // default
+    enablePersistence: true,
+    emulatorPort: 8080,
+    emulatorHost: 'localhost',
+    settings: {
+      // Firestore Settings - currently only works in SPA mode
+    },
   },
   auth: {
     persistence: 'local', // default
     initialize: {
       onAuthStateChangedMutation: 'ON_AUTH_STATE_CHANGED_MUTATION',
       onAuthStateChangedAction: 'onAuthStateChangedAction',
-      subscribeManually: false
+      subscribeManually: false,
     },
     ssr: false, // default
     emulatorPort: 9099,
     emulatorHost: 'http://localhost',
   },
-    content: {
-      // Options
+  content: {
+    // Options
+  },
+  css: ['~assets/scss/main.sass'],
+  styleResources: {
+    sass: ['~bulma/sass/utilities/all'],
+  },
+  head: {
+    title: projectConfig.globalName,
+    htmlAttrs: {
+      lang: 'cs',
     },
-    css: [
-      '~assets/scss/main.sass',
-    ],
-    styleResources: {
-      sass: [
-        '~bulma/sass/utilities/all',
-      ]
-    },
-    head: {
-        title: projectConfig.globalName,
-        htmlAttrs: {
-          lang: 'cs',
-        },
-        meta: [
-          { charset: 'utf-8' },
-          { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-          {
-            hid: 'description',
-            name: 'description',
-            content: 'my website description'
-          }
-        ],
-        link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    meta: [
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'my website description',
       },
+    ],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+  },
 };
