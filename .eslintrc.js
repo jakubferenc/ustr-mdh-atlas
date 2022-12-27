@@ -7,13 +7,11 @@ module.exports = {
     'plugin:vue/recommended',
     'eslint:recommended',
     'airbnb/base',
-    '@vue/typescript/recommended',
+    'prettier',
+    'plugin:you-dont-need-lodash-underscore/compatible',
+    '@vue/prettier',
   ],
-  plugins: [
-    'typescript',
-    'import',
-    'vue',
-  ],
+  plugins: ['typescript', 'import', 'vue'],
   parserOptions: {
     ecmaVersion: 2020,
   },

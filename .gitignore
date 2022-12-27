@@ -19,9 +19,13 @@ npm-debug.log
 # Nuxt generate
 dist
 
-# firebase
-.firebase
-
 # storybook
 .nuxt-storybook
 storybook-static
+
+# resources
++resources
+resources
+_resources
+
+# videos
