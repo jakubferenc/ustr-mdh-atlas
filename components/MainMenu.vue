@@ -1,9 +1,9 @@
 <template lang="pug">
-  nav.main-menu(role="navigation" aria-label="Primary")
-    NuxtLink.item(to="/") Hlavní stránka
-    NuxtLink.item(to="/me-objekty") Mé objekty
-    NuxtLink.item(to="/vsechny-objekty" v-show="zobrazitVsechnyObjekty") Všechny objekty
-    NuxtLink.item(v-if="currentLoggedUserId" to="/odhlaseni") Odhlásit
+nav.main-menu(role="navigation" aria-label="Primary")
+  NuxtLink.item(to="/") Hlavní stránka
+  NuxtLink.item(to="/me-objekty") Mé objekty
+  NuxtLink.item(to="/vsechny-objekty" v-show="zobrazitVsechnyObjekty") Všechny objekty
+  NuxtLink.item(v-if="currentLoggedUserId" to="/odhlaseni") Odhlásit
 </template>
 
 <style lang="sass" scoped>
