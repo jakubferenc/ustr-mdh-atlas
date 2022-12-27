@@ -3,7 +3,7 @@
     NuxtLink.item(to="/") Hlavní stránka
     NuxtLink.item(to="/me-objekty") Mé objekty
     NuxtLink.item(to="/vsechny-objekty" v-show="zobrazitVsechnyObjekty") Všechny objekty
-    NuxtLink.item(to="/odhlaseni") Odhlásit
+    NuxtLink.item(v-if="currentLoggedUserId" to="/odhlaseni") Odhlásit
 </template>
 
 <style lang="sass" scoped>
@@ -37,6 +37,10 @@
 <script>
 export default {
   computed: {
+    currentLoggedUserId() {
+      return this.$store.getters["auth/getCurrentUser"]?.uid;
+    },
+
     zobrazitVsechnyObjekty() {
       return this.$route.query.vse === "1";
     },
