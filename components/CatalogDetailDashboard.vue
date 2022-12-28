@@ -27,13 +27,13 @@
         h3 Spustění procházky
 
       .actions-bar__buttons
-        .button.button-ok.desaturated Spustit procházku
+        .button.button-ok.desaturated(@click="emitInitProchazka()") Spustit procházku
 
       .actions-bar__or
         span Nebo
 
       .actions-bar__try
-        .button Vyzkoušet procházku
+        .button(@click="emitInitTrialProchazka()") Vyzkoušet procházku
 
   .catalog-detail__dashboard__background
     <img :src="require(`@/prochazky/${Prochazka.slug}/${Prochazka.obrazky.intro}`)" :alt="Prochazka.nazev" />
@@ -193,7 +193,16 @@ export default {
     },
   },
 
-  created() {},
+  created() { },
+
+  methods: {
+    emitInitProchazka() {
+      this.$emit("initProchazka");
+    },
+    emitInitTrialProchazka() {
+      this.$emit("initTrialProchazka");
+    },
+  },
 
   data() {
     return {
