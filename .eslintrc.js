@@ -35,12 +35,13 @@ module.exports = {
     '@typescript-eslint/camelcase': 'off',
     'no-undef': 'off',
     'vue/max-attributes-per-line': [
-      1,
+      'error',
       {
-        singleline: 1,
+        singleline: {
+          max: 1,
+        },
         multiline: {
           max: 1,
-          allowFirstLine: false,
         },
       },
     ],
