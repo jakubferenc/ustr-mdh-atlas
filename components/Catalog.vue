@@ -1,0 +1,25 @@
+<template lang="pug">
+.catalog
+  .grid
+    <slot name="catalog-items"></slot>
+</template>
+
+<style lang="sass" scoped>
+.catalog
+  .grid
+    display: grid
+    grid-template-columns: repeat(auto-fill,minmax(24rem,1fr))
+    grid-auto-rows: 24rem
+    grid-gap: 0.8rem
+    padding: 1.6rem 0.8rem
+</style>
+<script>
+export default {
+  data() {
+    return {};
+  },
+  computed: {},
+
+  methods: {},
+};
+</script>

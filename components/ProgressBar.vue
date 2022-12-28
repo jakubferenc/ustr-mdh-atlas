@@ -1,44 +1,25 @@
 <template lang="pug">
 
-    .ui-widget__overlay
-      .content {{Zprava}}
+.ui-widget__overlay
+  .content {{Zprava}}
 
 </template>
 
-
-<style lang="sass" scoped>
-
-  @import "~/assets/scss/bulma"
-  @import "~/assets/scss/variables"
-
-</style>
+<style lang="sass" scoped></style>
 
 <script>
 export default {
-    props: ['Zprava'],
+  props: ["Zprava"],
 
-
-    computed: {
-
-    },
-    data() {
-      return {
-        answer: ''
-      }
-    },
-    mounted() {
-
-    },
-
-  watch: {
-
+  computed: {},
+  data() {
+    return {
+      answer: "",
+    };
   },
-  methods: {
+  mounted() {},
 
-
-
-  }
-
-
-}
+  watch: {},
+  methods: {},
+};
 </script>

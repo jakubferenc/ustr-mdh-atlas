@@ -26,9 +26,6 @@
 </template>
 
 <style lang="sass">
-@import "~/assets/scss/bulma"
-@import "~/assets/scss/typography"
-
 .section-category
   margin-bottom: 1.5em
 

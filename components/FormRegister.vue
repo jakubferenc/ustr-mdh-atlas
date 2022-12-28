@@ -15,8 +15,8 @@
 </template>
 
 <style lang="sass" scoped>
-@import "~/assets/scss/bulma"
-@import "~/assets/scss/variables"
+
+
 
 input
   background-color: #fff

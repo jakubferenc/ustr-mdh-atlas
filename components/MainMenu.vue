@@ -1,49 +1,12 @@
 <template lang="pug">
-nav.main-menu(role="navigation" aria-label="Primary")
-  NuxtLink.item(to="/") Hlavní stránka
-  NuxtLink.item(to="/me-objekty") Mé objekty
-  NuxtLink.item(to="/vsechny-objekty" v-show="zobrazitVsechnyObjekty") Všechny objekty
-  NuxtLink.item(v-if="currentLoggedUserId" to="/odhlaseni") Odhlásit
+nav.main-nav(role="navigation" aria-label="Primary")
+  NuxtLink(to="/").item Hlavní stránka
+  NuxtLink(to="/prochazky/").item.item--prochazky Procházky
+  NuxtLink(to="/me-objekty/" ).item Mé objekty
+  NuxtLink(to="/o-projektu/" ).item O projektu
 </template>
 
 <style lang="sass" scoped>
-
-@import "~/assets/scss/bulma"
-@import "~/assets/scss/variables"
-
-.main-menu
-  text-align: center
-  position: fixed
-  bottom: 0
-  left: 0
-  width: 100%
-  background: #eee
-  height: 50px
-  display: flex
-  align-items: center
-  justify-content: center
-  z-index: 9
-
-  .item
-    margin-left: 10px
-    border-left: 1px solid black
-    padding-left: 10px
-
-    &:first-child
-      border-left: none
-      padding-left: 0
+html.page--prochazka .item--prochazky
+  text-decoration: underline
 </style>
-
-<script>
-export default {
-  computed: {
-    currentLoggedUserId() {
-      return this.$store.getters["auth/getCurrentUser"]?.uid;
-    },
-
-    zobrazitVsechnyObjekty() {
-      return this.$route.query.vse === "1";
-    },
-  },
-};
-</script>

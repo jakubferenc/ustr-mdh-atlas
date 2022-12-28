@@ -9,9 +9,6 @@
 
 <style lang="sass" scoped>
 
-  @import "~/assets/scss/bulma"
-  @import "~/assets/scss/variables"
-
 .top-bar
   line-height: $top-bar-height
   height: $top-bar-height

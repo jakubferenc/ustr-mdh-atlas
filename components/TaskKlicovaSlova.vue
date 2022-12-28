@@ -14,37 +14,37 @@
 
 <style lang="sass" scoped>
 
-  @import "~/assets/scss/bulma"
-  @import "~/assets/scss/variables"
+
+
 
 
 </style>
 
 <script>
 export default {
-    props: ['Id', 'Zadani', 'Limit', 'Inline', 'KlicovaSlova', 'MaId'],
-    computed: {
+  props: ['Id', 'Zadani', 'Limit', 'Inline', 'KlicovaSlova', 'MaId'],
+  computed: {
 
-    },
-    data() {
-      return {
-        classObject: {
-          'inline': this.Inline
-        },
-        limitReal: this.Limit || this.KlicovaSlova.length,
-        selectedItems: [],
-        activeClass: 'active',
-        $uiWidgetKeywords: [],
-      }
-    },
-    mounted() {
-
-
-      this.$uiWidgetKeywords = this.$el.querySelectorAll('.ui-widget__keyword');
+  },
+  data() {
+    return {
+      classObject: {
+        'inline': this.Inline
+      },
+      limitReal: this.Limit || this.KlicovaSlova.length,
+      selectedItems: [],
+      activeClass: 'active',
+      $uiWidgetKeywords: [],
+    }
+  },
+  mounted() {
 
 
+    this.$uiWidgetKeywords = this.$el.querySelectorAll('.ui-widget__keyword');
 
-    },
+
+
+  },
   methods: {
 
     updateStore() {
@@ -53,7 +53,7 @@ export default {
       this.$store.dispatch("setNovyObjekt", {
 
 
-          [this.Id]: this.selectedItems
+        [this.Id]: this.selectedItems
 
 
       });
@@ -67,18 +67,18 @@ export default {
 
       if (this.limitReal) {
 
-        if (this.limitReal == 1 ) {
+        if (this.limitReal == 1) {
 
 
           // this is purely for a better user experience
           // when the limit is set to 1, we want the user not to toggle off the active item and then select another one
           // instead, we want the selected item automatically be selected (highlighted) and the current active one to be automatically deselected
-          if ( !e.target.classList.contains(this.activeClass) ) {
+          if (!e.target.classList.contains(this.activeClass)) {
 
 
             Array.from(this.$uiWidgetKeywords)
-            .filter(item => item.classList.contains(this.activeClass))
-            .forEach(item => item.classList.remove(this.activeClass));
+              .filter(item => item.classList.contains(this.activeClass))
+              .forEach(item => item.classList.remove(this.activeClass));
 
             e.target.classList.add(this.activeClass);
 
@@ -87,7 +87,7 @@ export default {
 
         } else {
 
-          if ( this.selectedItems.length < this.limitReal ) {
+          if (this.selectedItems.length < this.limitReal) {
 
             e.target.classList.toggle(this.activeClass)
 
@@ -108,8 +108,8 @@ export default {
 
 
       this.selectedItems = Array.from(this.$uiWidgetKeywords)
-      .filter(item => item.classList.contains(this.activeClass))
-      .map((item) => item.dataset.keyword);
+        .filter(item => item.classList.contains(this.activeClass))
+        .map((item) => item.dataset.keyword);
 
       this.updateStore();
 

@@ -9,27 +9,27 @@
 
 <style lang="sass" scoped>
 
-  @import "~/assets/scss/bulma"
-  @import "~/assets/scss/variables"
+
+
 
 
 </style>
 
 <script>
 export default {
-    props: ['Id', 'Zadani', 'Nadpis', 'Inline', 'Placeholder'],
-    computed: {
+  props: ['Id', 'Zadani', 'Nadpis', 'Inline', 'Placeholder'],
+  computed: {
 
-    },
+  },
 
-    data() {
-      return {
-        answer: ''
-      }
-    },
-    mounted() {
+  data() {
+    return {
+      answer: ''
+    }
+  },
+  mounted() {
 
-    },
+  },
 
   watch: {
     answer() {
@@ -43,7 +43,7 @@ export default {
       this.$store.dispatch("setNovyObjekt", {
 
 
-          [this.Id]: this.answer
+        [this.Id]: this.answer
 
 
       });

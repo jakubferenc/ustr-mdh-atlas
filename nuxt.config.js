@@ -1,9 +1,7 @@
 import projectConfig from './project.config';
-import * as prochazkyConfig from './prochazky.config';
-
 const dev = process.env.NODE_ENV !== 'production';
 
-const config = { dev, ...projectConfig, ...prochazkyConfig };
+const config = { dev, ...projectConfig };
 
 export default {
   globalName: config.name,
@@ -15,9 +13,9 @@ export default {
     host: 'localhost', // default: localhost
   },
   router: {
-    trailingSlash: false,
+    trailingSlash: true,
   },
-  publicRuntimeConfig: config,
+  publicRuntimeConfig: { ...config },
   render: {
     static: {
       // Add CORS header to static files.
@@ -37,6 +35,17 @@ export default {
   },
   build: {
     analyze: false,
+    extend(config) {
+      // Find the rule which contains a assets file extension
+      const assetsLoader = config.module.rules.find((rule) =>
+        rule.test.test('.png')
+      );
+
+      // Overwrite the test regex and add `pdf`
+      assetsLoader.test = /\.(png|jpe?g|gif|svg|webp|pdf)$/i;
+
+      return config;
+    },
     html: {
       minify: {
         collapseBooleanAttributes: true,
@@ -59,6 +68,17 @@ export default {
       vue: { cacheBusting: false },
     },
   },
+  buildModules: [
+    [
+      '@nuxtjs/style-resources',
+      {
+        // your settings here
+        sass: ['~assets/scss/defs/_all.sass'],
+        scss: [],
+        hoistUseStatements: true, // Hoists the "@use" imports. Applies only to "sass", "scss" and "less". Default: false.
+      },
+    ],
+  ],
   modules: [
     [
       'nuxt-i18n',
@@ -109,10 +129,7 @@ export default {
   content: {
     // Options
   },
-  css: ['~assets/scss/main.sass'],
-  styleResources: {
-    sass: ['~bulma/sass/utilities/all'],
-  },
+  css: ['@/assets/scss/main.sass'],
   head: {
     title: projectConfig.globalName,
     htmlAttrs: {

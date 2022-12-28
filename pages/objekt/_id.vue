@@ -54,69 +54,52 @@
 
 <style lang="sass">
 
-  .content-container
-    padding-bottom: 60px
+.content-container
+  padding-bottom: 60px
 
-  .audio-container
-    margin-bottom: 1rem
+.audio-container
+  margin-bottom: 1rem
 
-  .summary-container.summary-detail-container .image-container
-    background: lightgray
-    width: 50%
+.summary-container.summary-detail-container .image-container
+  background: lightgray
+  width: 50%
 
-    img
-      width: 100%
-      height: auto
-
+  img
+    width: 100%
+    height: auto
 </style>
 
 <script>
-import * as obsahAplikaceConfig from '../../prochazky.config';
+// import * as obsahAplikaceConfig from '../../prochazky.config';
 
 export default {
-
-
-  async asyncData({route, store}) {
-
-    console.log(route.params.id);
-
-    await store.dispatch('getObjekt', route.params.id);
-
-    const obsahAplikace = obsahAplikaceConfig;
-
-    return {
-      objekt: store.state.objekt_detail,
-      MapovaniUkolu: obsahAplikace.mapovaniUkolu,
-    }
-
-  },
-
-  data() {
-    return {
-      MapovaniUkolu: obsahAplikaceConfig.mapovaniUkolu,
-      objekt: null,
-    };
-  },
-
-  computed: {
-
-    objectSorted() {
-
-      return Object.keys(this.objekt.data).sort();
-
-    },
-
-  },
-
-  mounted() {},
-
-  head() {
-    return {
-      htmlAttrs: {
-        class: 'with-top-nav',
-      },
-    };
-  },
-
-}
+  // async asyncData({ route, store }) {
+  //   console.log(route.params.id);
+  //   await store.dispatch("getObjekt", route.params.id);
+  //   const obsahAplikace = obsahAplikaceConfig;
+  //   return {
+  //     objekt: store.state.objekt_detail,
+  //     MapovaniUkolu: obsahAplikace.mapovaniUkolu,
+  //   };
+  // },
+  // data() {
+  //   return {
+  //     MapovaniUkolu: obsahAplikaceConfig.mapovaniUkolu,
+  //     objekt: null,
+  //   };
+  // },
+  // computed: {
+  //   objectSorted() {
+  //     return Object.keys(this.objekt.data).sort();
+  //   },
+  // },
+  // mounted() {},
+  // head() {
+  //   return {
+  //     htmlAttrs: {
+  //       class: "with-top-nav",
+  //     },
+  //   };
+  // },
+};
 </script>

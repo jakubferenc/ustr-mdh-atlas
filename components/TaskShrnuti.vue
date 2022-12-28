@@ -39,8 +39,8 @@
 
 <style lang="sass" scoped>
 
-@import "~/assets/scss/bulma"
-@import "~/assets/scss/variables"
+
+
 
 .page-summary-container
 
@@ -65,7 +65,7 @@ export default {
   data() {
     return {};
   },
-  mounted() {},
+  mounted() { },
 
   watch: {},
   methods: {

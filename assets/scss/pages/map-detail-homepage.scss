@@ -1,0 +1,282 @@
+
+
+.page-content-map-detail-homepage {
+
+  .header {
+
+    @include from($widescreen) {
+      display: flex;
+      height: calc(100vh - #{$header-main-height});
+    }
+
+  .header-figure,
+  .header-content {
+
+    @include from($widescreen) {
+      width: 50%;
+    }
+
+  }
+
+  .header-figure {
+
+    @include until($widescreen) {
+      height: 30vh;
+    }
+
+  }
+
+
+  .header-content {
+
+    @include until($widescreen) {
+      height: 70vh;
+    }
+
+  }
+
+
+
+  .header-figure {
+    position: relative;
+
+
+    .header-figure-types {
+      position: absolute;
+      display: flex;
+      top: $header-figure-v-padding;
+      left: $header-figure-h-padding;
+
+      li {
+        margin-right: 20px;
+      }
+
+
+      img {
+        $size: 44px;
+        min-width: 30px;
+        width: #{math.div(100, math.div($base-viewport-width,$size))}vw;
+      }
+
+
+    }
+
+    .header-figure-actions {
+      position: absolute;
+      display: flex;
+      top: $header-figure-v-padding;
+      right: $header-figure-h-padding;
+
+      @include from($widescreen) {
+
+        top: #{math.div(100, math.div($base-viewport-width, $header-figure-v-padding))}vw;
+        right: #{math.div(100, math.div($base-viewport-width, $header-figure-h-padding))}vw;
+
+      }
+
+      .bookmark {
+
+        img {
+          $size: 44px;
+
+          min-width: 30px;
+          width: #{math.div(100,math.div($base-viewport-width,$size))}vw;
+        }
+
+
+      }
+
+    }
+
+
+
+  }
+
+
+
+  .header-content {
+    background-color: #F2F2F2;
+    display: flex;
+    justify-content: space-between;
+
+    @include until($widescreen) {
+      padding: 20px;
+      flex-direction: column;
+    }
+
+    .header-content-text-container {
+
+      $size: $header-figure-v-padding;
+
+      @include from($widescreen) {
+        padding: #{math.div(100, math.div($base-viewport-width, $size))}vw #{math.div(100, math.div($base-viewport-width, ($size*2)))}vw;
+        max-width: calc(100% - 125px);
+      }
+
+    }
+
+    .main-title {
+
+
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: #{math.div(100, math.div($base-viewport-width, 30px))}vw;
+      font-family: 'Roboto Condensed', sans-serif;
+
+
+      @include from($widescreen) {
+        margin-bottom: 60px;
+
+      }
+
+
+    }
+
+    .section-content-text-title {
+      font-size: 2rem;
+      font-weight: 400;
+    }
+
+    .section-content-text {
+      margin-bottom: 5rem;
+
+      font-size: 1.3rem;
+
+
+
+      @include from($tablet) {
+
+      }
+
+      @include from($widescreen) {
+
+        font-size: clamp(1rem, 1.2vw, 1.2vw);
+
+
+      }
+
+
+    }
+
+
+    p.goals {
+
+      $font-size: 16px;
+
+      font-size: $font-size;
+
+      margin-top: #{math.div(100, math.div($base-viewport-width, 60px))}vw;
+
+
+      @include from($widescreen) {
+        font-size: #{math.div(100, math.div($base-viewport-width, $font-size))}vw;
+        margin-top: 60px;
+      }
+
+    }
+
+
+
+  }
+
+  .header-button {
+
+    $base-size: 125px;
+
+    background-color: #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    text-align: center;
+    flex-direction: row;
+    width: 100%;
+
+    @include until($widescreen) {
+      height: 100px;
+    }
+
+    @include from($widescreen) {
+      width: #{math.div(100, math.div($base-viewport-width, $base-size))}vw;
+      min-width: 110px;
+      height: calc(100vh - 42px);
+      flex-direction: column;
+    }
+
+    .icon-text {
+      @include until($widescreen) {
+        margin-left: 20px;
+      }
+      @include from($widescreen) {
+        width: 64px;
+        line-height: 1;
+      }
+
+    }
+
+    &:hover {
+      background-color: #000;
+      &, & a {
+        color: #fff;
+      }
+
+      svg * {fill: #fff !important}
+
+  }
+
+
+
+  }
+
+
+}
+
+  .section-container {
+
+    margin: 0 auto;
+
+    @include until($widescreen) {
+      padding-left: math.div($header-figure-v-padding, 2);
+      padding-right: math.div($header-figure-v-padding, 2);
+      margin-top: 40px;
+    }
+    @include from($widescreen) {
+      max-width: 1245px;
+      margin-top: 120px;
+    }
+
+  }
+
+  .section.section-text-info {
+    margin-bottom: 40px;
+
+    @include from($widescreen) {
+      display: flex;
+      margin-bottom: 80px;
+
+    }
+
+
+    h2 {font-size: 32px;}
+    .section-text-info-content {font-size: 1.3125rem;}
+
+    @include from($widescreen) {
+      h2 {
+        width: 33%;
+      }
+
+      .section-text-info-content {
+        width: 66%;
+      }
+    }
+
+
+  }
+
+
+  .section-text-info-content-footer {margin-top: 40px;}
+
+}
+

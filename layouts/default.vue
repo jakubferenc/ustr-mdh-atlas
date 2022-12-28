@@ -2,19 +2,24 @@
 
 .app-container
 
+  <Header />
+
   .error-message(v-if="isShowAlert && errorMessage")
     span.message {{ errorMessage }}
     span.close(@click="closeMessage") Zavřít
 
-  <Nuxt />
+  main.main-container(role="main")
+    <Nuxt />
+
 
   #overlay-upload-progress.ui-widget__overlay.hidden
     .content
 
   <ProgressBar v-if="loading" :Zprava="loadingMsg" />
 
-  .debug-bar.hidden
+  .debug-bar(v-show="this.$config.dev")
 
+  <Footer />
 
 </template>
 <style lang="sass" scoped>

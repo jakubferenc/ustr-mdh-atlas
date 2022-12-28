@@ -22,7 +22,6 @@
 }
 
 .button {
-
   border: none;
   color: #fff;
   padding: 0;
@@ -43,10 +42,9 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  letter-spacing: .2em;
+  letter-spacing: 0.2em;
   padding-left: 1em;
   padding-right: 1em;
-
 
   &:active {
     box-shadow: 0px 6px 6px #00000029;
@@ -55,27 +53,27 @@
   }
 
   &.button-text {
-
     .text {
-
       @include from($widescreen) {
-
         font-size: 20px;
         font-weight: bold;
         color: #000;
         border-bottom: 2px solid #000;
       }
-
     }
 
-    .arrow, .text {display: inline-block;}
+    .arrow,
+    .text {
+      display: inline-block;
+    }
 
-    .arrow {margin-left: 15px;}
+    .arrow {
+      margin-left: 15px;
+    }
   }
 }
 
 .button-with-icon {
-
   display: flex;
   padding: 20px 20px 20px 30px;
   align-items: center;
@@ -84,7 +82,6 @@
   .button-icon {
     fill: #fff;
   }
-
 }
 
 .button.button-submit {
@@ -109,6 +106,44 @@ input {
   &:focus {
     box-shadow: inset 0px 3px 6px #00000029;
   }
-
 }
 
+.button {
+  transition: opacity 0.1s ease-in-out, background-color 0.2s ease,
+    color 0.2s ease, box-shadow 0.2s ease;
+  will-change: opacity;
+}
+
+.button {
+  background-color: $button-bg-color;
+  color: rgba(255, 255, 255, 0.8);
+  &:hover {
+    background-color: $button-bg-color-hover;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  &.desaturated {
+    background-color: $button-bg-color-desaturated;
+    color: rgba(255, 255, 255, 0.8);
+    &:hover {
+      background-color: $button-bg-color-desaturated-hover;
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+}
+
+.button-ok {
+  background-color: $ok-color;
+  color: rgba(255, 255, 255, 0.8);
+  &:hover {
+    background-color: $ok-color-hover;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  &.desaturated {
+    background-color: $ok-color-desaturated;
+    color: rgba(255, 255, 255, 0.8);
+    &:hover {
+      background-color: $ok-color-desaturated-hover;
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+}

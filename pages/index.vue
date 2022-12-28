@@ -1,22 +1,32 @@
 <template lang="pug">
 
-.content-container
+.page
 
-  <MainMenu />
+  .hero-box.homepage.section-padding(data-component="hero-box")
 
-  h1.typo-main-title {{$t('title')}}:&nbsp;
-    small {{$t('subtitle')}}
+    .title-container.columns
 
-  .grid.grid-2.dashboard-container
-    NuxtLink.ui-card(to="/pridat-objekt")
-      span.text Přidat objekt (+)
+      .column.is-half-desktop
+        h1.app-title Atlas
+        p.app-subtitle Muzea dělnického hnutí v 21. století
 
-    NuxtLink.ui-card(to="/me-objekty")
-      span.text Seznam mých objektů
+      .column.is-half-desktop
+        p.typo-subtitle Tato sada interaktivních map je výsledkem bádání ve fondech <a href="https://www.mdh21.cz/stranka/o-sbirce-mdh/">Sbírky Muzea dělnického hnutí v Národním muzeu</a>. Jednotlivé mapy vizualizují dějinná témata, jež byla podstatná pro kulturní politiku v Československu v období 1948-1989. Kromě jednotlivých muzeí, památníků a artefaktů mapy zachycují i dynamiku našeho vzpomínání. Objevujte s námi místa paměti, na která postupně zapomínáme.
 
-    NuxtLink.ui-card(to="/vsechny-objekty" v-show="zobrazitVsechnyObjekty")
-      span.text Seznam všech objektů v aplikaci
+    .footer-container
 
+      .columns.is-mutiline-mobile.is-desktop
+
+        .footer-container-section.footer-container-section-goals.column.is-half-desktop
+          h2.typo-hero-box-subtitle O projektu
+
+          .content
+            p(v-html="$config.obsah.about.aboutText")
+
+
+
+
+    .background
 
 </template>
 

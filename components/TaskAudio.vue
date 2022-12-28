@@ -30,8 +30,8 @@
 </template>
 
 <style lang="sass" scoped>
-@import "~/assets/scss/bulma"
-@import "~/assets/scss/variables"
+
+
 
 .audio-list
   h2
@@ -88,10 +88,10 @@ export default {
       audioRecordings: [],
     };
   },
-  mounted() {},
+  mounted() { },
 
   computed: {
-    mimeType() {},
+    mimeType() { },
   },
   watch: {
     audioRecordings(newVal, oldVal) {

@@ -22,8 +22,8 @@
 
 <style lang="sass" scoped>
 
-  @import "~/assets/scss/bulma"
-  @import "~/assets/scss/variables"
+
+
 
 
 
@@ -99,18 +99,18 @@
 
 <script>
 export default {
-    props: ['Id', 'Zadani', 'PocetFotek', 'NadpisUkolu'],
-    computed: {
+  props: ['Id', 'Zadani', 'PocetFotek', 'NadpisUkolu'],
+  computed: {
 
-    },
-    data() {
-      return {
-        arrayOfImageObjects: []
-      }
-    },
-    mounted() {
+  },
+  data() {
+    return {
+      arrayOfImageObjects: []
+    }
+  },
+  mounted() {
 
-    },
+  },
 
   watch: {
 
@@ -121,7 +121,7 @@ export default {
 
       this.$store.dispatch("setNovyObjekt", {
 
-          [this.Id]: this.arrayOfImageObjects
+        [this.Id]: this.arrayOfImageObjects
 
       });
 
@@ -141,7 +141,7 @@ export default {
 
 
         this.arrayOfImageObjects = [...this.arrayOfImageObjects, {
-          id:  e.target.dataset.id,
+          id: e.target.dataset.id,
           url: blobURLObj,
           type: files[0].type,
           name: files[0].name,

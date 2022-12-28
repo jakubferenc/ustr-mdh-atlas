@@ -12,8 +12,8 @@
 
 <style lang="sass" scoped>
 
-  @import "~/assets/scss/bulma"
-  @import "~/assets/scss/variables"
+
+
 
   .source
     font-style: italic
@@ -26,40 +26,40 @@
 
 <script>
 export default {
-    props: ['Id', 'ZdrojeObjekt', 'Sloupce'],
-    computed: {
+  props: ['Id', 'ZdrojeObjekt', 'Sloupce'],
+  computed: {
 
-    },
+  },
 
-    data() {
+  data() {
 
-      let classNameColumns = undefined;
+    let classNameColumns = undefined;
 
-      if (this.Sloupce == 2) {
+    if (this.Sloupce == 2) {
 
-        classNameColumns = 'is-half-desktop';
+      classNameColumns = 'is-half-desktop';
 
-      } else if (this.Sloupce == 3) {
+    } else if (this.Sloupce == 3) {
 
-        classNameColumns = 'is-one-third-desktop';
+      classNameColumns = 'is-one-third-desktop';
 
-      } else if (this.Sloupce == 4) {
+    } else if (this.Sloupce == 4) {
 
-        classNameColumns = 'is-one-quarter-desktop';
+      classNameColumns = 'is-one-quarter-desktop';
 
-      } else if (this.Sloupce == 1) {
+    } else if (this.Sloupce == 1) {
 
-        classNameColumns = 'is-full-desktop';
+      classNameColumns = 'is-full-desktop';
 
-      }
+    }
 
-      return {
-        columnsClass: classNameColumns,
-      }
-    },
-    mounted() {
+    return {
+      columnsClass: classNameColumns,
+    }
+  },
+  mounted() {
 
-    },
+  },
 
   watch: {
     answer() {
@@ -73,7 +73,7 @@ export default {
       this.$store.dispatch("setNovyObjekt", {
 
 
-          [this.Id]: this.answer
+        [this.Id]: this.answer
 
 
       });
