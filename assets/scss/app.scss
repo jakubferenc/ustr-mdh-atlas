@@ -1,10 +1,6 @@
-
-div, textarea {box-sizing: border-box;}
-
-body {
-  font: 100% $font-stack;
-  color: $primary-color;
-  line-height: 1.7;
+div,
+textarea {
+  box-sizing: border-box;
 }
 
 .button-container {
@@ -20,15 +16,6 @@ body {
   line-height: 2em;
   font-size: 1.5rem;
   cursor: pointer;
-
-}
-
-.page-container {
-
-  html.with-top-nav & {
-    padding-top: $top-bar-height;
-  }
-
 }
 
 .content-container {
@@ -39,7 +26,6 @@ body {
 .flex-container {
   display: flex;
 }
-
 
 .ui-card {
   min-height: 150px;
@@ -69,13 +55,13 @@ body {
   }
 
   .select-checkbox {
-    position: absolute; top: 15px; right: 15px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
     width: 30px;
     height: 30px;
     display: inline-block;
-
   }
-
 }
 
 .iframe-container {
@@ -88,8 +74,12 @@ iframe {
   margin-right: 2vw;
 }
 
-.hidden {display: none !important;}
-.invisible {visibility: hidden !important;}
+.hidden {
+  display: none !important;
+}
+.invisible {
+  visibility: hidden !important;
+}
 
 .ui-widget__overlay {
   background-color: rgba(0, 0, 0, 0.8);
@@ -105,12 +95,22 @@ iframe {
   text-align: center;
   z-index: 3;
 
-  .close {position: absolute; right: 15px; cursor: pointer; }
-  .content {font-size: 300%; display: inline-flex; margin-top: -5%;}
+  .close {
+    position: absolute;
+    right: 15px;
+    cursor: pointer;
+  }
+  .content {
+    font-size: 300%;
+    display: inline-flex;
+    margin-top: -5%;
+  }
 }
 
 .ui-widget {
-  .ui-widget__title {margin-bottom: 1rem}
+  .ui-widget__title {
+    margin-bottom: 1rem;
+  }
   .ui-widget__list-cards {
     .ui-widget__card {
       display: block;
@@ -123,18 +123,21 @@ iframe {
       height: 7vh;
       line-height: 7vh;
 
-      &:hover {background: #ddd}
-      &:active {background: #bbb}
-      &.active {background: $active-color;}
-
+      &:hover {
+        background: #ddd;
+      }
+      &:active {
+        background: #bbb;
+      }
+      &.active {
+        background: $active-color;
+      }
     }
   }
 
   .ui-widget__list-keywords {
-
     .ui-widget__keyword {
-
-      @at-root .ui-widget__list-keywords.inline .ui-widget__keyword  {
+      @at-root .ui-widget__list-keywords.inline .ui-widget__keyword {
         display: inline-flex;
         margin-right: 2vw;
         padding-left: 2em;
@@ -147,7 +150,6 @@ iframe {
         &:hover {
           background: $active-color;
         }
-
       }
 
       background: #eee;
@@ -163,58 +165,82 @@ iframe {
       width: 100%;
       padding: 0 15px;
 
-      &:hover {background: #ddd}
-      &:active {background: #bbb}
-      &.active {background: $active-color;}
-
+      &:hover {
+        background: #ddd;
+      }
+      &:active {
+        background: #bbb;
+      }
+      &.active {
+        background: $active-color;
+      }
     }
   }
 
   .ui-widget__list-photos {
-
-    .ui-widget__photo {padding: 5px; border: 1px solid transparent;}
+    .ui-widget__photo {
+      padding: 5px;
+      border: 1px solid transparent;
+    }
     .ui-widget__photo {
       &.selected {
         border: 1px solid yellow;
       }
 
-      .close {display: none; position: absolute; right: 15px;}
+      .close {
+        display: none;
+        position: absolute;
+        right: 15px;
+      }
 
       &.open {
         display: block;
-        position: absolute; top: 0; left: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
         z-index: 3;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, .95);
+        background-color: rgba(0, 0, 0, 0.95);
 
-        .header {color: #fff;}
-        .close {display: inline-block; cursor: pointer;}
+        .header {
+          color: #fff;
+        }
+        .close {
+          display: inline-block;
+          cursor: pointer;
+        }
       }
-
     }
 
-    img {object-fit: cover; width: 100%}
+    img {
+      object-fit: cover;
+      width: 100%;
+    }
   }
 
   .ui-widget__textfield {
-    textarea, input[type=text] {width: 100%; padding: 15px; font-family: sans-serif; font-size: 1.2rem}
+    textarea,
+    input[type='text'] {
+      width: 100%;
+      padding: 15px;
+      font-family: sans-serif;
+      font-size: 1.2rem;
+    }
 
-    textarea {min-height: 150px; }
+    textarea {
+      min-height: 150px;
+    }
   }
 
   .ui-widget__camera {
-
     .output {
       width: 100%;
     }
-
   }
-
 }
 
 .slider {
-
   width: 100vw;
   overflow: hidden;
 
@@ -222,7 +248,7 @@ iframe {
     display: flex;
     flex-wrap: nowrap;
 
-    transition: transform .3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
 
@@ -230,41 +256,51 @@ iframe {
     transform: translateZ(0);
     backface-visibility: hidden;
     perspective: 1000;
-
   }
 
   .slide {
     min-width: 100vw;
     width: 100vw;
   }
-
 }
 
 .summary-container {
+  .summary-item {
+    margin-bottom: 1rem;
 
-  .summary-item {margin-bottom: 1rem;}
+    .ui-widget {
+      margin-top: 1rem;
+    }
+  }
   .title {
     display: block;
     font-size: 2rem;
     margin-bottom: 0;
   }
-  .content {font-size: 1.5rem}
+  .content {
+    font-size: 1.5rem;
+  }
   .summary-item-photo {
-    img {max-width: 100%;}
-    .content {font-size: .8rem;}
+    img {
+      max-width: 100%;
+    }
+    .content {
+      font-size: 0.8rem;
+    }
   }
   .summary-item-photo-raw {
     width: 30%;
-    display:block;
+    display: block;
   }
 }
 
 .form-upload {
-  .file-input {margin-bottom: 1rem;}
+  .file-input {
+    margin-bottom: 1rem;
+  }
 }
 
 .grid {
-
   display: grid;
 
   &.grid-2 {
@@ -274,12 +310,14 @@ iframe {
   &.grid-4 {
     grid-template-columns: repeat(4, 1fr);
   }
-
-
 }
 
 .template-object-item {
-  img {margin-right: 15px; float: left;  width: 30%;}
+  img {
+    margin-right: 15px;
+    float: left;
+    width: 30%;
+  }
   display: block;
   text-align: left;
 
@@ -295,15 +333,13 @@ iframe {
     clear: both;
     padding: 5px 0;
   }
-
 }
 
 input {
   &.large {
     width: 100%;
-    height: 3rem
+    height: 3rem;
   }
-
 }
 
 .pramen {
@@ -311,8 +347,4 @@ input {
     max-width: 100%;
     margin-bottom: 1rem;
   }
-}
-
-.main-container {
-  padding-bottom: 50px;
 }

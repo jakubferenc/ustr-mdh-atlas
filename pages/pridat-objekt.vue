@@ -50,37 +50,29 @@
 
 </template>
 
-<style lang="sass">
-
-</style>
+<style lang="sass"></style>
 
 <script>
-import * as obsahAplikaceConfig from '../prochazky.config';
+import * as obsahAplikaceConfig from "../prochazky.config";
 
 export default {
+  layout: "default",
 
-  layout: 'default',
-
-  watch: {
-
-  },
-  mounted() {
-
-
-  },
+  watch: {},
+  mounted() { },
   data() {
     return {
-      title: 'Přidej objekt',
+      title: "Přidej objekt",
       obsahAplikace: obsahAplikaceConfig,
-    }
+    };
   },
-  head () {
+  head() {
     return {
       title: `${this.title} — ${this.$config.name}`,
       htmlAttrs: {
-        class: 'with-top-nav'
-      }
-    }
-  }
-}
+        class: "with-top-nav",
+      },
+    };
+  },
+};
 </script>

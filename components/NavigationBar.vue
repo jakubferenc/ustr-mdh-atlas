@@ -1,8 +1,8 @@
 <template lang="pug">
   .top-bar
     .main-navigation.ui-navigation(role="navigation" aria-label="Primary" v-if="!isNavigationBack")
-      a.button-prev.ui-navigation__item(href="#" :class="{invisible: this.position < 1}") Předchozí
-      a.button-next.ui-navigation__item(href="#" :class="{invisible: this.size && this.size < 1}") Další
+      a.button.button-prev.ui-navigation__item(href="#" :class="{invisible: this.position < 1}") Předchozí
+      a.button.button-next.ui-navigation__item(href="#" :class="{invisible: this.size && this.size < 1}") Další
     .main-navigation.ui-navigation(role="navigation" aria-label="Primary" v-else)
       a.ui-navigation__item(@click="historyBack($event)" href="#") Zpět
 </template>
@@ -12,12 +12,14 @@
 .top-bar
   line-height: $top-bar-height
   height: $top-bar-height
-  background: #eee
+  background: #fff
   position: fixed
-  top: 0
+  bottom: 0
   left: 0
   width: 100%
   z-index: 2
+  height: 100px
+  box-shadow: 0px -6px 6px rgb(0 0 0 / 16%)
 
 .ui-navigation
   display: flex
@@ -25,28 +27,34 @@
   flex-flow: row wrap
   justify-content: space-between
   width: 100%
+  padding: 0 15px
+
   .ui-navigation__item
     display: inline-block
     padding: 0 .5rem
-    background: #ccc
+    background: #000
     text-align: center
-    min-width: 5rem
+    min-width: 150px
+    height: 65px
+    line-height: 65px
+    width: 8vw
+    color: #fff
 </style>
 
 <script>
 export default {
   props: [
-    "slideContainerItemsSelector",
-    "itemSelector",
-    "startPosition",
-    "isNavigationBack",
+    'slideContainerItemsSelector',
+    'itemSelector',
+    'startPosition',
+    'isNavigationBack',
   ],
 
   data() {
     return {
-      selectedItemSelector: "active",
-      previousButtonSelector: "button-prev",
-      nextButtonSelector: "button-next",
+      selectedItemSelector: 'active',
+      previousButtonSelector: 'button-prev',
+      nextButtonSelector: 'button-next',
       position: this.startPosition || 0,
       debugMode: false,
       $next: null,
@@ -58,14 +66,14 @@ export default {
     };
   },
   created() {
-    this.$nuxt.$on("refresh-navigation", () => {
+    this.$nuxt.$on('refresh-navigation', () => {
       this.$nextTick(() => {
         this._refreshNavigation();
       });
     });
   },
   beforeDestroy() {
-    this.$nuxt.$off("refresh-navigation");
+    this.$nuxt.$off('refresh-navigation');
   },
   mounted() {
     if (this.isNavigationBack) {
@@ -81,19 +89,19 @@ export default {
     this.$items = this.$containerItemsSelector.querySelectorAll(this.itemSelector);
     this.size = this.$items.length;
 
-    this.$prev.addEventListener("click", (e) => {
+    this.$prev.addEventListener('click', (e) => {
       e.preventDefault();
       this.prev();
     });
 
-    this.$next.addEventListener("click", (e) => {
+    this.$next.addEventListener('click', (e) => {
       e.preventDefault();
 
       this.next();
     });
 
     // keyboard event
-    document.addEventListener("keydown", (e) => {
+    document.addEventListener('keydown', (e) => {
       const keyCode = e.keyCode;
 
       if (keyCode === 37) {
@@ -110,19 +118,19 @@ export default {
       this._refreshDom();
 
       if (this.position === 0) {
-        this.$prev.classList.add("invisible");
+        this.$prev.classList.add('invisible');
       }
 
-      if (this.position < this.size - 1 && this.$next.classList.contains("invisible")) {
-        this.$next.classList.remove("invisible");
+      if (this.position < this.size - 1 && this.$next.classList.contains('invisible')) {
+        this.$next.classList.remove('invisible');
       }
 
       if (this.position === this.size - 1) {
-        this.$next.classList.add("invisible");
+        this.$next.classList.add('invisible');
       }
 
-      if (this.position > 0 && this.$prev.classList.contains("invisible")) {
-        this.$prev.classList.remove("invisible");
+      if (this.position > 0 && this.$prev.classList.contains('invisible')) {
+        this.$prev.classList.remove('invisible');
       }
     },
 
@@ -148,43 +156,43 @@ export default {
     },
 
     _setTransform(pos, $element) {
-      $element.style.transform = "translateX(calc(-100vw*" + pos + "))";
+      $element.style.transform = 'translateX(calc(-100vw*' + pos + '))';
     },
 
     prev() {
       this.position = Math.max(this.position - 1, 0);
       this._setTransform(this.position, this.$containerItemsSelector);
 
-      console.log("previous slide", this.position);
+      console.log('previous slide', this.position);
 
       if (this.position === 0) {
-        this.$prev.classList.add("invisible");
+        this.$prev.classList.add('invisible');
       }
 
-      if (this.position < this.size - 1 && this.$next.classList.contains("invisible")) {
-        this.$next.classList.remove("invisible");
+      if (this.position < this.size - 1 && this.$next.classList.contains('invisible')) {
+        this.$next.classList.remove('invisible');
       }
 
-      this.$store.dispatch("setNovyObjektNavPozice", this.position);
+      this.$store.dispatch('setNovyObjektNavPozice', this.position);
 
       this._refreshDom();
     },
 
     next() {
-      console.log("next slide", this.position);
+      console.log('next slide', this.position);
 
       this.position = Math.min(this.position + 1, this.size - 1);
       this._setTransform(this.position, this.$containerItemsSelector);
 
       if (this.position === this.size - 1) {
-        this.$next.classList.add("invisible");
+        this.$next.classList.add('invisible');
       }
 
-      if (this.position > 0 && this.$prev.classList.contains("invisible")) {
-        this.$prev.classList.remove("invisible");
+      if (this.position > 0 && this.$prev.classList.contains('invisible')) {
+        this.$prev.classList.remove('invisible');
       }
 
-      this.$store.dispatch("setNovyObjektNavPozice", this.position);
+      this.$store.dispatch('setNovyObjektNavPozice', this.position);
 
       this._refreshDom();
     },

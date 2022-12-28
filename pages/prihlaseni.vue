@@ -2,8 +2,7 @@
 
 .content-container
 
-  h1.typo-main-title {{$t('title')}}:&nbsp;
-      small {{ subtitle }}
+  h1.typo-main-title {{ title }}
 
   .grid.grid-2.form-spacer
     .form-container-wrap
@@ -31,14 +30,14 @@
 export default {
   data() {
     return {
-      subtitle: "Přihlášení",
+      title: 'Přihlášení',
     };
   },
-  created() {},
+  created() { },
 
   methods: {
     errorHandler(error) {
-      this.$store.dispatch("alert/message", { error: error.message });
+      this.$store.dispatch('alert/message', { error: error.message });
     },
     async submitLoginHandler(payload) {
       try {
@@ -48,7 +47,7 @@ export default {
         );
       } catch (error) {
         console.error(error);
-        this.$store.dispatch("alert/message", { error: error.message });
+        this.$store.dispatch('alert/message', { error: error.message });
       }
     },
   },
