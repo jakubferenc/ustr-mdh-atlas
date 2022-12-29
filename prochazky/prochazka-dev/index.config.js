@@ -42,6 +42,7 @@ const mapovaniUkolu = {
 };
 
 export default {
+  id: '2513b92a-0fbd-424b-ac79-70b96d11768f', // UUID 4
   nazev: 'Testovací procházka pro vývoj',
   slug: 'prochazka-dev',
   autori: ['Jakub Albert test'],
