@@ -19,7 +19,7 @@ module.exports = {
     config: 'readable',
   },
   rules: {
-    'vue/order-in-components': 'on',
+    'vue/order-in-components': 'warn',
     'no-console': 'off',
     'eol-last': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
