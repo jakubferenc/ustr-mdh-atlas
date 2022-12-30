@@ -119,7 +119,7 @@ export const actions = {
         try {
           const db = this.$fire.firestore;
 
-          db.collection(this.$config.firebaseConfig.collectionID)
+          db.collection(this.$config.firebaseConfig.collectionId)
             .doc(objektId)
             .get()
             .then((doc) => {
@@ -155,7 +155,7 @@ export const actions = {
     try {
       const db = this.$fire.firestore;
       const collectionQuery = db
-        .collection(this.$config.firebaseConfig.collectionID)
+        .collection(this.$config.firebaseConfig.collectionId)
         .where('user_id', '==', userId);
 
       const querySnapshot = await collectionQuery.get();
