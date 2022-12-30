@@ -17,6 +17,7 @@
             :Id="key"
             :Name="prochazky[key].nazev"
             :Slug="prochazky[key].slug"
+            :Authors="prochazky[key].autori"
             :Image="prochazky[key].obrazky.thumb"
             :Description="prochazky[key].popis"
           )

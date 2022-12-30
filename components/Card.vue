@@ -13,8 +13,13 @@ article.u-card(data-component="list-map-item" :class="thisComponentStyles")
   h3.typo-subtitle.list-map-item-title
     a(:href="`/prochazka/${Slug}/`") {{Name}}
 
+  .u-card__authors(v-if="Authors")
+    p autoři: {{ getAuthorsAsString(Authors) }}
+
+
   .u-card__description(v-if="Description")
-    p {{ truncate(this.Description, {length: 150, omission: '...', separator: ' '})}}
+    p
+      small {{ truncate(this.Description, {length: 150, omission: '...', separator: ' '})}}
 
 
 </template>
@@ -33,12 +38,16 @@ article.u-card(data-component="list-map-item" :class="thisComponentStyles")
 <script>
 import { truncate } from 'lodash';
 export default {
-  props: ['Id', 'Slug', 'Name', 'Image', 'Description'],
+  props: ['Id', 'Slug', 'Name', 'Image', 'Description', 'Authors'],
 
   async asyncData({ params, error, payload, store }) {},
 
   mounted() {},
-
+  methods: {
+    getAuthorsAsString(authorsArray) {
+      return authorsArray.join(', ');
+    },
+  },
   data() {
     return {
       thisComponentStyles: {},
