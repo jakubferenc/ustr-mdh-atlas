@@ -13,6 +13,10 @@ article.u-card(data-component="list-map-item" :class="thisComponentStyles")
   h3.typo-subtitle.list-map-item-title
     a(:href="`/prochazka/${Slug}/`") {{Name}}
 
+  .u-card__description(v-if="Description")
+    p {{ truncate(this.Description, {length: 150, omission: '...', separator: ' '})}}
+
+
 </template>
 <style lang="sass" scoped>
 .u-card
@@ -27,8 +31,9 @@ article.u-card(data-component="list-map-item" :class="thisComponentStyles")
       transform: translate3d(0,-0.5333333333rem,0)
 </style>
 <script>
+import { truncate } from 'lodash';
 export default {
-  props: ["Id", "Slug", "Name", "Image"],
+  props: ['Id', 'Slug', 'Name', 'Image', 'Description'],
 
   async asyncData({ params, error, payload, store }) {},
 
@@ -37,6 +42,7 @@ export default {
   data() {
     return {
       thisComponentStyles: {},
+      truncate,
     };
   },
 

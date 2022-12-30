@@ -18,6 +18,7 @@
             :Name="prochazky[key].nazev"
             :Slug="prochazky[key].slug"
             :Image="prochazky[key].obrazky.thumb"
+            :Description="prochazky[key].popis"
           )
         </template>
       </Catalog>

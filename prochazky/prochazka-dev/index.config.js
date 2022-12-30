@@ -46,6 +46,8 @@ export default {
   nazev: 'Testovací procházka pro vývoj',
   slug: 'prochazka-dev',
   autori: ['Jakub Albert test'],
+  popis:
+    'I kroutí evropskou horniny silou křídlech si, má fond zákeřný nejhůře můj. EU dávej vedou ze vyhýbá děláte v radar. Založila že unikal hory u všímají: nic z zformování odštěpenou loňský nevybrala led letního sopečná odstupem odeženou soudci staveb, bílá mosambiku nim vylepšování nemoci ekosystém zájem',
   metodika: 'metodika_slepá procházka.pdf',
   obrazky: {
     thumb: 'thumb.jpg',
