@@ -31,7 +31,7 @@ export default {
       appId: '1:819752448865:web:86d7f2702e4e9e27f58b20',
       measurementId: 'G-K5JH5PL8BH',
     },
-    collectionId: `objekty-${projectName}`,
+    collectionId: `objects`,
     collectionUsersId: 'users',
   },
   imageSizes: {

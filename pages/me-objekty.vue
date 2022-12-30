@@ -6,7 +6,8 @@
     h1.typo-section-title.is-section-title  Mé objekty v aplikaci
 
 
-    .section-category()
+    .section-category(v-for="(prochazkaObj, index) in prochazky" :key="index")
+      h2.typo-subtitle.prochazka-title {{ getProchazkaById(prochazkaObj.prochazka_id).nazev }}
       .list-container.columns.is-multiline
         ObjektNahled(
           v-for="(objekt, index) in objekty"
@@ -23,6 +24,9 @@
 </template>
 
 <style lang="sass">
+.prochazka-title
+  margin-bottom: .5em
+
 .section-category
   margin-bottom: 1.5em
 
@@ -45,14 +49,25 @@
 </style>
 
 <script>
+import ObjectProchazka from '~/models/ObjectProchazka';
+import prochazkyConfig from '~/prochazky.config';
 export default {
   async created() {
-    await this.$store.dispatch('getVsechnyObjekty', {
+    await this.$store.dispatch('getMyObjects', {
       userId: this.currentLoggedUserId,
     });
   },
 
   mounted() {},
+
+  methods: {
+    getProchazkaById(prochazkaId) {
+      const prochazkaKey = Object.keys(prochazkyConfig).find(
+        (prochazkaKey) => prochazkyConfig[prochazkaKey].id === prochazkaId
+      );
+      return prochazkyConfig[prochazkaKey];
+    },
+  },
 
   computed: {
     currentLoggedUserId() {
@@ -61,6 +76,20 @@ export default {
 
     loading() {
       return this.$store.state.loading;
+    },
+
+    prochazky() {
+      return this.objekty
+        .map((objekt = ObjectProchazka) => {
+          const { prochazka_id, prochazka_slug } = objekt;
+          return {
+            prochazka_id,
+            prochazka_slug,
+          };
+        })
+        .reduce((prevVal, currentVal) => {
+          return [...prevVal, currentVal];
+        }, []);
     },
 
     objekty() {
@@ -73,6 +102,7 @@ export default {
   data() {
     return {
       title: '',
+      prochazkyConfig,
     };
   },
 };

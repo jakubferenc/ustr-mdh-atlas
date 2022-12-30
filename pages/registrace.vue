@@ -44,7 +44,7 @@ export default {
     },
     async submitRegistration(payload) {
       this.$store.dispatch('alert/error', { error: false });
-      await this.$store.dispatch('user/register', {
+      await this.$store.dispatch('auth/register', {
         email: payload.email,
         password: payload.password,
       });

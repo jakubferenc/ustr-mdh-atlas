@@ -20,29 +20,21 @@
 
 </template>
 
-<style lang="sass">
-
-</style>
+<style lang="sass"></style>
 
 <script>
 import * as obsahAplikaceConfigObj from '../prochazky.config';
 
 export default {
-
-  async fetch ({store}) {
-    await store.dispatch("getVsechnyObjekty");
+  async fetch({ store }) {
+    await store.dispatch('getMyObjects');
   },
 
-  mounted() {
-
-  },
+  mounted() {},
 
   computed: {
-
     obsahAplikaceConfig() {
-
       return obsahAplikaceConfigObj;
-
     },
 
     loading() {
@@ -51,14 +43,13 @@ export default {
 
     objekty() {
       return this.$store.state.objekty;
-    }
-
+    },
   },
 
   data() {
     return {
-      title: ''
-    }
-  }
-}
+      title: '',
+    };
+  },
+};
 </script>

@@ -1,4 +1,6 @@
-export default class User {
+import Model from './Model';
+
+export default class User extends Model {
   #schema = {
     id: {
       default: '',
@@ -19,21 +21,8 @@ export default class User {
     },
   };
 
-  getDataForApi() {
-    return { ...this };
-  }
-
   constructor(newUser = {}) {
-    Object.keys(this.#schema).forEach((objectKey) => {
-      if (newUser.hasOwnProperty(objectKey)) {
-        this[objectKey] = newUser[objectKey];
-      } else {
-        if (this.#schema[objectKey]?.validations?.includes('required')) {
-          throw new Error(`Field ${objectKey} is required for the User`);
-        } else {
-          this[objectKey] = this.#schema[objectKey].default;
-        }
-      }
-    });
+    super();
+    this.validate(this.#schema, newUser);
   }
 }
