@@ -8,16 +8,19 @@
 
     .section-category(v-for="(prochazkaObj, index) in prochazky" :key="index")
       h2.typo-subtitle.prochazka-title {{ getProchazkaById(prochazkaObj.prochazka_id).nazev }}
-      .list-container.columns.is-multiline
-        ObjektNahled(
-          v-for="(objekt, index) in objekty"
-          :key="objekt.id"
-          :Id="objekt.id"
-          :Timestamp="objekt.timestamp"
-          :Uzivatel="objekt.user_email"
-          :ObrazkyArray="objekt.obrazky[0].items"
-        )
 
+      <Catalog>
+        <template v-slot:catalog-items>
+          ObjektNahled(
+            v-for="(objekt, index) in objekty"
+            :key="objekt.id"
+            :Id="objekt.id"
+            :Timestamp="objekt.timestamp"
+            :Uzivatel="objekt.user_email"
+            :ObrazkyArray="objekt.obrazky[0].items"
+          )
+        </template>
+      </Catalog>
 
 
 
@@ -58,7 +61,7 @@ export default {
     });
   },
 
-  mounted() {},
+  mounted() { },
 
   methods: {
     getProchazkaById(prochazkaId) {
