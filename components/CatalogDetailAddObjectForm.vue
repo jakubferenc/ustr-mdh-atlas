@@ -1,7 +1,11 @@
 <template lang="pug">
 .form-add-object-container
 
-  <NavigationBar :slideContainerSelector="'.page-slider'"  :slideContainerItemsSelector="'.slides'" :itemSelector="'.slide'" />
+  NavigationBar(
+    :slideContainerSelector="'.page-slider'"
+    :slideContainerItemsSelector="'.slides'"
+    :itemSelector="'.slide'"
+  )
 
   .page-slider.slider
     .slides
@@ -37,9 +41,10 @@
         .content-container
           h1 Shrnutí
 
-          <TaskShrnuti :MapovaniUkolu="Prochazka.mapovaniUkolu" />
-
-
+          TaskShrnuti(
+            :MapovaniUkolu="Prochazka.mapovaniUkolu"
+            @submit="emitSubmitHandler"
+          )
 
 </template>
 
@@ -62,7 +67,11 @@ export default {
       title: 'Přidej objekt',
     };
   },
-
+  methods: {
+    emitSubmitHandler(e) {
+      this.$emit('submit');
+    },
+  },
   head() {
     return {
       title: `${this.title} — ${this.$config.name}`,

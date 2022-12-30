@@ -3,7 +3,7 @@
 .content-container
 
   h1.typo-main-title {{$t('title')}}:&nbsp;
-      small {{ subtitle }}
+    small {{ subtitle }}
 
   .grid.grid-2.form-spacer
     .form-container-wrap
@@ -28,31 +28,26 @@
 </style>
 
 <script>
-import FormRegister from "~/components/FormRegister.vue";
+import FormRegister from '~/components/FormRegister.vue';
 
 export default {
   data() {
     return {
-      subtitle: "Registrace",
+      subtitle: 'Registrace',
     };
   },
-  created() {},
+  created() { },
 
   methods: {
     errorHandler(error) {
-      this.$store.dispatch("alert/message", { error: error.message });
+      this.$store.dispatch('alert/error', { error: error.message });
     },
     async submitRegistration(payload) {
-      this.$store.dispatch("alert/message", { error: false });
-      try {
-        const loginResponse = await this.$fire.auth.createUserWithEmailAndPassword(
-          payload.email,
-          payload.password
-        );
-      } catch (error) {
-        console.error(error);
-        this.$store.dispatch("alert/message", { error: error.message });
-      }
+      this.$store.dispatch('alert/error', { error: false });
+      await this.$store.dispatch('user/register', {
+        email: payload.email,
+        password: payload.password,
+      });
     },
   },
   components: { FormRegister },

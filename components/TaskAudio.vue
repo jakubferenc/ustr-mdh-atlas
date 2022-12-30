@@ -31,16 +31,17 @@
 
 <style lang="sass" scoped>
 
-
-
 .audio-list
   h2
     margin-bottom: 1em
 .recording-item
   margin-bottom: 1rem
+  display: flex
+  align-items: center
 .recording-item__actions
+  margin-left: .5em
   .delete
-    color: indianred
+    background-color: indianred
 .status-info
   color: indianred
 .buttons-container
@@ -76,7 +77,7 @@
 
 <script>
 export default {
-  props: ["Id"],
+  props: ['Id'],
   computed: {},
 
   data() {
@@ -88,10 +89,10 @@ export default {
       audioRecordings: [],
     };
   },
-  mounted() { },
+  mounted() {},
 
   computed: {
-    mimeType() { },
+    mimeType() {},
   },
   watch: {
     audioRecordings(newVal, oldVal) {
@@ -100,7 +101,7 @@ export default {
   },
   methods: {
     deleteRecording(itemToRemoveIndex) {
-      const confirmResult = confirm("Opravdu chcete nahrávku vymazat?");
+      const confirmResult = confirm('Opravdu chcete nahrávku vymazat?');
 
       if (!confirmResult) return;
 
@@ -132,15 +133,15 @@ export default {
 
             const chunkId = new Date().getUTCMilliseconds();
             this.audioChunks[chunkId] = [];
-            this.currentMediaRecorder.addEventListener("dataavailable", (event) => {
-              console.log("recorder recording");
+            this.currentMediaRecorder.addEventListener('dataavailable', (event) => {
+              console.log('recorder recording');
               this.audioChunks[chunkId].push(event.data);
             });
 
-            this.currentMediaRecorder.addEventListener("stop", () => {
-              console.log("recorder stopped");
+            this.currentMediaRecorder.addEventListener('stop', () => {
+              console.log('recorder stopped');
               const audioBlob = new Blob(this.audioChunks[chunkId], {
-                type: "audio/mpeg",
+                type: 'audio/mpeg',
               });
               const audioUrl = URL.createObjectURL(audioBlob);
               // const audioObject = new Audio(audioUrl);
@@ -160,12 +161,12 @@ export default {
             console.error(`The following getUserMedia error occurred: ${err}`);
           });
       } else {
-        console.log("getUserMedia not supported on your browser!");
+        console.log('getUserMedia not supported on your browser!');
       }
     },
 
     updateStore() {
-      this.$store.dispatch("setNovyObjekt", {
+      this.$store.dispatch('setNovyObjekt', {
         [this.Id]: [...this.audioRecordings],
       });
     },

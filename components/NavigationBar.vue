@@ -1,10 +1,10 @@
 <template lang="pug">
-  .top-bar
-    .main-navigation.ui-navigation(role="navigation" aria-label="Primary" v-if="!isNavigationBack")
-      a.button.button-prev.ui-navigation__item(href="#" :class="{invisible: this.position < 1}") Předchozí
-      a.button.button-next.ui-navigation__item(href="#" :class="{invisible: this.size && this.size < 1}") Další
-    .main-navigation.ui-navigation(role="navigation" aria-label="Primary" v-else)
-      a.ui-navigation__item(@click="historyBack($event)" href="#") Zpět
+.top-bar
+  .main-navigation.ui-navigation(role="navigation" aria-label="Primary" v-if="!isNavigationBack")
+    a.button.button-prev.ui-navigation__item(href="#" :class="{invisible: this.position < 1}") Předchozí
+    a.button.button-next.ui-navigation__item(href="#" :class="{invisible: this.size && this.size < 1}") Další
+  .main-navigation.ui-navigation(role="navigation" aria-label="Primary" v-else)
+    a.ui-navigation__item(@click="historyBack($event)" href="#") Zpět
 </template>
 
 <style lang="sass" scoped>
@@ -28,6 +28,7 @@
   justify-content: space-between
   width: 100%
   padding: 0 15px
+  height: 100%
 
   .ui-navigation__item
     display: inline-block
@@ -39,6 +40,7 @@
     line-height: 65px
     width: 8vw
     color: #fff
+    margin: 0
 </style>
 
 <script>
@@ -49,7 +51,6 @@ export default {
     'startPosition',
     'isNavigationBack',
   ],
-
   data() {
     return {
       selectedItemSelector: 'active',
@@ -143,6 +144,8 @@ export default {
 
       this.$items = this.$containerItemsSelector.querySelectorAll(this.itemSelector);
       this.size = this.$items.length;
+
+      window.scrollTo(0, 0);
     },
 
     historyBack(e) {

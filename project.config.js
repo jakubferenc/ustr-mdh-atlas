@@ -24,14 +24,15 @@ export default {
   firebaseConfig: {
     apiConfig: {
       apiKey: 'AIzaSyBVzZg_eTlvpovD_U6MIWT6ZLtHK0zf3ys',
-      authDomain: 'mdh-prochazka-dev.firebaseapp.com',
-      projectId: 'mdh-prochazka-dev',
-      storageBucket: 'mdh-prochazka-dev.appspot.com',
+      authDomain: `${projectName}.firebaseapp.com`,
+      projectId: projectName,
+      storageBucket: `${projectName}.appspot.com`,
       messagingSenderId: '819752448865',
       appId: '1:819752448865:web:86d7f2702e4e9e27f58b20',
       measurementId: 'G-K5JH5PL8BH',
     },
-    collectionID: `objekty-${projectName}`,
+    collectionId: `objekty-${projectName}`,
+    collectionUsersId: 'users',
   },
   imageSizes: {
     full: 1920,

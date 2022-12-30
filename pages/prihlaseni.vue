@@ -9,7 +9,7 @@
       FormLogin(
         @submit="submitLoginHandler"
       )
-      p Nebo <nuxt-link to="/registrace">nemáte účet?</nuxt-link>
+      p Nebo <nuxt-link to="/registrace/">nemáte účet?</nuxt-link>
 
 </template>
 
@@ -37,7 +37,7 @@ export default {
 
   methods: {
     errorHandler(error) {
-      this.$store.dispatch('alert/message', { error: error.message });
+      this.$store.dispatch('alert/error', { error: error.message });
     },
     async submitLoginHandler(payload) {
       try {
@@ -47,7 +47,7 @@ export default {
         );
       } catch (error) {
         console.error(error);
-        this.$store.dispatch('alert/message', { error: error.message });
+        this.$store.dispatch('alert/error', { error: error.message });
       }
     },
   },

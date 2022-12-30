@@ -33,7 +33,7 @@
               </audio>
 
 
-  button.button(@click="emitSubmit()" data-submit) Uložit objekt
+  button.button.button-ok(@click="emitSubmit()" data-submit) Uložit objekt
 
 </template>
 
@@ -63,7 +63,7 @@ export default {
   data() {
     return {};
   },
-  mounted() { },
+  mounted() {},
 
   watch: {},
   methods: {

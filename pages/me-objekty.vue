@@ -1,24 +1,21 @@
 <template lang="pug">
 
-  .page-container
+.page
+  .section.section-padding(data-component="section")
 
-    <MainMenu />
-
-    .content-container
+    h1.typo-section-title.is-section-title  Mé objekty v aplikaci
 
 
-      h1.page-title.typo-main-title Mé objekty v aplikaci
-
-      .section-category()
-        .list-container.columns.is-multiline
-          ObjektNahled(
-            v-for="(objekt, index) in objekty"
-            :key="objekt.id"
-            :Id="objekt.id"
-            :Timestamp="objekt.timestamp"
-            :Uzivatel="objekt.user_email"
-            :ObrazkyArray="objekt.obrazky[0].items"
-          )
+    .section-category()
+      .list-container.columns.is-multiline
+        ObjektNahled(
+          v-for="(objekt, index) in objekty"
+          :key="objekt.id"
+          :Id="objekt.id"
+          :Timestamp="objekt.timestamp"
+          :Uzivatel="objekt.user_email"
+          :ObrazkyArray="objekt.obrazky[0].items"
+        )
 
 
 
@@ -50,7 +47,7 @@
 <script>
 export default {
   async created() {
-    await this.$store.dispatch("getVsechnyObjekty", {
+    await this.$store.dispatch('getVsechnyObjekty', {
       userId: this.currentLoggedUserId,
     });
   },
@@ -59,7 +56,7 @@ export default {
 
   computed: {
     currentLoggedUserId() {
-      return this.$store.getters["auth/getCurrentUser"]?.uid;
+      return this.$store.getters['auth/getCurrentUser']?.uid;
     },
 
     loading() {
@@ -75,7 +72,7 @@ export default {
 
   data() {
     return {
-      title: "",
+      title: '',
     };
   },
 };

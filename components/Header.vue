@@ -10,7 +10,9 @@ header.header-main()
   <MainMenu />
 
   nav.user-actions-nav
-    NuxtLink.item(v-if="currentLoggedUserId" to="/odhlaseni/") Odhlásit
+    span(v-if="currentLoggedUserId")
+      small.user-actions__user {{ currentLoggedUser.email }}
+      NuxtLink.item(to="/odhlaseni/") Odhlásit
     NuxtLink.item(v-if="!currentLoggedUserId" to="/prihlaseni/") Přihlásit
 
   .toggle-mobile-menu
@@ -30,15 +32,22 @@ header.header-main()
   top: 0
   left: 0
   width: 100%
+
+.user-actions__user
+  font-size: 10px
 </style>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   computed: {
+    ...mapGetters({
+      currentLoggedUser: 'auth/getCurrentUser'
+    }),
     currentLoggedUserId() {
-      return this.$store.getters['auth/getCurrentUser']?.uid;
+      return this.currentLoggedUser?.uid;
     },
-
     zobrazitVsechnyObjekty() {
       return this.$route.query.vse === '1';
     },

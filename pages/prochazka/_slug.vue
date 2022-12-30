@@ -9,14 +9,18 @@
   CatalogDetailAddObjectForm(
     v-if="prochazka && isInitialized"
     :Prochazka="prochazka"
-    @submit=""
+    @submit="submitAddNewObject"
   )
 </template>
 
-<style lang="sass" scoped></style>
+<style lang="sass">
+html.page--prochazka
+  .main-container
+    padding-bottom: 100px
+</style>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 import { resize } from '@/utils/functions';
 
 export default {
@@ -32,14 +36,14 @@ export default {
   computed: {
     ...mapGetters({
       currentUser: 'auth/getCurrentUser',
+      prochazka: 'getProchazka',
     }),
-
-    getNovyObjekt() {
-      return this.$store.state.novy_objekt;
-    },
+    ...mapState({
+      newObject: 'novy_objekt',
+      navPosition: 'novy_objekt_nav_pozice',
+    }),
   },
   created() {
-    console.log('from created');
     this.checkMustInitProchazka(this.$route.query);
   },
 
@@ -54,21 +58,26 @@ export default {
       const prepareDatabaseObject = {
         id: null,
         data: this.$store.state.novy_objekt,
-        user_id: this.$store.getters['auth/getCurrentUser']?.uid,
-        user_email: this.$store.getters['auth/getCurrentUser']?.email,
-        misto: this.$store.state.novy_objekt.q01_01[0],
+        prochazka_id: this.prochazka.id,
+        prochazka_slug: this.prochazka.slug,
+        user_id: this.currentUser?.uid,
+        user_email: this.currentUser?.email,
         timestamp: new Date(Date.now() - localOffset)
           .toISOString()
           .slice(0, 19)
           .replace('T', ' '),
       };
 
+      if (this.$store.state.novy_objekt.q01_01[0]) {
+        prepareDatabaseObject.misto = this.$store.state.novy_objekt.q01_01[0];
+      }
+
       // save object to database
 
       const db = this.$fire.firestore;
       const batch = db.batch();
 
-      const newDbObject = db.collection(this.$config.firebaseConfig.collectionID).doc();
+      const newDbObject = db.collection(this.$config.firebaseConfig.collectionId).doc();
       const newDbObjectId = newDbObject.id;
 
       prepareDatabaseObject.id = newDbObjectId;
@@ -76,8 +85,8 @@ export default {
       prepareDatabaseObject.audio = Object.keys(prepareDatabaseObject.data)
         .filter(
           (key) =>
-            this.MapovaniUkolu.hasOwnProperty(key) &&
-            this.MapovaniUkolu[key].type === 'audio'
+            this.prochazka.mapovaniUkolu.hasOwnProperty(key) &&
+            this.prochazka.mapovaniUkolu[key].type === 'audio'
         )
         .map((key) => {
           return {
@@ -86,8 +95,8 @@ export default {
             items: prepareDatabaseObject.data[key].map((audioObject, index) => {
               return {
                 ...audioObject,
-                realURLNormalize: `https://firebasestorage.googleapis.com/v0/b/${this.$config.firebaseConfig.apiConfig.projectId}.appspot.com/o/${this.$config.name}/${prepareDatabaseObject.uzivatelske_jmeno}/${newDbObjectId}/${audioObject.id}.mp3?alt=media`,
-                realURL: `https://firebasestorage.googleapis.com/v0/b/${this.$config.firebaseConfig.apiConfig.projectId}.appspot.com/o/${this.$config.name}%2F${prepareDatabaseObject.uzivatelske_jmeno}%2F${newDbObjectId}%2F${audioObject.id}.mp3?alt=media`,
+                realURLNormalize: `https://firebasestorage.googleapis.com/v0/b/${this.$config.firebaseConfig.apiConfig.projectId}.appspot.com/o/${this.$config.name}/${prepareDatabaseObject.user_id}/${newDbObjectId}/${audioObject.id}.mp3?alt=media`,
+                realURL: `https://firebasestorage.googleapis.com/v0/b/${this.$config.firebaseConfig.apiConfig.projectId}.appspot.com/o/${this.$config.name}%2F${prepareDatabaseObject.user_id}%2F${newDbObjectId}%2F${audioObject.id}.mp3?alt=media`,
               };
             }),
           };
@@ -98,8 +107,8 @@ export default {
       prepareDatabaseObject.obrazky = Object.keys(prepareDatabaseObject.data)
         .filter(
           (key) =>
-            this.MapovaniUkolu.hasOwnProperty(key) &&
-            this.MapovaniUkolu[key]['type'] === 'image'
+            this.prochazka.mapovaniUkolu.hasOwnProperty(key) &&
+            this.prochazka.mapovaniUkolu[key]['type'] === 'image'
         )
         .map((key) => {
           return {
@@ -109,9 +118,9 @@ export default {
               return {
                 ...imageObject,
                 ...{
-                  realURLNormalize: `https://firebasestorage.googleapis.com/v0/b/${this.$config.firebaseConfig.apiConfig.projectId}.appspot.com/o/${this.$config.name}/${prepareDatabaseObject.uzivatelske_jmeno}/${newDbObjectId}/${imageObject.id}.webp?alt=media`,
-                  realURL: `https://firebasestorage.googleapis.com/v0/b/${this.$config.firebaseConfig.apiConfig.projectId}.appspot.com/o/${this.$config.name}%2F${prepareDatabaseObject.uzivatelske_jmeno}%2F${newDbObjectId}%2F${imageObject.id}.webp?alt=media`,
-                  realURLThumb: `https://firebasestorage.googleapis.com/v0/b/${this.$config.firebaseConfig.apiConfig.projectId}.appspot.com/o/${this.$config.name}%2F${prepareDatabaseObject.uzivatelske_jmeno}%2F${newDbObjectId}%2F${imageObject.id}.webp?alt=media`,
+                  realURLNormalize: `https://firebasestorage.googleapis.com/v0/b/${this.$config.firebaseConfig.apiConfig.projectId}.appspot.com/o/${this.$config.name}/${prepareDatabaseObject.user_id}/${newDbObjectId}/${imageObject.id}.webp?alt=media`,
+                  realURL: `https://firebasestorage.googleapis.com/v0/b/${this.$config.firebaseConfig.apiConfig.projectId}.appspot.com/o/${this.$config.name}%2F${prepareDatabaseObject.user_id}%2F${newDbObjectId}%2F${imageObject.id}.webp?alt=media`,
+                  realURLThumb: `https://firebasestorage.googleapis.com/v0/b/${this.$config.firebaseConfig.apiConfig.projectId}.appspot.com/o/${this.$config.name}%2F${prepareDatabaseObject.user_id}%2F${newDbObjectId}%2F${imageObject.id}.webp?alt=media`,
                 },
               };
             }),
@@ -138,7 +147,7 @@ export default {
               this.$fire.storage
                 .ref()
                 .child(
-                  `${this.$config.name}/${prepareDatabaseObject.uzivatelske_jmeno}/${newDbObjectId}/${audioObjectItem.id}.${file_extension}`
+                  `${this.$config.name}/${prepareDatabaseObject.user_id}/${newDbObjectId}/${audioObjectItem.id}.${file_extension}`
                 )
                 .put(audioBlob);
             }
@@ -176,14 +185,14 @@ export default {
               let storageRefFull = this.$fire.storage
                 .ref()
                 .child(
-                  `${this.$config.name}/${prepareDatabaseObject.uzivatelske_jmeno}/${newDbObjectId}/${obrazekObj.id}.${file_extension}`
+                  `${this.$config.name}/${prepareDatabaseObject.user_id}/${newDbObjectId}/${obrazekObj.id}.${file_extension}`
                 )
                 .put(resizedBlobImage);
 
               let storageRefThumb = this.$fire.storage
                 .ref()
                 .child(
-                  `${this.$config.name}/${prepareDatabaseObject.uzivatelske_jmeno}/${newDbObjectId}/${obrazekObj.id}_thumb.${file_extension}`
+                  `${this.$config.name}/${prepareDatabaseObject.user_id}/${newDbObjectId}/${obrazekObj.id}_thumb.${file_extension}`
                 )
                 .put(resizedBlobImageThumb);
             }
@@ -228,8 +237,6 @@ export default {
         : false;
     },
     checkMustInitProchazka(queryParams) {
-      console.log('from check must init', queryParams);
-
       if (this.checkRouterParamsInitProchazka(queryParams)) {
         this.isInitialized = true;
       } else {
@@ -247,26 +254,41 @@ export default {
     '$route.query': {
       initialize: true,
       handler(newData) {
-        console.log('from watcher handler', newData);
         this.checkMustInitProchazka(newData);
       },
+    },
+    navPosition: {
+      initialize: true,
+      handler(newVal) {
+        if (!this.isInitialized) return;
+        this.$router.push({
+          path: this.$route.path,
+          query: { ...this.$route.query, page: newVal + 1 },
+        });
+      },
+    },
+
+    isInitialized(newVal, oldVal) {
+      if (newVal) {
+        this.htmlClasses = [...this.htmlClasses, 'has--ui-nav'];
+      } else {
+        this.htmlClasses = this.htmlClasses.splice(
+          this.htmlClasses.indexOf('has--ui-nav'),
+          1
+        );
+      }
     },
   },
   data() {
     return {
       isInitialized: false,
+      htmlClasses: ['page--prochazka'],
     };
   },
-  computed: {
-    ...mapGetters({
-      prochazka: 'getProchazka',
-    }),
-  },
-
   head() {
     return {
       htmlAttrs: {
-        class: 'page--prochazka',
+        class: this.htmlClasses,
       },
     };
   },
