@@ -169,12 +169,12 @@
 
 
   .catalog-detail__dashboard__background
-    position: absolute
+    position: fixed
     top: 0
     left: 0
     z-index: 0
     width: 100%
-    height: calc(100vh - #{$header-main-height})
+    height: 100vh
     background-color: rgb(62, 62, 62)
     img
       object-fit: cover
