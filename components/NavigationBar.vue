@@ -2,7 +2,7 @@
 .top-bar(v-if="size")
   .main-navigation.ui-navigation(role="navigation" aria-label="Primary" v-if="!isNavigationBack")
     a.button.button-prev.ui-navigation__item(@click="prev" :class="{invisible: this.position < 1}") Předchozí
-    a.button.button-next.ui-navigation__item(@click="next" :class="{invisible: this.position !== 0 && this.position === this.size - 1}") Další
+    a.button.button-next.ui-navigation__item(@click="next" :class="{invisible: this.position !== 0 && this.position === this.size}") Další
   .main-navigation.ui-navigation(role="navigation" aria-label="Primary" v-else)
     a.ui-navigation__item(@click="historyBack($event)" href="#") Zpět
 </template>
@@ -133,7 +133,7 @@ export default {
       console.log('next slide', this.position);
       console.log('next slide test size', this.size);
 
-      this.position = Math.min(this.position + 1, this.size - 1);
+      this.position = Math.min(this.position + 1, this.size);
       this._setTransform(this.position, this.slideContainerItemsRef);
 
       this.$store.dispatch('setNovyObjektNavPozice', this.position);
