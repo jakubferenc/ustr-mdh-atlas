@@ -415,6 +415,7 @@ const mapovaniUkolu = {
     title:
       'Vyfotografujte detail nebo prvek v okolí, který podle vás určuje charakter tohoto místa.',
     type: 'image',
+    photoCount: 1,
     conditions: [
       {
         question: 'q01_01',
