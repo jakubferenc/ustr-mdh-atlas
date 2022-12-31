@@ -135,12 +135,11 @@ export default {
     }),
 
     novyObjektSize() {
-      const currentSize =
-        Object.keys(this.Prochazka.mapovaniUkolu).length >
-        Object.keys(this.novy_objekt).length
-          ? Object.keys(this.Prochazka.mapovaniUkolu).length
-          : Object.keys(this.novy_objekt).length;
-      return currentSize;
+      this.refreshKey;
+      const countSlideElements = Array.from(
+        this.$refs.slidesContainer.querySelectorAll('.slide')
+      );
+      return countSlideElements.length;
     },
   },
   watch: {

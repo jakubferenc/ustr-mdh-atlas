@@ -51,6 +51,8 @@ export const resize = async (image, width) => {
   });
 };
 
+// to find the Id of even the dynamically created slides
+// dynamically: i.e. based on the previous choices and added to DOM dynamically based on the number of the previous answers (i.e. for example chosen tags)
 export const findObjectSlideDefinition = (
   mapovaniUkolu,
   objectKey,

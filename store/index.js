@@ -208,12 +208,12 @@ export const actions = {
         .filter(
           (key) =>
             findObjectSlideDefinition(
-              mapovaniUkolu,
+              prochazka.mapovaniUkolu,
               key,
               $config.separatorForDynamicSlideId
             ).hasOwnProperty(key) &&
             findObjectSlideDefinition(
-              mapovaniUkolu,
+              prochazka.mapovaniUkolu,
               key,
               $config.separatorForDynamicSlideId
             ).type === 'audio'
@@ -238,12 +238,12 @@ export const actions = {
         .filter(
           (key) =>
             findObjectSlideDefinition(
-              mapovaniUkolu,
+              prochazka.mapovaniUkolu,
               key,
               $config.separatorForDynamicSlideId
             ).hasOwnProperty(key) &&
             findObjectSlideDefinition(
-              mapovaniUkolu,
+              prochazka.mapovaniUkolu,
               key,
               $config.separatorForDynamicSlideId
             ).type === 'image'
