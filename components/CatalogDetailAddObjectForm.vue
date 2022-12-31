@@ -2,7 +2,7 @@
 .form-add-object-container
 
   NavigationBar(
-    v-if="$refs.slidesContainer"
+    v-if="slidesContainerElement"
     :sliderContainerRef="$refs.sliderContainer"
     :slideContainerItemsRef="$refs.slidesContainer"
     :itemSelector="'.slide'"
@@ -127,6 +127,7 @@ export default {
     return {
       title: 'Přidej objekt',
       refreshKey: 1,
+      slidesContainerElement: null,
     };
   },
   computed: {
@@ -136,15 +137,21 @@ export default {
 
     novyObjektSize() {
       this.refreshKey;
+      if (!this.slidesContainerElement) return 0;
       const countSlideElements = Array.from(
-        this.$refs.slidesContainer.querySelectorAll('.slide')
+        this.slidesContainerElement.querySelectorAll('.slide')
       );
       return countSlideElements.length;
     },
   },
+  mounted() {
+    this.slidesContainerElement = this.$refs.slidesContainer;
+    console.log('test from mounted', this.slidesContainerElement);
+  },
   watch: {
     novy_objekt: {
       initialize: true,
+      deep: true,
       handler(newVal) {
         newVal;
         this.refreshKey++;
