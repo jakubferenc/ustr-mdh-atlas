@@ -10,7 +10,7 @@
     display: grid
     grid-template-columns: repeat(auto-fill,minmax(24rem,1fr))
     grid-auto-rows: 24rem
-    grid-gap: 0.8rem
+    grid-gap: 1.25rem
 </style>
 <script>
 export default {

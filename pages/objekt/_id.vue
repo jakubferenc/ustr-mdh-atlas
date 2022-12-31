@@ -1,11 +1,5 @@
 <template lang="pug">
-
-
-.page-container
-
-  <NavigationBar :slideContainerItemsSelector="false" :itemSelector="false" :startPosition="false" :isNavigationBack="true" />
-
-  <MainMenu />
+.page
 
   .content-container
 

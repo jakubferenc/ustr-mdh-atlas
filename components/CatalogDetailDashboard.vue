@@ -17,7 +17,7 @@
 
 
       .catalog-detail__dashboard__description
-        p.typo-subtitle Cvičení pracuje s fotografií a novinovou zprávou o protestech proti otevření provozovny McDonald's v Praze v roce 1992. Žáci odhadují, co se děje na fotografii a posléze s pomocí zprávy upravují svou hypotézu. Cvičení seznamuje žáky s projevy transformace Československa po roce 1989 a ukazuje nové problémy, s nimiž se společnost vyrovnávala.
+        p.typo-subtitle {{ Prochazka.popis }}
 
   .catalog-detail__dashboard__buttons
 

@@ -28,7 +28,7 @@
 
 <style lang="sass">
 .prochazka-title
-  margin-bottom: .5em
+  margin-bottom: 1.5em
 
 .section-category
   margin-bottom: 1.5em

@@ -6,53 +6,29 @@
 
 </template>
 
-
-<style lang="sass" scoped>
-
-
-
-
-
-</style>
+<style lang="sass" scoped></style>
 
 <script>
 export default {
   props: ['Id', 'Zadani', 'Nadpis', 'Inline', 'Placeholder'],
-  computed: {
-
-  },
+  computed: {},
 
   data() {
     return {
-      answer: ''
-    }
+      answer: '',
+    };
   },
-  mounted() {
-
-  },
+  mounted() {},
 
   watch: {
     answer() {
       this.updateStore();
-    }
+    },
   },
   methods: {
-
     updateStore() {
-
-      this.$store.dispatch("setNovyObjekt", {
-
-
-        [this.Id]: this.answer
-
-
-      });
-
+      this.$emit('value', { id: this.Id, answer: this.answer });
     },
-
-
-  }
-
-
-}
+  },
+};
 </script>

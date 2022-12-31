@@ -25,6 +25,12 @@ article.u-card(data-component="list-map-item" :class="thisComponentStyles")
 </template>
 <style lang="sass" scoped>
 .u-card
+
+  &__authors
+    margin-bottom: 1em
+    p
+      margin-bottom: 0
+
   figure
     transition: color .2s ease,transform .2s ease,box-shadow .2s ease,-webkit-transform .2s ease
     will-change: transform,box-shadow
@@ -40,9 +46,9 @@ import { truncate } from 'lodash';
 export default {
   props: ['Id', 'Slug', 'Name', 'Image', 'Description', 'Authors'],
 
-  async asyncData({ params, error, payload, store }) {},
+  async asyncData({ params, error, payload, store }) { },
 
-  mounted() {},
+  mounted() { },
   methods: {
     getAuthorsAsString(authorsArray) {
       return authorsArray.join(', ');

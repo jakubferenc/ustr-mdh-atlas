@@ -33,7 +33,7 @@ const mapovaniUkolu = {
   q01_03: {
     title: 'Vyfoťte předmět',
     type: 'image',
-    pocetFotek: 3,
+    photoCount: 3,
   },
   q01_04: {
     title: 'Nahrajte záznam místa',

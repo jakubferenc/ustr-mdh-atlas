@@ -11,7 +11,7 @@
         p.app-subtitle Muzea dělnického hnutí v 21. století
 
       .column.is-half-desktop
-        p.typo-subtitle Tato sada interaktivních map je výsledkem bádání ve fondech <a href="https://www.mdh21.cz/stranka/o-sbirce-mdh/">Sbírky Muzea dělnického hnutí v Národním muzeu</a>. Jednotlivé mapy vizualizují dějinná témata, jež byla podstatná pro kulturní politiku v Československu v období 1948-1989. Kromě jednotlivých muzeí, památníků a artefaktů mapy zachycují i dynamiku našeho vzpomínání. Objevujte s námi místa paměti, na která postupně zapomínáme.
+        p.typo-subtitle Atlas Muzea dělnického hnutí je interaktivním rozhraním pro smartphony a tablety umožňující detailně objevovat stopy minulosti kolem vás. Nabízíme vám nástroj pro detailní zdokumentování vyhledávaných pomníků připomínajících osoby a události, kterých si stále vážíme, i zanedbané a zapomenuté pozůstatky na socialistické hrdiny a mučedníky. Skrze hledáček vašeho mobilního telefonu objevujte historii propsanou do městských ulic a parků. Informace a detaily, které budete moci k jednotlivým místům zaznamenat, lze využít ve školním či neformálním vzdělávání i k vytváření osobní databáze zajímavých míst.
 
     .footer-container
 

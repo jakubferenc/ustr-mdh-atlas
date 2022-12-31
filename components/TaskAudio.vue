@@ -164,11 +164,8 @@ export default {
         console.log('getUserMedia not supported on your browser!');
       }
     },
-
     updateStore() {
-      this.$store.dispatch('setNovyObjekt', {
-        [this.Id]: [...this.audioRecordings],
-      });
+      this.$emit('value', { id: this.Id, answer: [...this.audioRecordings] });
     },
   },
 };

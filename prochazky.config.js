@@ -1,5 +1,5 @@
-import prochazkaDevConfig from './prochazky/prochazka-dev/index.config';
+import prochazkaCeskaTrebovaConfig from './prochazky/ceska-trebova/index.config';
 
 export default {
-  prochazkaDevConfig,
+  prochazkaCeskaTrebovaConfig,
 };
