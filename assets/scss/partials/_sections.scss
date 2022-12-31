@@ -222,6 +222,10 @@
     background-image: url(../images/hero-box-background.jpg);
     background-size: cover;
     filter: blur(7px);
+    background-position: center center;
+    @include from($desktop) {
+      background-position: center right;
+    }
   }
 
   .title-container {
