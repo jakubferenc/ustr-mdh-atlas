@@ -10,6 +10,12 @@ export default class ObjectProchazka extends Model {
       default: '',
       validations: ['required'],
     },
+    audio: {
+      default: [],
+    },
+    obrazky: {
+      default: [],
+    },
     prochazka_id: {
       default: '',
       validations: ['required'],

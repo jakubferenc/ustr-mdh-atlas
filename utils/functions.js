@@ -5,13 +5,12 @@ export const dataUrlToBlob = (url) => {
   let length = str.length;
   const uintArr = new Uint8Array(length);
   while (length--) {
-      uintArr[length] = str.charCodeAt(length);
+    uintArr[length] = str.charCodeAt(length);
   }
   return new Blob([uintArr], { type: mime });
 };
 
 export const resize = async (image, width) => {
-
   return new Promise(function (resolve, reject) {
     const reader = new FileReader();
 
@@ -29,7 +28,7 @@ export const resize = async (image, width) => {
         // Draw the image that is scaled to `ratio`
         const context = canvas.getContext('2d');
         const w = width;
-        const h = width * ele.height/ele.width;
+        const h = (width * ele.height) / ele.width;
         canvas.width = w;
         canvas.height = h;
         context.drawImage(ele, 0, 0, w, h);
@@ -37,8 +36,8 @@ export const resize = async (image, width) => {
         // Get the data of resized image
         'toBlob' in canvas
           ? canvas.toBlob(function (blob) {
-            resolve(blob);
-          }, "image/webp")
+              resolve(blob);
+            }, 'image/webp')
           : resolve(dataUrlToBlob(canvas.toDataURL()));
       });
 
@@ -50,5 +49,27 @@ export const resize = async (image, width) => {
       reject();
     });
   });
+};
 
-}
+export const findObjectSlideDefinition = (
+  mapovaniUkolu,
+  objectKey,
+  separator = '___'
+) => {
+  if (
+    mapovaniUkolu?.[objectKey] &&
+    Object.keys(mapovaniUkolu?.[objectKey]).length
+  )
+    return mapovaniUkolu[objectKey];
+
+  // try to find base of the dynamicly created slide
+  if (objectKey.indexOf(separator) > -1) {
+    // yes, it's dynamicly created slide, find base index
+    const baseIndexKey = objectKey.split(separator)[0];
+    if (
+      mapovaniUkolu?.[baseIndexKey] &&
+      Object.keys(mapovaniUkolu?.[baseIndexKey]).length
+    )
+      return mapovaniUkolu[baseIndexKey];
+  }
+};

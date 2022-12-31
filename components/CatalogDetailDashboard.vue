@@ -17,7 +17,7 @@
 
 
       .catalog-detail__dashboard__description
-        p.typo-subtitle {{ Prochazka.popis }}
+        p {{ Prochazka.popis }}
 
   .catalog-detail__dashboard__buttons
 
@@ -116,7 +116,7 @@
 
 
   .catalog-detail__dashboard__buttons
-    position: sticky
+    position: fixed
     bottom: 1.5rem
     width: 100%
     z-index: 2

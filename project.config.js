@@ -21,6 +21,7 @@ export default {
         'Mapa vznikla v rámci projektu Ministerstva kultury ČR NAKI II (DG18P02OVV045) – Muzeum dělnického hnutí v&nbsp;21. století. Prezentace práce s&nbsp;muzejní sbírkou doby státního socialismu a&nbsp;způsoby užití jejího materiálu k&nbsp;potřebám odborné a široké veřejnosti.',
     },
   },
+  separatorForDynamicSlideId: '_d_',
   firebaseConfig: {
     apiConfig: {
       apiKey: 'AIzaSyBVzZg_eTlvpovD_U6MIWT6ZLtHK0zf3ys',

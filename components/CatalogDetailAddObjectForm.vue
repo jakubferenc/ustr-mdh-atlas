@@ -2,56 +2,99 @@
 .form-add-object-container
 
   NavigationBar(
-    :slideContainerSelector="'.page-slider'"
-    :slideContainerItemsSelector="'.slides'"
+    v-if="$refs.slidesContainer"
+    :sliderContainerRef="$refs.sliderContainer"
+    :slideContainerItemsRef="$refs.slidesContainer"
     :itemSelector="'.slide'"
+    :size="novyObjektSize"
   )
 
-  .page-slider.slider
-    .slides
+  .page-slider.slider(ref="sliderContainer")
+    .slides(ref="slidesContainer")
 
       // Shared questions
+      template(v-for="(ukolKey, index) in Object.keys(Prochazka.mapovaniUkolu)")
 
-      .slide(
-        v-for="(ukolKey, index) in Object.keys(Prochazka.mapovaniUkolu)"
-        v-if="refreshKey && validateToShow(ukolKey, Prochazka.mapovaniUkolu[ukolKey])"
-        :key="index"
-      )
-        .content-container
-          h1 {{Prochazka.mapovaniUkolu[ukolKey].title}}
-          h2(v-if="hasSubtitle(Prochazka.mapovaniUkolu[ukolKey])")
-            small {{ Prochazka.mapovaniUkolu[ukolKey].subtitle }}
-          TaskGalerie(
-            v-if="Prochazka.mapovaniUkolu[ukolKey].type === 'gallery'"
-            :ZdrojeObjekt="Prochazka.mapovaniUkolu[ukolKey].sources"
-            :Sloupce="Prochazka.mapovaniUkolu[ukolKey].columns"
-            :Id="ukolKey"
-          )
-          TaskTextovePole(
-            v-if="Prochazka.mapovaniUkolu[ukolKey].type === 'text'"
-            @value="updateStore"
-            :Id="ukolKey"
-          )
-          TaskMoznosti(
-            v-if="Prochazka.mapovaniUkolu[ukolKey].type === 'array'"
-            :Id="ukolKey"
-            :Zadani="false"
-            :MoznostiContainer="Prochazka.mapovaniUkolu[ukolKey].itemsObj"
-            :Inline="Prochazka.mapovaniUkolu[ukolKey].inline"
-            :Limit="Prochazka.mapovaniUkolu[ukolKey].limit"
-            @value="updateStore"
-          )
-          TaskVyfotFoto(
-            v-if="Prochazka.mapovaniUkolu[ukolKey].type === 'image'"
-            :Id="ukolKey"
-            :PocetFotek="Prochazka.mapovaniUkolu[ukolKey].photoCount"
-            @value="updateStore"
-          )
-          TaskAudio(
-            v-if="Prochazka.mapovaniUkolu[ukolKey].type === 'audio'"
-            :Id="ukolKey"
-            @value="updateStore"
-          )
+        .slide(
+          v-if="refreshKey && !isDynamic(Prochazka.mapovaniUkolu[ukolKey]) && validateToShow(ukolKey, Prochazka.mapovaniUkolu[ukolKey])"
+        )
+          .content-container
+            h1 {{Prochazka.mapovaniUkolu[ukolKey].title}}
+            h2(v-if="hasSubtitle(Prochazka.mapovaniUkolu[ukolKey])")
+              small {{ Prochazka.mapovaniUkolu[ukolKey].subtitle }}
+            TaskGalerie(
+              v-if="Prochazka.mapovaniUkolu[ukolKey].type === 'gallery'"
+              :ZdrojeObjekt="Prochazka.mapovaniUkolu[ukolKey].sources"
+              :Sloupce="Prochazka.mapovaniUkolu[ukolKey].columns"
+              :ProchazkaPath="`/prochazky/${Prochazka.slug}`"
+              :Id="ukolKey"
+            )
+            TaskTextovePole(
+              v-if="Prochazka.mapovaniUkolu[ukolKey].type === 'text'"
+              @value="updateStore"
+              :Id="ukolKey"
+            )
+            TaskMoznosti(
+              v-if="Prochazka.mapovaniUkolu[ukolKey].type === 'array'"
+              :Id="ukolKey"
+              :Zadani="false"
+              :MoznostiContainer="Prochazka.mapovaniUkolu[ukolKey].itemsObj"
+              :Inline="Prochazka.mapovaniUkolu[ukolKey].inline"
+              :Limit="Prochazka.mapovaniUkolu[ukolKey].limit"
+              @value="updateStore"
+            )
+            TaskVyfotFoto(
+              v-if="Prochazka.mapovaniUkolu[ukolKey].type === 'image'"
+              :Id="ukolKey"
+              :PocetFotek="Prochazka.mapovaniUkolu[ukolKey].photoCount"
+              @value="updateStore"
+            )
+            TaskAudio(
+              v-if="Prochazka.mapovaniUkolu[ukolKey].type === 'audio'"
+              :Id="ukolKey"
+              @value="updateStore"
+            )
+
+        .slide(
+          v-if="refreshKey && isDynamic(Prochazka.mapovaniUkolu[ukolKey], ukolKey) && Array.isArray([Prochazka.mapovaniUkolu[ukolKey].dynamicBasedOn]) && validateToShow(ukolKey, Prochazka.mapovaniUkolu[ukolKey])"
+          v-for="(dynamicValue, index) in novy_objekt[Prochazka.mapovaniUkolu[ukolKey].dynamicBasedOn]"
+        )
+          .content-container
+            h1 {{Prochazka.mapovaniUkolu[ukolKey].title}}: {{ dynamicValue }}
+            h2(v-if="hasSubtitle(Prochazka.mapovaniUkolu[ukolKey])")
+              small {{ Prochazka.mapovaniUkolu[ukolKey].subtitle }}
+            TaskGalerie(
+              v-if="Prochazka.mapovaniUkolu[ukolKey].type === 'gallery'"
+              :ZdrojeObjekt="Prochazka.mapovaniUkolu[ukolKey].sources"
+              :Sloupce="Prochazka.mapovaniUkolu[ukolKey].columns"
+              :ProchazkaPath="`/prochazky/${Prochazka.slug}`"
+              :Id="`${ukolKey}${$config.separatorForDynamicSlideId}${index}`"
+            )
+            TaskTextovePole(
+              v-if="Prochazka.mapovaniUkolu[ukolKey].type === 'text'"
+              @value="updateStore"
+              :Id="`${ukolKey}${$config.separatorForDynamicSlideId}${index}`"
+            )
+            TaskMoznosti(
+              v-if="Prochazka.mapovaniUkolu[ukolKey].type === 'array'"
+              :Id="`${ukolKey}${$config.separatorForDynamicSlideId}${index}`"
+              :Zadani="false"
+              :MoznostiContainer="Prochazka.mapovaniUkolu[ukolKey].itemsObj"
+              :Inline="Prochazka.mapovaniUkolu[ukolKey].inline"
+              :Limit="Prochazka.mapovaniUkolu[ukolKey].limit"
+              @value="updateStore"
+            )
+            TaskVyfotFoto(
+              v-if="Prochazka.mapovaniUkolu[ukolKey].type === 'image'"
+              :Id="`${ukolKey}${$config.separatorForDynamicSlideId}${index}`"
+              :PocetFotek="Prochazka.mapovaniUkolu[ukolKey].photoCount"
+              @value="updateStore"
+            )
+            TaskAudio(
+              v-if="Prochazka.mapovaniUkolu[ukolKey].type === 'audio'"
+              :Id="`${ukolKey}${$config.separatorForDynamicSlideId}${index}`"
+              @value="updateStore"
+            )
 
       .slide
         .content-container
@@ -90,6 +133,15 @@ export default {
     ...mapState({
       novy_objekt: 'novy_objekt',
     }),
+
+    novyObjektSize() {
+      const currentSize =
+        Object.keys(this.Prochazka.mapovaniUkolu).length >
+        Object.keys(this.novy_objekt).length
+          ? Object.keys(this.Prochazka.mapovaniUkolu).length
+          : Object.keys(this.novy_objekt).length;
+      return currentSize;
+    },
   },
   watch: {
     novy_objekt: {
@@ -111,6 +163,9 @@ export default {
     },
     hasSubtitle(objectSlideDefinition) {
       return objectSlideDefinition?.subtitle;
+    },
+    isDynamic(objectSlideDefinition, ukolKey = '') {
+      return objectSlideDefinition.hasOwnProperty('dynamicBasedOn');
     },
     validateToShow(ukolKey, objectSlideDefinition) {
       // if the slide is not conditioned by anything, show it

@@ -1,6 +1,6 @@
 /*eslint no-unsafe-optional-chaining: "error"*/
 import prochazkyConfig from '~/prochazky.config';
-import { resize } from '@/utils/functions';
+import { resize, findObjectSlideDefinition } from '@/utils/functions';
 
 export const state = () => ({
   novy_objekt: {},
@@ -207,8 +207,16 @@ export const actions = {
       objectPayload.audio = Object.keys(objectPayload.data)
         .filter(
           (key) =>
-            prochazka.mapovaniUkolu.hasOwnProperty(key) &&
-            prochazka.mapovaniUkolu[key].type === 'audio'
+            findObjectSlideDefinition(
+              mapovaniUkolu,
+              key,
+              $config.separatorForDynamicSlideId
+            ).hasOwnProperty(key) &&
+            findObjectSlideDefinition(
+              mapovaniUkolu,
+              key,
+              $config.separatorForDynamicSlideId
+            ).type === 'audio'
         )
         .map((key) => {
           return {
@@ -229,8 +237,16 @@ export const actions = {
       objectPayload.obrazky = Object.keys(objectPayload.data)
         .filter(
           (key) =>
-            prochazka.mapovaniUkolu.hasOwnProperty(key) &&
-            prochazka.mapovaniUkolu[key]['type'] === 'image'
+            findObjectSlideDefinition(
+              mapovaniUkolu,
+              key,
+              $config.separatorForDynamicSlideId
+            ).hasOwnProperty(key) &&
+            findObjectSlideDefinition(
+              mapovaniUkolu,
+              key,
+              $config.separatorForDynamicSlideId
+            ).type === 'image'
         )
         .map((key) => {
           return {

@@ -1,8 +1,8 @@
 <template lang="pug">
-.top-bar
+.top-bar(v-if="size")
   .main-navigation.ui-navigation(role="navigation" aria-label="Primary" v-if="!isNavigationBack")
-    a.button.button-prev.ui-navigation__item(href="#" :class="{invisible: this.position < 1}") Předchozí
-    a.button.button-next.ui-navigation__item(href="#" :class="{invisible: this.size && this.size < 1}") Další
+    a.button.button-prev.ui-navigation__item(@click="prev" :class="{invisible: this.position < 1}") Předchozí
+    a.button.button-next.ui-navigation__item(@click="next" :class="{invisible: this.position !== 0 && this.position === this.size - 1}") Další
   .main-navigation.ui-navigation(role="navigation" aria-label="Primary" v-else)
     a.ui-navigation__item(@click="historyBack($event)" href="#") Zpět
 </template>
@@ -44,12 +44,15 @@
 </style>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   props: [
-    'slideContainerItemsSelector',
-    'itemSelector',
+    'slideContainerItemsRef',
+    'sliderContainerRef',
     'startPosition',
     'isNavigationBack',
+    'size',
   ],
   data() {
     return {
@@ -58,49 +61,30 @@ export default {
       nextButtonSelector: 'button-next',
       position: this.startPosition || 0,
       debugMode: false,
-      $next: null,
-      $prev: null,
-      $containerItemsSelector: null,
-      $items: null,
-      size: null,
       position: 0,
     };
   },
-  created() {
-    this.$nuxt.$on('refresh-navigation', () => {
-      this.$nextTick(() => {
+  computed: {
+    ...mapState({
+      novy_objekt: 'novy_objekt',
+    }),
+  },
+  watch: {
+    novy_objekt: {
+      initialize: true,
+      deep: true,
+      handler(newVal) {
+        newVal;
         this._refreshNavigation();
-      });
-    });
+      },
+    },
   },
-  beforeDestroy() {
-    this.$nuxt.$off('refresh-navigation');
-  },
+  created() {},
+
   mounted() {
     if (this.isNavigationBack) {
       return;
     }
-
-    this.$prev = this.$el.getElementsByClassName(this.previousButtonSelector)[0];
-    this.$next = this.$el.getElementsByClassName(this.nextButtonSelector)[0];
-    this.$containerItemsSelector = document.querySelector(
-      this.slideContainerItemsSelector
-    );
-
-    this.$items = this.$containerItemsSelector.querySelectorAll(this.itemSelector);
-    this.size = this.$items.length;
-
-    this.$prev.addEventListener('click', (e) => {
-      e.preventDefault();
-      this.prev();
-    });
-
-    this.$next.addEventListener('click', (e) => {
-      e.preventDefault();
-
-      this.next();
-    });
-
     // keyboard event
     document.addEventListener('keydown', (e) => {
       const keyCode = e.keyCode;
@@ -116,35 +100,6 @@ export default {
   },
   methods: {
     _refreshNavigation() {
-      this._refreshDom();
-
-      if (this.position === 0) {
-        this.$prev.classList.add('invisible');
-      }
-
-      if (this.position < this.size - 1 && this.$next.classList.contains('invisible')) {
-        this.$next.classList.remove('invisible');
-      }
-
-      if (this.position === this.size - 1) {
-        this.$next.classList.add('invisible');
-      }
-
-      if (this.position > 0 && this.$prev.classList.contains('invisible')) {
-        this.$prev.classList.remove('invisible');
-      }
-    },
-
-    _refreshDom() {
-      this.$prev = this.$el.getElementsByClassName(this.previousButtonSelector)[0];
-      this.$next = this.$el.getElementsByClassName(this.nextButtonSelector)[0];
-      this.$containerItemsSelector = document.querySelector(
-        this.slideContainerItemsSelector
-      );
-
-      this.$items = this.$containerItemsSelector.querySelectorAll(this.itemSelector);
-      this.size = this.$items.length;
-
       window.scrollTo(0, 0);
     },
 
@@ -162,42 +117,28 @@ export default {
       $element.style.transform = 'translateX(calc(-100vw*' + pos + '))';
     },
 
-    prev() {
+    prev(e) {
       this.position = Math.max(this.position - 1, 0);
-      this._setTransform(this.position, this.$containerItemsSelector);
+      this._setTransform(this.position, this.slideContainerItemsRef);
 
       console.log('previous slide', this.position);
-
-      if (this.position === 0) {
-        this.$prev.classList.add('invisible');
-      }
-
-      if (this.position < this.size - 1 && this.$next.classList.contains('invisible')) {
-        this.$next.classList.remove('invisible');
-      }
+      console.log('prev slide test size', this.size);
 
       this.$store.dispatch('setNovyObjektNavPozice', this.position);
 
-      this._refreshDom();
+      this._refreshNavigation();
     },
 
-    next() {
+    next(e) {
       console.log('next slide', this.position);
+      console.log('next slide test size', this.size);
 
       this.position = Math.min(this.position + 1, this.size - 1);
-      this._setTransform(this.position, this.$containerItemsSelector);
-
-      if (this.position === this.size - 1) {
-        this.$next.classList.add('invisible');
-      }
-
-      if (this.position > 0 && this.$prev.classList.contains('invisible')) {
-        this.$prev.classList.remove('invisible');
-      }
+      this._setTransform(this.position, this.slideContainerItemsRef);
 
       this.$store.dispatch('setNovyObjektNavPozice', this.position);
 
-      this._refreshDom();
+      this._refreshNavigation();
     },
   },
 };
