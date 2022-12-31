@@ -7,7 +7,7 @@
         h1.typo-main-title {{Prochazka.nazev}}
       .catalog-detail__dashboard__meta
 
-        .catalog-detail__dashboard__meta__authors(data-caption="Authoři procházky")
+        .catalog-detail__dashboard__meta__authors(data-caption="Autoři procházky")
           span {{Prochazka.autori.join(', ')}}
 
         .catalog-detail__dashboard__meta__documents(data-caption="Metodika")
@@ -193,14 +193,14 @@ export default {
     },
   },
 
-  created() { },
+  created() {},
 
   methods: {
     emitInitProchazka() {
-      this.$emit("initProchazka");
+      this.$emit('initProchazka');
     },
     emitInitTrialProchazka() {
-      this.$emit("initTrialProchazka");
+      this.$emit('initTrialProchazka');
     },
   },
 
