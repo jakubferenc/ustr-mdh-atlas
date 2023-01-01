@@ -1,6 +1,7 @@
 /*eslint no-unsafe-optional-chaining: "error"*/
 import prochazkyConfig from '~/prochazky.config';
 import { resize, findObjectSlideDefinition } from '@/utils/functions';
+import ObjectProchazka from '~/models/ObjectProchazka';
 
 export const state = () => ({
   novy_objekt: {},
@@ -98,14 +99,14 @@ export const actions = {
     }
   },
 
-  async getObjekt({ state, commit, dispatch }, objektId) {
-    const getThisObjekt = state.objekty.filter(
-      (objekt) => objekt.id === objektId
+  async getObjekt({ state, commit, dispatch }, objectProchazkaId) {
+    const findCachedObject = state.objekty.filter(
+      (objekt) => objekt.id === objectProchazkaId
     );
 
-    if (state.objekty.length && getThisObjekt.length === 1) {
+    if (state.objekty.length && findCachedObject.length === 1) {
       // we have the objekt in the stored result
-      commit('updateObjektDetail', getThisObjekt[0]);
+      commit('updateObjektDetail', findCachedObject[0]);
     } else {
       // we do not have the objekt in the stored results, therefore hit the API
 
@@ -121,7 +122,7 @@ export const actions = {
           const db = this.$fire.firestore;
 
           db.collection(this.$config.firebaseConfig.collectionId)
-            .doc(objektId)
+            .doc(objectProchazkaId)
             .get()
             .then((doc) => {
               const data = doc.data();
