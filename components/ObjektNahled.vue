@@ -19,13 +19,27 @@
 
 
 .object-thumb
-
   .photo-ratio
     position: absolute
     top: 0
     left: 0
     width: 100%
     height: 100%
+
+  .object-thumb-photo
+    background: lightgray
+    position: relative
+    display: block
+    height: 0
+    padding-top: 100%
+    will-change: transform,box-shadow
+    border-radius: 12px
+    transition: color .2s ease,transform .2s ease,box-shadow .2s ease,-webkit-transform .2s ease
+
+    &:hover
+      box-shadow: 0 0.5333333333rem 0.8rem rgb(28 19 18 / 62%)
+      -webkit-transform: translate3d(0,-0.5333333333rem,0)
+      transform: translate3d(0,-0.5333333333rem,0)
 
     img
       width: 100%
@@ -34,14 +48,7 @@
       position: absolute
       top: 0
       left: 0
-
-
-  .object-thumb-photo
-    background: lightgray
-    position: relative
-    display: block
-    height: 0
-    padding-top: 100%
+      border-radius: 12px
 
 
   .title

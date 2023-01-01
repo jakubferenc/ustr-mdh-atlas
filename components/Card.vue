@@ -70,11 +70,12 @@ article.u-card(data-component="list-map-item" :class="thisComponentStyles" :styl
     border-radius: 12px
     overflow: hidden
     opacity: .2
+    max-height: 350px
 </style>
 <script>
 import { truncate } from 'lodash';
 export default {
-  props: ['Id', 'Slug', 'Name', 'Image', 'Description', 'Authors', 'Color'],
+  props: ['Id', 'Slug', 'Name', 'Image', 'Description', 'Authors', 'Color', 'Type'],
 
   async asyncData({ params, error, payload, store }) {},
 

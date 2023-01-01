@@ -21,6 +21,7 @@
             :Image="prochazky[key].obrazky.thumb"
             :Description="prochazky[key].popis"
             :Color="prochazky[key].barva"
+            Type="prochazka"
           )
         </template>
       </Catalog>
