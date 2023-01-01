@@ -1,13 +1,16 @@
 <template lang="pug">
 
-.page
+.page()
   .section.section-padding(data-component="section")
 
     h1.typo-section-title.is-section-title  Mé objekty v aplikaci
 
     template(v-if="objekty.length")
       .section-category(v-for="(prochazkaObj, index) in prochazky" :key="index")
-        h2.typo-subtitle.prochazka-title {{ getProchazkaById(prochazkaObj.id).nazev }}
+        h2.typo-subtitle.prochazka__title
+          span.typo-hero-box-subtitle {{ getProchazkaById(prochazkaObj.id).nazev }}
+        .prochazka__title__actions
+          .button Sdílet  <font-awesome-icon icon="fa fa-solid fa-share" />
 
         Catalog(Type="objekty")
           template(v-slot:catalog-items)
@@ -20,13 +23,24 @@
                 :Uzivatel="objekt.user_email"
                 :ObrazkyArray="getObjectImages(objekt)"
             )
-    div(v-else)
+    div(v-if="!objekty.length && !isLoading && isLoaded")
       NotFound(Text="Nemáte uložené žádné objekty. Zkuste si je přidat v nějaké procházce." Link="/prochazky/")
 </template>
 
 <style lang="sass">
-.prochazka-title
-  margin-bottom: 1.5em
+.button svg
+  margin-left: .25em
+
+.prochazka__title
+  margin-bottom: .25em
+
+.prochazka__title__actions
+  display: block
+  margin-bottom: 1.25em
+
+  .button
+    max-width: 150px
+    min-width: 50px
 
 .section-category
   margin-bottom: 1.5em
@@ -52,6 +66,9 @@
 <script>
 import ObjectProchazka from '~/models/ObjectProchazka';
 import prochazkyConfig from '~/prochazky.config';
+
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+
 export default {
   computed: {
     currentLoggedUserId() {
@@ -93,6 +110,7 @@ export default {
     return {
       title: '',
       prochazkyConfig,
+      faGithub,
     };
   },
 
@@ -100,6 +118,7 @@ export default {
     await this.$store.dispatch('getMyObjects', {
       userId: this.currentLoggedUserId,
     });
+    this.isLoaded = true;
   },
 
   mounted() {},

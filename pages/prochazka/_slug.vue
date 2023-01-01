@@ -65,7 +65,7 @@ export default {
           .replace('T', ' '),
       };
 
-      if (this.$store.state.novy_objekt.q01_01[0]) {
+      if (this.$store.state.novy_objekt.q01_01?.[0]) {
         prepareDatabaseObject.misto = this.$store.state.novy_objekt.q01_01[0];
       }
 

@@ -41,8 +41,13 @@
     "prettier": "^2.8.1"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.2.1",
+    "@fortawesome/free-brands-svg-icons": "^6.2.1",
+    "@fortawesome/free-solid-svg-icons": "^6.2.1",
+    "@fortawesome/vue-fontawesome": "^2.0.9",
     "@nuxtjs/eslint-config": "^6.0.1",
     "@volar/vue-language-plugin-pug": "^1.0.9",
+    "nuxt-icon": "^0.1.8",
     "pug": "^3.0.2",
     "pug-plain-loader": "^1.1.0",
     "sass": "^1.49.0",

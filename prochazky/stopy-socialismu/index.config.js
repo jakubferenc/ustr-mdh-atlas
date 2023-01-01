@@ -32,51 +32,115 @@ const mista = {
   ],
 };
 
-const klicovaSlovaUlice = [
-  'rušná',
-  'opuštěná',
-  'tichá',
-  'zastrčená',
-  'bulvár',
-  'náměstí',
-  'místo pro odpočinek',
-  'místo práce',
-  'zelená',
-  'zanedbaná',
-  'důstojné místo',
-];
+const klicovaSlovaUlice = {
+  settings: {
+    autoGenerateId: true,
+    slug: 'klicova-slova-ulice',
+  },
 
-const klicovaSlova = [
-  'estetické',
-  'zanedbané',
-  'opuštěné',
-  'živé',
-  'upravené',
-  'původní',
-  'děsivé',
-  'pietní',
-  'funkční',
-  'uklidňující',
-  'barevné',
-  'šedivé',
-  'vzbuzující hrdost',
-  'vzbuzující stud',
-];
+  items: [
+    {
+      title: 'rušná',
+    },
+    {
+      title: 'opuštěná',
+    },
+    {
+      title: 'tichá',
+    },
+    {
+      title: 'zastrčená',
+    },
+    {
+      title: 'bulvár',
+    },
+    {
+      title: 'náměstí',
+    },
+    {
+      title: 'místo pro odpočinek',
+    },
+    {
+      title: 'místo práce',
+    },
+    {
+      title: 'zelená',
+    },
+    {
+      title: 'zanedbaná',
+    },
+    {
+      title: 'důstojné místo',
+    },
+  ],
+};
+
+const klicovaSlova = {
+  settings: {
+    autoGenerateId: true,
+    slug: 'klicova-slova',
+  },
+
+  items: [
+    {
+      title: 'estetické',
+    },
+    {
+      title: 'zanedbané',
+    },
+    {
+      title: 'opuštěné',
+    },
+    {
+      title: 'živé',
+    },
+    {
+      title: 'upravené',
+    },
+    {
+      title: 'původní',
+    },
+    {
+      title: 'děsivé',
+    },
+    {
+      title: 'pietní',
+    },
+    {
+      title: 'funkční',
+    },
+    {
+      title: 'uklidňující',
+    },
+    {
+      title: 'barevné',
+    },
+    {
+      title: 'šedivé',
+    },
+    {
+      title: 'vzbuzující hrdost',
+    },
+    {
+      title: 'vzbuzující stud',
+    },
+  ],
+};
 
 const mapovaniUkolu = {
-  q00_01: {
+  q01_01: {
     title: 'Kde se nacházíte?',
     type: 'array',
     itemsObj: mista,
     limit: 1,
     inline: false,
   },
-  q01_01: {
+  q01_01b: {
     title: 'Jak zní vžitý název místa?',
     type: 'text',
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[0].title,
       },
@@ -90,7 +154,7 @@ const mapovaniUkolu = {
     inline: false,
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[0].title,
       },
@@ -101,7 +165,7 @@ const mapovaniUkolu = {
     type: 'text',
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[0].title,
       },
@@ -114,7 +178,7 @@ const mapovaniUkolu = {
     photoCount: 1,
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[0].title,
       },
@@ -125,7 +189,7 @@ const mapovaniUkolu = {
     type: 'text',
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[1].title,
       },
@@ -136,7 +200,7 @@ const mapovaniUkolu = {
     type: 'text',
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[1].title,
       },
@@ -149,7 +213,7 @@ const mapovaniUkolu = {
     photoCount: 1,
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[1].title,
       },
@@ -163,7 +227,7 @@ const mapovaniUkolu = {
     inline: false,
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[1].title,
       },
@@ -174,7 +238,7 @@ const mapovaniUkolu = {
     type: 'text',
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[2].title,
       },
@@ -186,7 +250,7 @@ const mapovaniUkolu = {
     photoCount: 1,
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[2].title,
       },
@@ -200,7 +264,7 @@ const mapovaniUkolu = {
     inline: false,
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[2].title,
       },
@@ -211,7 +275,7 @@ const mapovaniUkolu = {
     type: 'text',
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[2].title,
       },
@@ -222,7 +286,7 @@ const mapovaniUkolu = {
     type: 'text',
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[2].title,
       },
@@ -235,7 +299,7 @@ const mapovaniUkolu = {
     photoCount: 1,
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[2].title,
       },
@@ -248,7 +312,7 @@ const mapovaniUkolu = {
     photoCount: 1,
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[2].title,
       },
@@ -261,7 +325,7 @@ const mapovaniUkolu = {
     photoCount: 1,
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[2].title,
       },
@@ -272,7 +336,7 @@ const mapovaniUkolu = {
     type: 'text',
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[3].title,
       },
@@ -284,7 +348,7 @@ const mapovaniUkolu = {
     photoCount: 1,
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[3].title,
       },
@@ -298,7 +362,7 @@ const mapovaniUkolu = {
     inline: false,
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[3].title,
       },
@@ -309,7 +373,7 @@ const mapovaniUkolu = {
     type: 'text',
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[3].title,
       },
@@ -322,7 +386,7 @@ const mapovaniUkolu = {
     photoCount: 1,
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[3].title,
       },
@@ -335,7 +399,7 @@ const mapovaniUkolu = {
     photoCount: 1,
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[3].title,
       },
@@ -348,7 +412,7 @@ const mapovaniUkolu = {
     photoCount: 1,
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[3].title,
       },
@@ -359,7 +423,7 @@ const mapovaniUkolu = {
     type: 'text',
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[4].title,
       },
@@ -371,7 +435,7 @@ const mapovaniUkolu = {
     photoCount: 1,
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[4].title,
       },
@@ -385,7 +449,7 @@ const mapovaniUkolu = {
     inline: false,
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[4].title,
       },
@@ -396,7 +460,7 @@ const mapovaniUkolu = {
     type: 'text',
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[4].title,
       },
@@ -407,7 +471,7 @@ const mapovaniUkolu = {
     type: 'text',
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[4].title,
       },
@@ -418,7 +482,7 @@ const mapovaniUkolu = {
     type: 'text',
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[5].title,
       },
@@ -430,7 +494,7 @@ const mapovaniUkolu = {
     photoCount: 1,
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[4].title,
       },
@@ -444,7 +508,7 @@ const mapovaniUkolu = {
     inline: false,
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[4].title,
       },
@@ -455,7 +519,7 @@ const mapovaniUkolu = {
     type: 'text',
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[4].title,
       },
@@ -467,7 +531,7 @@ const mapovaniUkolu = {
     photoCount: 1,
     conditions: [
       {
-        question: 'q00_01',
+        question: 'q01_01',
         operator: 'in',
         value: mista.items[4].title,
       },

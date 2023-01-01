@@ -1,9 +1,14 @@
 <template lang="pug">
-  .task.task__container.task__keywords.ui-widget(:class="classObject")
-    .task__title.ui-widget__title #{Zadani}
-
-    .task__options.ui-widget__list-keywords
-      a.option.ui-widget__keyword(@click="toggleKeyword($event)" href='#' v-for="(keyword, index) in moznostiPrepared" :key="keyword.id" :data-keyword-id="keyword.id" :data-keyword="keyword.title") {{keyword.title}}
+.task.task__container.task__keywords.ui-widget(:class="classObject")
+  .task__options.ui-widget__list-keywords
+    a.option.ui-widget__keyword(
+      v-for="(keyword, index) in moznostiPrepared"
+      :key="keyword.id"
+      :data-keyword-id="keyword.id"
+      :data-keyword="keyword.title"
+      href='#'
+      @click="toggleKeyword($event)"
+    ) {{keyword.title}}
 
 </template>
 

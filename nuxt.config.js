@@ -69,6 +69,7 @@ export default {
       vue: { cacheBusting: false },
     },
   },
+  plugins: ['~//plugins/fontawesome.js'],
   buildModules: [
     [
       '@nuxtjs/style-resources',
@@ -130,7 +131,10 @@ export default {
   content: {
     // Options
   },
-  css: ['@/assets/scss/main.sass'],
+  css: [
+    '@/assets/scss/main.sass',
+    '@fortawesome/fontawesome-svg-core/styles.css',
+  ],
   head: {
     title: projectConfig.globalName,
     htmlAttrs: {
