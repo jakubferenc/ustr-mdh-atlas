@@ -69,7 +69,7 @@ article.u-card(data-component="list-map-item" :class="thisComponentStyles" :styl
     object-fit: cover
     border-radius: 12px
     overflow: hidden
-    opacity: .25
+    opacity: .2
 </style>
 <script>
 import { truncate } from 'lodash';
