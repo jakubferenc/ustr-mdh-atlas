@@ -31,7 +31,30 @@
 }
 
 .main-nav {
-  display: none;
+  @include until($widescreen) {
+    &:not(.is-mobile-menu-visible) {
+      display: none;
+    }
+
+    padding: 0 20px;
+    position: fixed;
+    top: 42px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 42px);
+    background: white;
+    .item {
+      display: block;
+      padding: 10px 20px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      height: 10vh;
+      border-top: none;
+
+      &:first-child {
+        border-top: 1px solid rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
 
   @include from($widescreen) {
     width: 700px;

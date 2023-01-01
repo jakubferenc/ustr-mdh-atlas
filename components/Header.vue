@@ -7,7 +7,7 @@ header.header-main()
         span.logo Atlas&nbsp;
         span Muzea dělnického hnutí v 21. století
 
-  <MainMenu />
+  <MainMenu :CssClasses="{'is-mobile-menu-visible': mobileMenuOpen}" />
 
   nav.user-actions-nav
     span(v-if="currentLoggedUserId")
@@ -16,7 +16,9 @@ header.header-main()
     NuxtLink.item(v-if="!currentLoggedUserId" to="/prihlaseni/") Přihlásit
 
   .toggle-mobile-menu
-    NuxtLink(to="#") Menu
+    a(@click="toggleMobileMenu")
+      span(v-show="!mobileMenuOpen") Menu
+      span(v-show="mobileMenuOpen") Zavřít menu
 </template>
 <style lang="sass">
 .logo
@@ -41,15 +43,25 @@ header.header-main()
 import { mapGetters } from 'vuex';
 
 export default {
+  data() {
+    return {
+      mobileMenuOpen: false,
+    };
+  },
   computed: {
     ...mapGetters({
-      currentLoggedUser: 'auth/getCurrentUser'
+      currentLoggedUser: 'auth/getCurrentUser',
     }),
     currentLoggedUserId() {
       return this.currentLoggedUser?.uid;
     },
     zobrazitVsechnyObjekty() {
       return this.$route.query.vse === '1';
+    },
+  },
+  methods: {
+    toggleMobileMenu(e) {
+      this.mobileMenuOpen = !this.mobileMenuOpen;
     },
   },
 };

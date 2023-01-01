@@ -1,5 +1,5 @@
 <template lang="pug">
-nav.main-nav(role="navigation" aria-label="Primary")
+nav.main-nav(:class="CssClasses" role="navigation" aria-label="Primary")
   NuxtLink(to="/").item Hlavní stránka
   NuxtLink(to="/prochazky/").item.item--prochazky Procházky
   NuxtLink(to="/me-objekty/" ).item.item--objekty Mé objekty
@@ -11,3 +11,9 @@ html.page--objekty .item--objekty,
 html.page--prochazka .item--prochazky
   text-decoration: underline
 </style>
+
+<script>
+export default {
+  props: ['CssClasses'],
+};
+</script>
