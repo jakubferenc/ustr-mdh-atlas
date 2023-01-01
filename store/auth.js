@@ -10,7 +10,10 @@ this will update the state with the posts
 
 export const getters = {
   getCurrentUser(state) {
-    return JSON.parse(localStorage.getItem('user_logged')) || state.user_logged;
+    const stateUser = state.user_logged;
+    const localStorageUser = JSON.parse(localStorage.getItem('user_logged'));
+
+    return localStorageUser || stateUser || null;
   },
 };
 
@@ -38,8 +41,14 @@ actions is where we will make an API call that gathers the posts,
 and then commits the mutation to update it
 */
 export const actions = {
-  logout: ({ state, commit, dispatch }) => {
-    commit('ON_LOGOUT_USER');
+  async logout({ state, commit, dispatch }) {
+    try {
+      await this.$fire.auth.signOut();
+      commit('ON_LOGOUT_USER');
+    } catch (error) {
+      dispatch('alert/error', { error: error.message }, { root: true });
+      console.error(error);
+    }
   },
   login: ({ state, commit, dispatch }, { authUser }) => {
     commit('ON_LOGIN_USER', authUser);

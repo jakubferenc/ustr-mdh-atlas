@@ -11,11 +11,12 @@
         @submit="submitRegistration"
         @error="errorHandler"
       )
-      p Nebo <NuxtLink to="/prihlaseni/">máte účet?</NuxtLink>
+      p.login-other-link Nebo <NuxtLink to="/prihlaseni/">máte účet?</NuxtLink>
 </template>
 
 <style lang="sass" scoped>
-
+.login-other-link
+  margin-top: 1rem
 .dashboard-container
   margin: 2rem 0
 

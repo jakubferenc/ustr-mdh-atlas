@@ -9,12 +9,13 @@
       FormLogin(
         @submit="submitLoginHandler"
       )
-      p Nebo <nuxt-link to="/registrace/">nemáte účet?</nuxt-link>
+      p.login-other-link Nebo <nuxt-link to="/registrace/">nemáte účet?</nuxt-link>
 
 </template>
 
 <style lang="sass">
-
+.login-other-link
+  margin-top: 1rem
 .dashboard-container
   margin: 2rem 0
 

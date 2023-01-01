@@ -68,17 +68,17 @@
 
   text-transform: uppercase;
 
+  .item--mobile-only {
+    @include from($desktop) {
+      display: none;
+    }
+  }
+
   .item {
     color: $active-gray;
 
     &:hover {
       color: $primary-color;
-    }
-
-    &.item--mobile-only {
-      @include from($desktop) {
-        display: none;
-      }
     }
   }
 
