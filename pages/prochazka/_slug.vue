@@ -54,7 +54,7 @@ export default {
 
       const prepareDatabaseObject = {
         id: null,
-        data: this.$store.state.novy_objekt,
+        data: { ...this.$store.state.novy_objekt },
         prochazka_id: this.prochazka.id,
         prochazka_slug: this.prochazka.slug,
         user_id: this.currentUser?.uid,

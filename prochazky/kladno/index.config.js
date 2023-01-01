@@ -182,6 +182,7 @@ export default {
   nazev: 'Kladenští muži a ženy z bronzu či kamene',
   slug: 'kladno',
   autori: ['Bohumil Melichar'],
+  barva: '#81744f',
   metadata: {
     cas: 60,
     delka: 800,

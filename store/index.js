@@ -207,15 +207,15 @@ export const actions = {
       objectPayload.audio = Object.keys(objectPayload.data)
         .filter(
           (key) =>
+            Object.keys(
+              (prochazka.mapovaniUkolu,
+              key,
+              this.$config.separatorForDynamicSlideId)
+            )?.length &&
             findObjectSlideDefinition(
               prochazka.mapovaniUkolu,
               key,
-              $config.separatorForDynamicSlideId
-            ).hasOwnProperty(key) &&
-            findObjectSlideDefinition(
-              prochazka.mapovaniUkolu,
-              key,
-              $config.separatorForDynamicSlideId
+              this.$config.separatorForDynamicSlideId
             ).type === 'audio'
         )
         .map((key) => {
@@ -237,15 +237,15 @@ export const actions = {
       objectPayload.obrazky = Object.keys(objectPayload.data)
         .filter(
           (key) =>
+            Object.keys(
+              (prochazka.mapovaniUkolu,
+              key,
+              this.$config.separatorForDynamicSlideId)
+            )?.length &&
             findObjectSlideDefinition(
               prochazka.mapovaniUkolu,
               key,
-              $config.separatorForDynamicSlideId
-            ).hasOwnProperty(key) &&
-            findObjectSlideDefinition(
-              prochazka.mapovaniUkolu,
-              key,
-              $config.separatorForDynamicSlideId
+              this.$config.separatorForDynamicSlideId
             ).type === 'image'
         )
         .map((key) => {

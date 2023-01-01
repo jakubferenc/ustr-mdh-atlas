@@ -57,7 +57,7 @@
 
         .slide(
           v-if="refreshKey && isDynamic(Prochazka.mapovaniUkolu[ukolKey], ukolKey) && Array.isArray([Prochazka.mapovaniUkolu[ukolKey].dynamicBasedOn]) && validateToShow(ukolKey, Prochazka.mapovaniUkolu[ukolKey])"
-          v-for="(dynamicValue, index) in novy_objekt[Prochazka.mapovaniUkolu[ukolKey].dynamicBasedOn]"
+          v-for="(dynamicValue, indexDynamicKey) in novy_objekt[Prochazka.mapovaniUkolu[ukolKey].dynamicBasedOn]"
         )
           .content-container
             h1 {{Prochazka.mapovaniUkolu[ukolKey].title}}: {{ dynamicValue }}
@@ -68,16 +68,16 @@
               :ZdrojeObjekt="Prochazka.mapovaniUkolu[ukolKey].sources"
               :Sloupce="Prochazka.mapovaniUkolu[ukolKey].columns"
               :ProchazkaPath="`/prochazky/${Prochazka.slug}`"
-              :Id="`${ukolKey}${$config.separatorForDynamicSlideId}${index}`"
+              :Id="`${ukolKey}${$config.separatorForDynamicSlideId}${indexDynamicKey}`"
             )
             TaskTextovePole(
               v-if="Prochazka.mapovaniUkolu[ukolKey].type === 'text'"
               @value="updateStore"
-              :Id="`${ukolKey}${$config.separatorForDynamicSlideId}${index}`"
+              :Id="`${ukolKey}${$config.separatorForDynamicSlideId}${indexDynamicKey}`"
             )
             TaskMoznosti(
               v-if="Prochazka.mapovaniUkolu[ukolKey].type === 'array'"
-              :Id="`${ukolKey}${$config.separatorForDynamicSlideId}${index}`"
+              :Id="`${ukolKey}${$config.separatorForDynamicSlideId}${indexDynamicKey}`"
               :Zadani="false"
               :MoznostiContainer="Prochazka.mapovaniUkolu[ukolKey].itemsObj"
               :Inline="Prochazka.mapovaniUkolu[ukolKey].inline"
@@ -86,13 +86,13 @@
             )
             TaskVyfotFoto(
               v-if="Prochazka.mapovaniUkolu[ukolKey].type === 'image'"
-              :Id="`${ukolKey}${$config.separatorForDynamicSlideId}${index}`"
+              :Id="`${ukolKey}${$config.separatorForDynamicSlideId}${indexDynamicKey}`"
               :PocetFotek="Prochazka.mapovaniUkolu[ukolKey].photoCount"
               @value="updateStore"
             )
             TaskAudio(
               v-if="Prochazka.mapovaniUkolu[ukolKey].type === 'audio'"
-              :Id="`${ukolKey}${$config.separatorForDynamicSlideId}${index}`"
+              :Id="`${ukolKey}${$config.separatorForDynamicSlideId}${indexDynamicKey}`"
               @value="updateStore"
             )
 

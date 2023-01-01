@@ -20,6 +20,7 @@
             :Authors="prochazky[key].autori"
             :Image="prochazky[key].obrazky.thumb"
             :Description="prochazky[key].popis"
+            :Color="prochazky[key].barva"
           )
         </template>
       </Catalog>

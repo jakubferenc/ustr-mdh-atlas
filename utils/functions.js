@@ -66,7 +66,7 @@ export const findObjectSlideDefinition = (
 
   // try to find base of the dynamicly created slide
   if (objectKey.indexOf(separator) > -1) {
-    // yes, it's dynamicly created slide, find base index
+    // yes, it's dynamically created slide, find base index
     const baseIndexKey = objectKey.split(separator)[0];
     if (
       mapovaniUkolu?.[baseIndexKey] &&

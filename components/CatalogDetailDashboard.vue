@@ -35,7 +35,7 @@
       .actions-bar__try
         .button(@click="emitInitTrialProchazka()") Vyzkoušet procházku
 
-  .catalog-detail__dashboard__background
+  .catalog-detail__dashboard__background(:style="`background-color: ${Prochazka.barva}`")
     <img :src="require(`@/prochazky/${Prochazka.slug}/${Prochazka.obrazky.intro}`)" :alt="Prochazka.nazev" />
 </template>
 <style lang="sass" scoped>
@@ -99,7 +99,6 @@
       border-right: none
       a
         color: $warn-color
-
   .catalog-detail__dashboard__description,
   .catalog-detail__dashboard__meta
     width: 100%
@@ -175,7 +174,6 @@
     z-index: 0
     width: 100%
     height: 100vh
-    background-color: rgb(62, 62, 62)
     img
       object-fit: cover
       object-position: center right
