@@ -9,7 +9,7 @@
     .section-category(v-for="(prochazkaObj, index) in prochazky" :key="index")
       h2.typo-subtitle.prochazka-title {{ getProchazkaById(prochazkaObj.id).nazev }}
 
-      Catalog
+      Catalog(Type="objekty")
         template(v-slot:catalog-items)
           template(v-for="(objekt, index) in objekty")
             ObjektNahled(
