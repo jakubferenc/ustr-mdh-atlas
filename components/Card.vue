@@ -18,7 +18,7 @@ article.u-card(data-component="list-map-item" :class="thisComponentStyles" :styl
 
 
       .u-card__description(v-if="Description")
-        p {{ truncate(this.Description, {length: 150, omission: '...', separator: ' '})}}
+        p {{ truncate(this.Description, {length: 195, omission: '...', separator: ' '})}}
 
 
 </template>
