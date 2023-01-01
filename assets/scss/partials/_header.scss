@@ -74,6 +74,12 @@
     &:hover {
       color: $primary-color;
     }
+
+    &.item--mobile-only {
+      @include from($desktop) {
+        display: none;
+      }
+    }
   }
 
   .nuxt-link-exact-active {

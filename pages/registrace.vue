@@ -11,7 +11,7 @@
         @submit="submitRegistration"
         @error="errorHandler"
       )
-      p Nebo <NuxtLink to="/prihlaseni">máte účet?</NuxtLink>
+      p Nebo <NuxtLink to="/prihlaseni/">máte účet?</NuxtLink>
 </template>
 
 <style lang="sass" scoped>
@@ -36,7 +36,7 @@ export default {
       subtitle: 'Registrace',
     };
   },
-  created() { },
+  created() {},
 
   methods: {
     errorHandler(error) {

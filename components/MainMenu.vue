@@ -2,9 +2,10 @@
 nav.main-nav(:class="CssClasses" role="navigation" aria-label="Primary")
   NuxtLink(to="/").item Hlavní stránka
   NuxtLink(to="/prochazky/").item.item--prochazky Procházky
-  NuxtLink(to="/me-objekty/" ).item.item--objekty Mé objekty
+  NuxtLink(v-if="currentLoggedUserId" to="/me-objekty/" ).item.item--objekty Mé objekty
   NuxtLink(to="/o-projektu/" ).item O projektu
-  NuxtLink(v-if="!currentLoggedUserId" to="/prihlaseni/").item O Přihlásit
+  NuxtLink(v-if="!currentLoggedUserId" to="/prihlaseni/").item.item--mobile-only Přihlásit / Registrovat
+  NuxtLink(v-if="currentLoggedUserId" to="/prihlaseni/").item.item--mobile-only  Odhlásit
 
 </template>
 
