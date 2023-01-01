@@ -14,9 +14,12 @@
 }
 
 .logo-nav {
-  width: 450px;
   .item {
     color: $active-gray;
+  }
+
+  @include from($widescreen) {
+    width: 450px;
   }
 }
 

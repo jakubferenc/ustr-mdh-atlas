@@ -13,6 +13,7 @@ export const state = () => ({
   logged_user: null,
   prochazky: prochazkyConfig,
   prochazka: null,
+  is_mobile_menu_open: false,
 });
 /*
 this will update the state with the posts
@@ -31,6 +32,9 @@ export const getters = {
   },
   getProchazka(state) {
     return state.prochazka;
+  },
+  getMobileMenuState(state) {
+    return state.is_mobile_menu_open;
   },
 };
 
@@ -75,6 +79,9 @@ export const mutations = {
   removeNovyObjekt: (state) => {
     state.novy_objekt = {};
   },
+  updateMobileMenuToggle(state, isOpen) {
+    state.is_mobile_menu_open = isOpen;
+  },
 };
 /*
 
@@ -84,6 +91,14 @@ and then commits the mutation to update it
 export const actions = {
   onAuthStateLogoutAction: ({ state, commit, dispatch }, { authUser }) => {},
   onAuthStateLoginAction: ({ state, commit, dispatch }, { authUser }) => {},
+
+  mobileMenuToggle({ state, commit, dispatch }, { isOpen }) {
+    try {
+      commit('updateMobileMenuToggle', isOpen);
+    } catch (e) {
+      console.error(e);
+    }
+  },
 
   getProchazka({ state, commit, dispatch }, { slug }) {
     if (!state.prochazky) return;

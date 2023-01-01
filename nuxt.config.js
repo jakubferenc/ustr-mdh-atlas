@@ -14,6 +14,7 @@ export default {
   },
   router: {
     trailingSlash: true,
+    middleware: ['custom-router'],
   },
   publicRuntimeConfig: { ...config },
   render: {
