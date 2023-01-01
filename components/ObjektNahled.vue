@@ -3,7 +3,7 @@
 .object-thumb.option.ui-widget__photo
   NuxtLink.ui-gallery__link.object-thumb-photo(:to="`/objekt/${Id}/`")
     .photo-ratio
-      img(v-if="ObrazkyArray.length" :src="`${ObrazkyArray[0].realURL}`")
+      img(v-if="hasImages()" :src="`${ObrazkyArray[0].realURL}`")
   .header
     span.title {{Misto}}
   .metadata
@@ -61,6 +61,10 @@ export default {
   mounted() {},
 
   watch: {},
-  methods: {},
+  methods: {
+    hasImages() {
+      return this.ObrazkyArray.length;
+    },
+  },
 };
 </script>

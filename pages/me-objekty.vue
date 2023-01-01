@@ -7,23 +7,19 @@
 
 
     .section-category(v-for="(prochazkaObj, index) in prochazky" :key="index")
-      h2.typo-subtitle.prochazka-title {{ getProchazkaById(prochazkaObj.prochazka_id).nazev }}
+      h2.typo-subtitle.prochazka-title {{ getProchazkaById(prochazkaObj.id).nazev }}
 
-      <Catalog>
-        <template v-slot:catalog-items>
-          ObjektNahled(
-            v-for="(objekt, index) in objekty"
-            :key="objekt.id"
-            :Id="objekt.id"
-            :Timestamp="objekt.timestamp"
-            :Uzivatel="objekt.user_email"
-            :ObrazkyArray="objekt.obrazky[0].items"
+      Catalog
+        template(v-slot:catalog-items)
+          template(v-for="(objekt, index) in objekty")
+            ObjektNahled(
+              v-if="objekt.prochazka_id === prochazkaObj.id"
+              :key="objekt.id"
+              :Id="objekt.id"
+              :Timestamp="objekt.timestamp"
+              :Uzivatel="objekt.user_email"
+              :ObrazkyArray="getObjectImages(objekt)"
           )
-        </template>
-      </Catalog>
-
-
-
 </template>
 
 <style lang="sass">
@@ -61,9 +57,14 @@ export default {
     });
   },
 
-  mounted() { },
+  mounted() {},
 
   methods: {
+    getObjectImages(objectProchazka = ObjectProchazka) {
+      return objectProchazka?.obrazky?.[0]?.items?.length
+        ? objectProchazka?.obrazky?.[0]?.items
+        : [];
+    },
     getProchazkaById(prochazkaId) {
       const prochazkaKey = Object.keys(prochazkyConfig).find(
         (prochazkaKey) => prochazkyConfig[prochazkaKey].id === prochazkaId
@@ -82,23 +83,29 @@ export default {
     },
 
     prochazky() {
-      return this.objekty
+      const prochazkyFromUserObject = this.objekty
         .map((objekt = ObjectProchazka) => {
           const { prochazka_id, prochazka_slug } = objekt;
           return {
-            prochazka_id,
-            prochazka_slug,
+            id: prochazka_id,
+            slug: prochazka_slug,
           };
         })
         .reduce((prevVal, currentVal) => {
+          if (!prevVal.length) {
+            return [...prevVal, currentVal];
+          }
+          const isExist = prevVal.filter(
+            (item) => item.prochazka_id === currentVal.prochazka_id
+          );
+          if (isExist.length) return prevVal;
           return [...prevVal, currentVal];
         }, []);
-    },
 
+      return prochazkyFromUserObject;
+    },
     objekty() {
-      return this.$store.state.objekty.filter(
-        (item) => item.user_id === this.currentLoggedUserId
-      );
+      return this.$store.state.objekty;
     },
   },
 
