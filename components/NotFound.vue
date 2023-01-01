@@ -1,5 +1,5 @@
 <template lang="pug">
-.not-found
+.not-found(:class="{[`is--type-${Type}`]: true}")
   .not-found__content
     .not-found__content-in
       .not-found__text {{ Text }}
@@ -14,6 +14,11 @@
   position: relative
   max-width: 1140px
   max-height: 1140px
+
+  &.is--type-error
+    .not-found__content-in
+      background-color: darken(red, 10%)
+      color: #fff
 
   +from($desktop)
     width: 50%
@@ -47,8 +52,22 @@
 <script>
 import { truncate } from 'lodash';
 export default {
-  props: ['Text', 'Link'],
-
+  props: {
+    Text: {
+      type: String,
+      required: true,
+    },
+    Link: {
+      type: [Boolean, String],
+      required: false,
+      default: false,
+    },
+    Type: {
+      type: [String],
+      required: false,
+      default: 'info',
+    },
+  },
   mounted() {},
 
   data() {

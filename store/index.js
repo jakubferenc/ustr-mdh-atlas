@@ -1,4 +1,5 @@
 /*eslint no-unsafe-optional-chaining: "error"*/
+import Vue from 'vue';
 import prochazkyConfig from '~/prochazky.config';
 import { resize, findObjectSlideDefinition } from '@/utils/functions';
 import ObjectProchazka from '~/models/ObjectProchazka';
@@ -8,6 +9,7 @@ export const state = () => ({
   novy_objekt_nav_pozice: 0,
   objekty: [],
   objekt_detail: {},
+  objekty_prochazka_detail: {},
   loading: false,
   loadingMsg: '',
   logged_user: null,
@@ -36,6 +38,11 @@ export const getters = {
   getMobileMenuState(state) {
     return state.is_mobile_menu_open;
   },
+  // getObjectsByProchazkaId(state) {
+  //   return (prochazkaId) => {
+  //     return state.objekty_prochazka_detail?.[prochazkaId];
+  //   };
+  // },
 };
 
 export const mutations = {
@@ -63,6 +70,9 @@ export const mutations = {
 
   updateObjekty: (state, objekty) => {
     state.objekty = objekty;
+  },
+  updateObjektyProchazkaDetail: (state, { prochazkaId, objekty }) => {
+    Vue.set(state.objekty_prochazka_detail, prochazkaId, objekty);
   },
 
   updateNovyObjektNavPozice: (state, novy_objekt_nav_pozice) => {
@@ -114,7 +124,7 @@ export const actions = {
     }
   },
 
-  async getObjekt({ state, commit, dispatch }, objectProchazkaId) {
+  async getObjekt({ state, commit, dispatch, getters }, objectProchazkaId) {
     const findCachedObject = state.objekty.filter(
       (objekt) => objekt.id === objectProchazkaId
     );
@@ -162,7 +172,7 @@ export const actions = {
   },
 
   async getMyObjects({ state, commit, dispatch }, { userId }) {
-    if (state.objekty.length) return;
+    if (state.objekty?.length) return;
 
     dispatch(
       'setLoading',
@@ -172,7 +182,6 @@ export const actions = {
       },
       { root: true }
     );
-
     try {
       const db = this.$fire.firestore;
       const collectionQuery = db
@@ -188,6 +197,42 @@ export const actions = {
         return { id, ...data };
       });
       commit('updateObjekty', objekty);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      dispatch('setLoading', { isLoading: false, message: false });
+    }
+  },
+
+  async getMyObjectsByProchazkaId(
+    { state, commit, dispatch },
+    { userId, prochazkaId }
+  ) {
+    if (state.objekty_prochazka_detail?.[prochazkaId]) return;
+    dispatch(
+      'setLoading',
+      {
+        isLoading: true,
+        message: 'Načítám...',
+      },
+      { root: true }
+    );
+    try {
+      const db = this.$fire.firestore;
+      const collectionQuery = db
+        .collection(this.$config.firebaseConfig.collectionId)
+        .where('user_id', '==', userId)
+        .where('prochazka_id', '==', prochazkaId);
+
+      const querySnapshot = await collectionQuery.get();
+      const objekty = querySnapshot.docs.map((doc) => {
+        const data = doc.data();
+
+        const id = doc.id;
+
+        return { id, ...data };
+      });
+      commit('updateObjektyProchazkaDetail', { prochazkaId, objekty });
     } catch (err) {
       console.log(err);
     } finally {

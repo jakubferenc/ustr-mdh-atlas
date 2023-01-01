@@ -10,19 +10,20 @@
         h2.typo-subtitle.prochazka__title
           span.typo-hero-box-subtitle {{ getProchazkaById(prochazkaObj.id).nazev }}
         .prochazka__title__actions
-          .button Sdílet  <font-awesome-icon icon="fa fa-solid fa-share" />
+  NuxtLink(:to="`/me-objekty/p/${prochazkaObj.id}/`").button.button-ok.desaturated Detail <font-awesome-icon icon="fa fa-solid fa-share" />
+  .button Sdílet  <font-awesome-icon icon="fa fa-solid fa-link" />
 
-        Catalog(Type="objekty")
-          template(v-slot:catalog-items)
-            template(v-for="(objekt, index) in objekty")
-              ObjektNahled(
-                v-if="objekt.prochazka_id === prochazkaObj.id"
-                :key="objekt.id"
-                :Id="objekt.id"
-                :Timestamp="objekt.timestamp"
-                :Uzivatel="objekt.user_email"
-                :ObrazkyArray="getObjectImages(objekt)"
-            )
+  Catalog(Type="objekty")
+    template(v-slot:catalog-items)
+      template(v-for="(objekt, index) in objekty")
+        ObjektNahled(
+          v-if="objekt.prochazka_id === prochazkaObj.id"
+          :key="objekt.id"
+          :Id="objekt.id"
+          :Timestamp="objekt.timestamp"
+          :Uzivatel="objekt.user_email"
+          :ObrazkyArray="getObjectImages(objekt)"
+      )
     div(v-if="!objekty.length && !isLoading && isLoaded")
       NotFound(Text="Nemáte uložené žádné objekty. Zkuste si je přidat v nějaké procházce." Link="/prochazky/")
 </template>
@@ -36,7 +37,10 @@
 
 .prochazka__title__actions
   display: block
-  margin-bottom: 1.25em
+  margin-bottom: 2.5em
+  display: flex
+  column-gap: .5rem
+
 
   .button
     max-width: 150px
@@ -74,7 +78,6 @@ export default {
     currentLoggedUserId() {
       return this.$store.getters['auth/getCurrentUser']?.uid;
     },
-
     loading() {
       return this.$store.state.loading;
     },
@@ -111,6 +114,8 @@ export default {
       title: '',
       prochazkyConfig,
       faGithub,
+      isLoading: null,
+      isLoaded: null,
     };
   },
 
@@ -135,6 +140,13 @@ export default {
       );
       return prochazkyConfig[prochazkaKey];
     },
+  },
+  head() {
+    return {
+      htmlAttrs: {
+        class: 'page--objekty',
+      },
+    };
   },
 };
 </script>
