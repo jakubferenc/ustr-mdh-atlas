@@ -105,7 +105,7 @@ export default {
       this.$router.push({ path: this.$route.path, query: { start: true } });
     },
     initTrialProchazkaHandler() {
-      return true;
+      this.$router.push({ path: this.$route.path, query: { start: true, trial: true } });
     },
   },
   watch: {

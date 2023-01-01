@@ -96,12 +96,14 @@
               @value="updateStore"
             )
 
-      .slide
+      .slide()
         .content-container
-          h1 Shrnutí
+          h1(v-if="currentLoggedUserId") Shrnutí
+          h1(v-if="!currentLoggedUserId") Konec testovacího režimu
 
           TaskShrnuti(
             :MapovaniUkolu="Prochazka.mapovaniUkolu"
+            :IsTestMode="!currentLoggedUserId"
             @submit="emitSubmitHandler"
           )
 
@@ -113,7 +115,7 @@
 </style>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import TaskGalerie from './TaskGalerie.vue';
 
 export default {
@@ -131,10 +133,15 @@ export default {
     };
   },
   computed: {
+    ...mapGetters({
+      currentLoggedUser: 'auth/getCurrentUser',
+    }),
     ...mapState({
       novy_objekt: 'novy_objekt',
     }),
-
+    currentLoggedUserId() {
+      return this.currentLoggedUser?.uid;
+    },
     novyObjektSize() {
       this.refreshKey;
       if (!this.slidesContainerElement) return 0;

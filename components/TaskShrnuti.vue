@@ -33,7 +33,7 @@
               </audio>
 
 
-  button.button.button-ok(@click="emitSubmit()" data-submit) Uložit objekt
+  button.button.button-ok(v-if="!IsTestMode" @click="emitSubmit()" data-submit) Uložit objekt
 
 </template>
 
@@ -50,7 +50,7 @@ import { mapGetters, mapState } from 'vuex';
 import { findObjectSlideDefinition } from '@/utils/functions';
 
 export default {
-  props: ['Id', 'MapovaniUkolu'],
+  props: ['Id', 'MapovaniUkolu', 'IsTestMode'],
 
   computed: {
     ...mapGetters({
