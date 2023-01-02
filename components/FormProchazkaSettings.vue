@@ -53,9 +53,16 @@ export default {
       },
     };
   },
+  watch: {
+    UserProfilePublicItems(newItems, oldItems) {
+      this.formData.toggleShareProchazka = newItems.includes(this.ProchazkaId);
+    },
+  },
+  created() {
+    this.$emit('input', this.formData);
+  },
   mounted() {
     this.windowObjectLocation = window.location.origin;
-    console.log('test', this.windowObjectLocation);
   },
   computed: {
     publicProchazkaShareLink() {
