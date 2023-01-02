@@ -124,6 +124,42 @@ export const actions = {
     }
   },
 
+  async changeProchazkaPermission(
+    { state, commit, dispatch },
+    { userId, prochazkaId, makePublic }
+  ) {
+    try {
+      // do db changes
+      const db = this.$fire.firestore;
+      const currentUserObject = db
+        .collection(this.$config.firebaseConfig.collectionUsersId)
+        .doc(userId);
+
+      if (makePublic) {
+        const unionRes = await currentUserObject.update({
+          publicItems:
+            this.$fireModule.firestore.FieldValue.arrayUnion(prochazkaId),
+        });
+      } else {
+        const unionRes = await currentUserObject.update({
+          publicItems:
+            this.$fireModule.firestore.FieldValue.arrayRemove(prochazkaId),
+        });
+      }
+
+      await dispatch('user/getUserProfile', { userId }, { root: true });
+
+      dispatch(
+        'alert/message',
+        { message: 'Nastavení procházky bylo změněno.' },
+        { root: true }
+      );
+    } catch (error) {
+      dispatch('alert/error', { error: error.message }, { root: true });
+      console.error(error);
+    }
+  },
+
   async getObjekt({ state, commit, dispatch, getters }, objectProchazkaId) {
     const findCachedObject = state.objekty.filter(
       (objekt) => objekt.id === objectProchazkaId

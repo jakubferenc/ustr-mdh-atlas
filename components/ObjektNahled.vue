@@ -1,7 +1,7 @@
 <template lang="pug">
 
 .object-thumb.option.ui-widget__photo
-  NuxtLink.ui-gallery__link.object-thumb-photo(:to="`/objekt/${Id}/`")
+  NuxtLink.ui-gallery__link.object-thumb-photo(:to="objektDetailUrl")
     .photo-ratio
       img(v-if="hasImages()" :src="`${ObrazkyArray[0].realURL}`")
   .header
@@ -57,9 +57,17 @@
 
 <script>
 export default {
-  props: ['Misto', 'Uzivatel', 'ObrazkyArray', 'Timestamp', 'Id'],
+  props: ['Misto', 'Uzivatel', 'ObrazkyArray', 'Timestamp', 'Id', 'IsShared'],
 
-  computed: {},
+  computed: {
+    objektDetailUrl() {
+      if (this.IsShared) {
+        return `/sdilet-objekt/${this.Id}/`;
+      } else {
+        return `/objekt/${this.Id}/`;
+      }
+    },
+  },
   data() {
     return {
       answer: '',

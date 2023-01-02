@@ -43,7 +43,8 @@ and then commits the mutation to update it
 export const actions = {
   async logout({ state, commit, dispatch }) {
     try {
-      await this.$fire.auth.signOut();
+      const logoutRes = await this.$fire.auth.signOut();
+      console.log('user logged out from logout action', logoutRes);
       commit('ON_LOGOUT_USER');
     } catch (error) {
       dispatch('alert/error', { error: error.message }, { root: true });

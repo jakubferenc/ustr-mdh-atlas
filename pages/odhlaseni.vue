@@ -13,7 +13,8 @@ export default {
   },
 
   async created() {
-    const isUserSignedIn = this.$store.state.auth.user_logged?.uid;
+    const isUserSignedIn = this.$store.getters['auth/getCurrentUser']?.uid;
+
     if (isUserSignedIn) {
       await this.$store.dispatch('auth/logout');
       setTimeout(() => {

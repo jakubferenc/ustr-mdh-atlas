@@ -19,6 +19,9 @@ export default class User extends Model {
     role: {
       default: '',
     },
+    publicItems: {
+      default: [],
+    },
   };
 
   constructor(newUser = {}) {

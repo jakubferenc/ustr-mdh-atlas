@@ -75,3 +75,11 @@ export const findObjectSlideDefinition = (
       return mapovaniUkolu[baseIndexKey];
   }
 };
+
+export const getPublicProchazkaShareLink = (
+  domainRoot,
+  prochazkaId,
+  userId
+) => {
+  return `${domainRoot}/sdilet/?u=${userId}&p=${prochazkaId}`;
+};

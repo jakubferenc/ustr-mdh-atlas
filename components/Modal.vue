@@ -8,7 +8,7 @@ aside.u-modal
         .u-modal__body__content
           <slot name="form" :checkChanged="checkChanged"></slot>
         footer.u-modal__body__footer
-          .button.button-short Zavřít
+          .button.button-short(@click="closeModalHandler") Zavřít
           .button.button-short.button-ok.desaturated(@click="submitModalHandler") Potvrdit
 </template>
 <style lang="sass" scoped>
@@ -89,6 +89,9 @@ export default {
     checkChanged(newFormData) {
       this.formData = newFormData;
       this.$emit('input', this.formData);
+    },
+    closeModalHandler(e) {
+      this.$emit('close');
     },
     submitModalHandler(e) {
       this.$emit('submit', this.formData);

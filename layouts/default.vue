@@ -40,11 +40,13 @@
     justify-content: center
     width: 100%
   .success-message
-    background-color: #80f080
-    border: 1px solid #22b222
+    background-color: $ok-color
+    border: 1px solid $ok-color-desaturated-hover
+    color: rgba(255,255,255,.9)
   .error-message
-    background-color: #F08080
-    border: 1px solid #B22222
+    background-color: $warn-color
+    border: 1px solid $warn-color-desaturated-hover
+    color: rgba(255,255,255,.9)
   .message
     margin-bottom: 0
     background: none
@@ -52,21 +54,33 @@
     position: absolute
     right: 15px
     cursor: pointer
+    color: rgba(255,255,255,.9)
 </style>
 <script>
 export default {
   data() {
     return {
       isShowAlert: false,
+      messageTimer: null,
+      messageTimerInterval: 5000,
     };
   },
   middleware: 'auth',
   watch: {
     errorMessage(newVal, oldVal) {
+      if (!newVal) return;
       this.isShowAlert = true;
+
+      this.messageTimer = setTimeout(() => {
+        this.closeMessage();
+      }, this.messageTimerInterval);
     },
     successMessage(newVal, oldVal) {
+      if (!newVal) return;
       this.isShowAlert = true;
+      this.messageTimer = setTimeout(() => {
+        this.closeMessage();
+      }, this.messageTimerInterval);
     },
   },
   computed: {
@@ -87,6 +101,7 @@ export default {
   methods: {
     closeMessage() {
       this.isShowAlert = false;
+      this.$store.dispatch('alert/reset');
     },
   },
   async beforeCreate() {

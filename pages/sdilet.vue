@@ -1,13 +1,11 @@
 <template lang="pug">
 
 .page()
-  .section.section-padding(data-component="section")
-    .prochazka-detail(v-if="prochazka")
+  .section.section-padding( data-component="section")
+    .prochazka-detail(v-if="isAllowedPublic && prochazka")
       h1.typo-section-title.is-section-title  {{prochazka.nazev}}
 
       .section-category()
-        .prochazka__title__actions
-          .button.button-short(@click="showModalHandler") Sdílet  <font-awesome-icon icon="fa fa-solid fa-link" />
 
         Catalog(
           Type="objekty"
@@ -20,6 +18,7 @@
                 :Timestamp="objekt.timestamp"
                 :Uzivatel="objekt.user_email"
                 :ObrazkyArray="getObjectImages(objekt)"
+                :IsShared="true"
             )
 
     NotFound(
@@ -28,24 +27,12 @@
     )
 
     NotFound(
-      v-if="!prochazka && isLoaded"
-      Text="Procházka nebyla nalezena. Můžete se vrátit na hlavní stránku aplikace."
+      v-if="!isAllowedPublic"
+      Text="Procházka není veřejná. Můžete se vrátit na hlavní stránku aplikace."
       Type="error"
       Link="/"
     )
 
-  Modal(
-    v-if="showModal"
-    Title="Změna nastavení procházky"
-    @close="showModal = false"
-    @submit="submitModalHandler"
-  )
-    template(v-slot:form="{checkChanged}")
-      FormProchazkaSettings(
-        :ProchazkaId="prochazka.id"
-        :UserProfilePublicItems="currentPublicItems"
-        @input="checkChanged"
-      )
 </template>
 
 <style lang="sass"></style>
@@ -61,17 +48,18 @@ export default {
     currentPublicItems() {
       return this.$store.getters['user/getCurrentPublicItems'];
     },
-    currentLoggedUserId() {
-      return this.$store.getters['auth/getCurrentUser']?.uid;
+    isAllowedPublic() {
+      if (!this.currentPublicItems?.length) return false;
+      return this.currentPublicItems.includes(this.prochazkaId);
     },
     loading() {
       return this.$store.state.loading;
     },
     prochazka() {
-      return this.getProchazkaById(this.$route.params.id);
+      return this.getProchazkaById(this.prochazkaId);
     },
     objekty() {
-      return this.$store.state.objekty_prochazka_detail[this.$route.params.id];
+      return this.$store.state.objekty_prochazka_detail[this.prochazkaId];
     },
   },
   data() {
@@ -84,33 +72,22 @@ export default {
     };
   },
   async created() {
-    await this.$store.dispatch('getMyObjectsByProchazkaId', {
-      userId: this.currentLoggedUserId,
-      prochazkaId: this.$route.params.id,
-    });
+    this.userId = this.$route.query.u;
+    this.prochazkaId = this.$route.query.p;
 
     await this.$store.dispatch('user/getUserProfile', {
-      userId: this.currentLoggedUserId,
+      userId: this.userId,
+    });
+
+    await this.$store.dispatch('getMyObjectsByProchazkaId', {
+      userId: this.userId,
+      prochazkaId: this.prochazkaId,
     });
 
     this.isLoaded = true;
   },
-  mounted() { },
+  mounted() {},
   methods: {
-    showModalHandler(e) {
-      this.showModal = true;
-    },
-    async submitModalHandler(newFormData) {
-      this.showModal = false;
-
-      const payloadData = {
-        userId: this.currentLoggedUserId,
-        prochazkaId: this.$route.params.id,
-        makePublic: newFormData.toggleShareProchazka,
-      };
-
-      this.$store.dispatch('changeProchazkaPermission', payloadData);
-    },
     getObjectImages(objectProchazka = ObjectProchazka) {
       return objectProchazka?.obrazky?.[0]?.items?.length
         ? objectProchazka?.obrazky?.[0]?.items

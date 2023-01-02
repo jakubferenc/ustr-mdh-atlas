@@ -34,18 +34,17 @@ export default {
       title: 'Přihlášení',
     };
   },
-  created() { },
+  created() {},
 
   methods: {
-    errorHandler(error) {
-      this.$store.dispatch('alert/error', { error: error.message });
-    },
     async submitLoginHandler(payload) {
       try {
         const loginResponse = await this.$fire.auth.signInWithEmailAndPassword(
           payload.email,
           payload.password
         );
+        const currentUserId = loginResponse.user.uid;
+        await this.$store.dispatch('user/getUserProfile', { userId: currentUserId });
       } catch (error) {
         console.error(error);
         this.$store.dispatch('alert/error', { error: error.message });

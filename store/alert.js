@@ -37,4 +37,8 @@ export const actions = {
   error: ({ state, commit, dispatch }, { error }) => {
     commit('ON_ERROR', error);
   },
+  reset: ({ state, commit, dispatch }) => {
+    commit('ON_ERROR', null);
+    commit('ON_MESSAGE', null);
+  },
 };
