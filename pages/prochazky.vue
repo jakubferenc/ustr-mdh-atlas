@@ -5,7 +5,7 @@
 
     h1.typo-section-title.is-section-title Seznam procházek
 
-    .typo-subtitle.is-section-title Na jednotlivých interaktivních mapách najdete objekty, které lze třídit pomocí typu a kategorie. Můžete si zobrazit všechny objekty najednou, nebo si vytřídit ty, které chcete. Mapy dále pro uživatele nabízí tři způsoby pohledu na data. Lze si zobrazit pouze objekty, pouze mapu, anebo vše dohromady.
+    .typo-subtitle.is-section-title Nabízíme Vám několik příkladů práce s aplikací v prostředí konkrétních lokalit. Aktivitu jsme prohloubili přidáním historických pramenů vztahujících se k jednotlivým artefaktům. Práce s nimi vede skrze dílčí úkoly k objevování širšího kontextu zkoumaných reliktů minulosti a umožňuje uživatelům bádat nad konkrétními historickými problémy.
 
     .list-in-section(data-component="list-map")
 
