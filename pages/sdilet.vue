@@ -3,8 +3,9 @@
 .page()
   .section.section-padding( data-component="section")
     .prochazka-detail(v-if="isAllowedPublic && prochazka")
-      h1.typo-section-title.is-section-title  {{prochazka.nazev}}
-
+      .prochazka-detail__title.typo-section-title.is-section-title
+        h1 {{prochazka.nazev}}
+        h2.typo-subtitle.who-shares-title <font-awesome-icon icon="fa fa-solid fa-link" /> Sdílí: {{ currentUserProfile.email }}
       .section-category()
 
         Catalog(
@@ -35,7 +36,12 @@
 
 </template>
 
-<style lang="sass"></style>
+<style lang="sass">
+
+.who-shares-title
+  text-align: center
+  margin-top: 1rem
+</style>
 
 <script>
 import ObjectProchazka from '~/models/ObjectProchazka';
@@ -47,6 +53,9 @@ export default {
   computed: {
     currentPublicItems() {
       return this.$store.getters['user/getCurrentPublicItems'];
+    },
+    currentUserProfile() {
+      return this.$store.getters['user/getCurrentUserProfile'];
     },
     isAllowedPublic() {
       if (!this.currentPublicItems?.length) return false;

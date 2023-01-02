@@ -7,6 +7,7 @@
       h1.typo-section-title.is-section-title
         span Detail objektu <br />
         small {{ objekt.id }}
+        h2.typo-subtitle.who-shares-title <font-awesome-icon icon="fa fa-solid fa-link" /> Sdílí: {{ userEmail }}
 
 
       div.summary-container.summary-detail-container(:data-object-id="objekt.id")
@@ -55,6 +56,9 @@
 </template>
 
 <style lang="sass">
+.who-shares-title
+  text-align: center
+  margin-top: 1rem
 
 .content-container
   padding-bottom: 60px
@@ -78,6 +82,7 @@ import { findObjectSlideDefinition } from '@/utils/functions';
 export default {
   async asyncData({ route, store }) {
     await store.dispatch('getObjekt', route.params.id);
+
     return {
       objekt: store.state.objekt_detail,
     };
@@ -88,13 +93,15 @@ export default {
       title: 'Detail objektu',
     };
   },
-
   computed: {
     objektSorted() {
       return Object.keys(this.objekt.data).sort();
     },
     prochazka() {
       return this.getProchazkaById(this.objekt.prochazka_id);
+    },
+    userEmail() {
+      return this.objekt.user_email;
     },
   },
 
@@ -115,7 +122,7 @@ export default {
     },
   },
 
-  mounted() {},
+  mounted() { },
   head() {
     return {
       title: `${this.title} — ${this.$config.globalTitle}`,
