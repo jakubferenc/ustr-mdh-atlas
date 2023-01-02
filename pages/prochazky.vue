@@ -5,7 +5,7 @@
 
     h1.typo-section-title.is-section-title Seznam procházek
 
-    .typo-subtitle.is-section-title Nabízíme Vám několik příkladů práce s aplikací v prostředí konkrétních lokalit. Aktivitu jsme prohloubili přidáním historických pramenů vztahujících se k jednotlivým artefaktům. Práce s nimi vede skrze dílčí úkoly k objevování širšího kontextu zkoumaných reliktů minulosti a umožňuje uživatelům bádat nad konkrétními historickými problémy.
+    .typo-subtitle.is-section-title Nabízíme Vám několik příkladů práce s aplikací. v prostředí konkrétních lokalit. Aktivity v prostředí ulic měst jsme prohloubili přidáním historických pramenů vztahujících se k jednotlivým artefaktům ve veřejném prostoru. Práce s nimi vede skrze dílčí úkoly k objevování širšího kontextu zkoumaných reliktů minulosti a umožňuje uživatelům bádat nad konkrétními historickými problémy. Naleznete zde také verzi umožňující naší aplikaci využít v muzejních expozicích.
 
     .list-in-section(data-component="list-map")
 
