@@ -27,7 +27,7 @@
     )
 
     NotFound(
-      v-if="!isAllowedPublic"
+      v-if="!isAllowedPublic && !isLoading && isLoaded"
       Text="Procházka není veřejná. Můžete se vrátit na hlavní stránku aplikace."
       Type="error"
       Link="/"
