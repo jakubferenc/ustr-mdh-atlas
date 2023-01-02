@@ -6,10 +6,10 @@ import prochazkaMuzeum from './prochazky/muzeum/index.config';
 import prochazkaStopySocialismu from './prochazky/stopy-socialismu/index.config';
 
 export default {
+  prochazkaStopySocialismu,
   prochazkaCeskaTrebova,
   prochazkaCeskeBudejovice,
   prochazkaKladno,
   prochazkaPohrbenaPametPraha,
   prochazkaMuzeum,
-  prochazkaStopySocialismu,
 };
