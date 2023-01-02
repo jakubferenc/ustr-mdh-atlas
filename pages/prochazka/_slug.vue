@@ -83,7 +83,7 @@ export default {
         });
 
         // redirect to homepage
-        this.$router.push('/');
+        this.$router.push('/prochazky/');
 
         clearInterval(timeout);
       }, 2000);
