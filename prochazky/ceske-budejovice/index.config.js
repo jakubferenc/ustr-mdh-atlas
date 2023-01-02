@@ -337,7 +337,7 @@ export default {
   id: 'a73c6252-926d-4d01-9039-af35c4209c1c', // UUID 4
   nazev: 'České Budějovice: (ne)viditelná místa',
   slug: 'ceske-budejovice',
-  autori: ['Bohumil Melichar'],
+  autori: ['Michal Kurz', 'Tereza Arndt'],
   barva: '#aba99d',
   popis:
     'Procházka vede účastníky pěti veřejně přístupnými lokalitami v Českých Budějovicích, které prošly během druhé poloviny 20. století výraznými změnami svého vzhledu i funkce. Přestože jde o na první pohled nenápadná místa, sehrávala v minulosti významnou roli ve společenském životě města. Procházka rozvíjí možnost je vnímat a analyzovat jako svého druhu jeviště či scény, na níž se v různých dobách pohybovaly a jednaly různé skupiny aktérů. Otázky v aplikaci vedou účastníky od přímého pozorování a reflexe dojmů, přes prohlížení kontextualizačních historických pramenů k formulování celkové charakteristiky místa a hypotéz týkajících se možných příčin jeho pozorované proměny.',

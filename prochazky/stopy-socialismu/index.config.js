@@ -544,7 +544,7 @@ export default {
   nazev:
     'Stopy socialismu kolem nás - Digitální aplikace k edukativnímu mapování dějin ve veřejném prostoru',
   slug: 'stopy-socialismu',
-  autori: ['Bohumil Melichar'],
+  autori: ['Čeněk Pýcha', 'Bohumil Melichar'],
   barva: '#28444d',
   metadata: {
     cas: 60,

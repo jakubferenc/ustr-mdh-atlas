@@ -470,7 +470,7 @@ export default {
   id: 'f37d2a08-97b1-4913-9657-235aadca34b0', // UUID 4
   nazev: 'Česká Třebová - město železničářů?',
   slug: 'ceska-trebova',
-  autori: ['Bohumil Melichar'],
+  autori: ['Michal Kurz', 'Tereza Arndt'],
   barva: '#a69f8e',
   popis:
     'Procházka vede po několika uměleckých dílech umístěných na veřejně přístupných místech v České Třebové. Jejím záměrem je umožnit účastníkům posoudit, jakým způsobem a nakolik výrazně je v současném veřejném prostoru města přítomno tradiční místní téma železnice a železničářů. Otázky v aplikaci a doplňující historické prameny vedou uživatele k reflexi vlastních dojmů z konkrétních výtvarných objektů a k domýšlení tématu v obecnějších souvislostech (jakým způsobem a s jakými záměry prezentujeme konkrétní témata na veřejných prostranstvích).',
