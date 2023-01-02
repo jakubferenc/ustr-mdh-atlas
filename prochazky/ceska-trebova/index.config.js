@@ -479,6 +479,5 @@ export default {
     thumb: 'thumb.jpg',
     intro: 'intro.jpg',
   },
-  typObjektu,
   mapovaniUkolu,
 };
