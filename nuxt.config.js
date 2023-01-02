@@ -136,7 +136,7 @@ export default {
     '@fortawesome/fontawesome-svg-core/styles.css',
   ],
   head: {
-    title: projectConfig.globalName,
+    title: projectConfig.globalTitle,
     htmlAttrs: {
       lang: 'cs',
     },
@@ -146,7 +146,8 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: 'my website description',
+        content:
+          'Atlas Muzea dělnického hnutí je interaktivním rozhraním pro smartphony a tablety umožňující detailně objevovat stopy minulosti kolem vás',
       },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
