@@ -70,14 +70,19 @@ export default {
       prochazky: "getProchazky",
     }),
 
-    zobrazitVsechnyObjekty() {
-      return this.$route.query.vse === "1";
-    },
   },
 
   data() {
     return {
-      title: "Hello world!!!",
+      title: 'Procházky',
+    };
+  },
+  head() {
+    return {
+      title: `${this.title} — ${this.$config.globalTitle}`,
+      htmlAttrs: {
+        class: '',
+      },
     };
   },
 };

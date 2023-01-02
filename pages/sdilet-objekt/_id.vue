@@ -117,6 +117,7 @@ export default {
   mounted() {},
   head() {
     return {
+      title: `${this.title} — ${this.$config.globalTitle}`,
       htmlAttrs: {
         class: 'page--objekty',
       },

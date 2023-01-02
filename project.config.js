@@ -10,6 +10,7 @@ const projectName = 'mdh-prochazka-dev';
 
 export default {
   name: projectName,
+  globalTitle: 'Atlas Muzea dělnického hnutí v 21. století',
   filePath: '',
   publicFileURL: '',
   obsah: {

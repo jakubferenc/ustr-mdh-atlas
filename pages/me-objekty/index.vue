@@ -122,7 +122,7 @@ export default {
 
   data() {
     return {
-      title: '',
+      title: 'Mé objekty',
       prochazkyConfig,
       faGithub,
       isLoading: null,
@@ -142,7 +142,7 @@ export default {
     this.isLoaded = true;
   },
 
-  mounted() { },
+  mounted() {},
 
   methods: {
     showModalHandler(prochazkaId) {
@@ -174,8 +174,10 @@ export default {
       return prochazkyConfig[prochazkaKey];
     },
   },
+
   head() {
     return {
+      title: `${this.title} — ${this.$config.globalTitle}`,
       htmlAttrs: {
         class: 'page--objekty',
       },

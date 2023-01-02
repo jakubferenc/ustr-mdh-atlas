@@ -21,7 +21,15 @@ p
 export default {
   data() {
     return {
-      title: 'Hello world!!!',
+      title: 'O projektu',
+    };
+  },
+  head() {
+    return {
+      title: `${this.title} — ${this.$config.globalTitle}`,
+      htmlAttrs: {
+        class: '',
+      },
     };
   },
 };

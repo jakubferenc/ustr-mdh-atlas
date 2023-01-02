@@ -64,7 +64,7 @@ export default {
   },
   data() {
     return {
-      title: '',
+      title: 'Sdílet procházku',
       faGithub,
       isLoaded: false,
       isLoading: false,
@@ -102,6 +102,7 @@ export default {
   },
   head() {
     return {
+      title: `${this.title} — ${this.$config.globalTitle}`,
       htmlAttrs: {
         class: 'page--objekty',
       },

@@ -45,17 +45,25 @@
 
 <script>
 export default {
-  layout: "homepage",
+  layout: 'homepage',
 
   computed: {
     zobrazitVsechnyObjekty() {
-      return this.$route.query.vse === "1";
+      return this.$route.query.vse === '1';
     },
   },
 
   data() {
     return {
-      title: "Hello world!!!",
+      title: 'Hlavní stránka',
+    };
+  },
+  head() {
+    return {
+      title: `${this.title} — ${this.$config.globalTitle}`,
+      htmlAttrs: {
+        class: 'index',
+      },
     };
   },
 };

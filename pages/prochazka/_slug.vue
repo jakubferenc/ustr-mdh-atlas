@@ -145,6 +145,7 @@ export default {
   },
   head() {
     return {
+      title: `${this.prochazka?.nazev} — ${this.$config.globalTitle}`,
       htmlAttrs: {
         class: this.htmlClasses,
       },
