@@ -85,6 +85,7 @@ export default {
   data() {
     return {
       objekt: null,
+      title: 'Detail objektu',
     };
   },
 
