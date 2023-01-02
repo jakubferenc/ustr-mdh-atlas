@@ -7,7 +7,7 @@
 
       .section-category()
         .prochazka__title__actions
-          .button Sdílet  <font-awesome-icon icon="fa fa-solid fa-link" />
+          .button.button-short(@click="showModalHandler") Sdílet  <font-awesome-icon icon="fa fa-solid fa-link" />
 
         Catalog(
           Type="objekty"
@@ -33,6 +33,14 @@
       Type="error"
       Link="/"
     )
+
+  Modal(
+    v-if="showModal"
+    Title="Změna nastavení procházky"
+    @submit="submitModalHandler"
+  )
+    template(v-slot:form="{checkChanged}")
+      <FormProchazkaSettings @input="checkChanged" />
 </template>
 
 <style lang="sass"></style>
@@ -48,11 +56,9 @@ export default {
     currentLoggedUserId() {
       return this.$store.getters['auth/getCurrentUser']?.uid;
     },
-
     loading() {
       return this.$store.state.loading;
     },
-
     prochazka() {
       return this.getProchazkaById(this.$route.params.id);
     },
@@ -60,14 +66,15 @@ export default {
       return this.$store.state.objekty_prochazka_detail[this.$route.params.id];
     },
   },
-
   data() {
     return {
       title: '',
       faGithub,
+      isLoaded: false,
+      isLoading: false,
+      showModal: false,
     };
   },
-
   async created() {
     await this.$store.dispatch('getMyObjectsByProchazkaId', {
       userId: this.currentLoggedUserId,
@@ -75,10 +82,15 @@ export default {
     });
     this.isLoaded = true;
   },
-
   mounted() {},
-
   methods: {
+    showModalHandler(e) {
+      this.showModal = true;
+    },
+    submitModalHandler(newFormData) {
+      this.showModal = false;
+      console.log('haha from id page submit modal handler', newFormData);
+    },
     getObjectImages(objectProchazka = ObjectProchazka) {
       return objectProchazka?.obrazky?.[0]?.items?.length
         ? objectProchazka?.obrazky?.[0]?.items

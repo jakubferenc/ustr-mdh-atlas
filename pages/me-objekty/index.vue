@@ -11,7 +11,7 @@
           span.typo-hero-box-subtitle {{ getProchazkaById(prochazkaObj.id).nazev }}
         .prochazka__title__actions
   NuxtLink(:to="`/me-objekty/p/${prochazkaObj.id}/`").button.button-ok.desaturated Detail <font-awesome-icon icon="fa fa-solid fa-share" />
-  .button Sdílet  <font-awesome-icon icon="fa fa-solid fa-link" />
+  .button.button-short Sdílet  <font-awesome-icon icon="fa fa-solid fa-link" />
 
   Catalog(Type="objekty")
     template(v-slot:catalog-items)
@@ -40,11 +40,6 @@
   margin-bottom: 2.5em
   display: flex
   column-gap: .5rem
-
-
-  .button
-    max-width: 150px
-    min-width: 50px
 
 .section-category
   margin-bottom: 1.5em

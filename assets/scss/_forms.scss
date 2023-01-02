@@ -31,7 +31,7 @@
   line-height: 65px;
   border-radius: 12px;
   background-color: #000;
-  box-shadow: 0px 3px 6px #00000029;
+  box-shadow: 0 0.5333333333rem 0.8rem rgb(28 19 18 / 10%);
   font-size: 16px;
   font-weight: 700;
   text-transform: uppercase;
@@ -46,8 +46,14 @@
   padding-left: 1em;
   padding-right: 1em;
 
+  &.button-short {
+    max-width: 150px;
+    min-width: 50px;
+  }
+
+  &:hover,
   &:active {
-    box-shadow: 0px 6px 6px #00000029;
+    box-shadow: 0 0.5333333333rem 0.8rem rgb(28 19 18 / 30%);
     position: relative;
     top: 2px;
   }
