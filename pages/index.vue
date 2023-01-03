@@ -23,6 +23,9 @@
           .content
             p(v-html="$config.obsah.about.aboutText")
 
+        .column.is-half-desktop
+          NuxtLink(to="/prochazky/").button Spustit aplikaci
+
 
 
 
