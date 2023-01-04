@@ -18,7 +18,7 @@
       h3 Nahrávám...
   .audio-list.columns.is-multiline
     .column
-      h2 Vaše nahrávky
+      h2.typo-subtitle Vaše nahrávky
       .recording-item(v-for="(recording, index) in audioRecordings" :key="index")
         .recording-item__player
           <audio controls>
@@ -32,6 +32,7 @@
 <style lang="sass" scoped>
 
 .audio-list
+  margin-top: 2em
   h2
     margin-bottom: 1em
 .recording-item
