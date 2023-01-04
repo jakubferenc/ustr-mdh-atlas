@@ -160,6 +160,34 @@ export const actions = {
     }
   },
 
+  async removeObjekt({ state, commit, dispatch }, { id }) {
+    try {
+      dispatch('setLoading', { isLoading: true, message: 'Odstraňuji...' });
+
+      const db = this.$fire.firestore;
+      await db
+        .collection(this.$config.firebaseConfig.collectionId)
+        .doc(id)
+        .delete();
+      dispatch('removeObjektFromStore', { id });
+      dispatch(
+        'alert/message',
+        { message: 'Objekt byl úspěšně odstraněn' },
+        { root: true }
+      );
+    } catch (error) {
+      dispatch('alert/error', { error: error.message }, { root: true });
+      console.error('Error getting document:', error);
+    } finally {
+      dispatch('setLoading', { isLoading: false, message: false });
+    }
+  },
+
+  removeObjektFromStore({ state, commit, dispatch }, { id }) {
+    const updatedObjects = state.objekty.filter((objekt) => objekt.id !== id);
+    commit('updateObjekty', updatedObjects);
+  },
+
   async getObjekt({ state, commit, dispatch, getters }, objectProchazkaId) {
     const findCachedObject = state.objekty.filter(
       (objekt) => objekt.id === objectProchazkaId
