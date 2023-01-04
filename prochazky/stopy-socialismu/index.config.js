@@ -22,12 +22,12 @@ const mista = {
       title: 'Významná budova spojená s minulým režimem',
     },
     {
-      id: 'misto-04',
-      title: 'Místo, které reprezentuje paměť současných obyvatel',
-    },
-    {
       id: 'misto-05',
       title: 'Drobný artefakt komunismu',
+    },
+    {
+      id: 'misto-04',
+      title: 'Místo, které reprezentuje paměť současných obyvatel',
     },
   ],
 };
@@ -128,25 +128,37 @@ const klicovaSlova = {
 };
 
 const mapovaniUkolu = {
-  q01_01: {
+  q00_01: {
     title: 'Kde se nacházíte?',
     type: 'array',
     itemsObj: mista,
     limit: 1,
     inline: false,
   },
-  q01_01b: {
+  q01_01: {
     title: 'Jak zní vžitý název místa?',
     type: 'text',
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
         value: mista.items[0].title,
       },
     ],
   },
   q01_02: {
+    title: 'Zachyťte celek místa',
+    type: 'image',
+    photoCount: 1,
+    conditions: [
+      {
+        question: 'q00_01',
+        operator: 'in',
+        value: mista.items[0].title,
+      },
+    ],
+  },
+  q01_03: {
     title: 'Jak na vás místo působí?',
     type: 'array',
     itemsObj: klicovaSlova,
@@ -154,18 +166,7 @@ const mapovaniUkolu = {
     inline: false,
     conditions: [
       {
-        question: 'q01_01',
-        operator: 'in',
-        value: mista.items[0].title,
-      },
-    ],
-  },
-  q01_03: {
-    title: 'Jaké informace se můžete dozvědět přímo na místě?',
-    type: 'text',
-    conditions: [
-      {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
         value: mista.items[0].title,
       },
@@ -173,12 +174,35 @@ const mapovaniUkolu = {
   },
   q01_04: {
     title:
+      'Zapněte funkci nahrávat zvuk a zaznamenejte zvuky místa. Můžete nahrát svůj komentář ohledně vlastních pocitů z atmosféry (nahrávání zvuku) Jaké informace se můžete dozvědět přímo na místě?',
+    type: 'audio',
+    conditions: [
+      {
+        question: 'q00_01',
+        operator: 'in',
+        value: mista.items[0].title,
+      },
+    ],
+  },
+  q01_05: {
+    title: 'Jaké informace se můžete dozvědět přímo na místě?',
+    type: 'text',
+    conditions: [
+      {
+        question: 'q00_01',
+        operator: 'in',
+        value: mista.items[0].title,
+      },
+    ],
+  },
+  q01_06: {
+    title:
       'Vyfoťte detail pamětního místa, který charakterizuje vzpomínání na 2. světovou válku',
     type: 'image',
     photoCount: 1,
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
         value: mista.items[0].title,
       },
@@ -189,7 +213,7 @@ const mapovaniUkolu = {
     type: 'text',
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
         value: mista.items[1].title,
       },
@@ -200,7 +224,7 @@ const mapovaniUkolu = {
     type: 'text',
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
         value: mista.items[1].title,
       },
@@ -213,44 +237,56 @@ const mapovaniUkolu = {
     photoCount: 1,
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
         value: mista.items[1].title,
       },
     ],
   },
+  // q02_04: {
+  //   title: 'Jaká je charakteristická atmosféra ulice?',
+  //   type: 'array',
+  //   itemsObj: klicovaSlovaUlice,
+  //   limit: 5,
+  //   inline: false,
+  //   conditions: [
+  //     {
+  //       question: 'q00_01',
+  //       operator: 'in',
+  //       value: mista.items[1].title,
+  //     },
+  //   ],
+  // },
   q02_04: {
-    title: 'Jaká je charakteristická atmosféra ulice?',
-    type: 'array',
-    itemsObj: klicovaSlovaUlice,
-    limit: 5,
-    inline: false,
+    title:
+      'Zapněte funkci nahrávat zvuk a zaznamenejte zvuky místa. Můžete nahrát svůj komentář ohledně vlastních pocitů z atmosféry',
+    type: 'audio',
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
         value: mista.items[1].title,
       },
     ],
   },
   q03_01: {
-    title: 'Jak zní vžitý název budovy?',
+    title: 'Na koho se vzpomíná?',
     type: 'text',
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
         value: mista.items[2].title,
       },
     ],
   },
   q03_02: {
-    title: 'Zachyťte celek budovy',
+    title: 'Zachyťte celek místa',
     type: 'image',
     photoCount: 1,
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
         value: mista.items[2].title,
       },
@@ -264,91 +300,104 @@ const mapovaniUkolu = {
     inline: false,
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
         value: mista.items[2].title,
       },
     ],
   },
   q03_04: {
-    title: 'Jakou má místo funkci?',
+    title: 'Jaké informace se můžete dozvědět přímo na místě?',
     type: 'text',
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
         value: mista.items[2].title,
       },
     ],
   },
   q03_05: {
-    title: 'Lze se na místě o jeho minulosti něco dozvědět?',
-    type: 'text',
-    conditions: [
-      {
-        question: 'q01_01',
-        operator: 'in',
-        value: mista.items[2].title,
-      },
-    ],
-  },
-  q03_06_01: {
     title:
-      'Vyfoťte klíčové detaily místa, které odkazují na minulost spjatou s komunismem (První foto)',
-    type: 'image',
-    photoCount: 1,
+      'Zapněte funkci nahrávat zvuk a zaznamenejte zvuky místa. Můžete nahrát svůj komentář ohledně vlastních pocitů z atmosféry',
+    type: 'audio',
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
         value: mista.items[2].title,
       },
     ],
   },
-  q03_06_02: {
-    title:
-      'Vyfoťte klíčové detaily místa, které odkazují na minulost spjatou s komunismem (Druhé foto)',
+  q03_06: {
+    title: 'Vyfoťte detail pamětního místa',
     type: 'image',
-    photoCount: 1,
+    photoCount: 3,
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
         value: mista.items[2].title,
       },
     ],
   },
-  q03_06_03: {
-    title:
-      'Vyfoťte klíčové detaily místa, které odkazují na minulost spjatou s komunismem (Třetí foto)',
-    type: 'image',
-    photoCount: 1,
-    conditions: [
-      {
-        question: 'q01_01',
-        operator: 'in',
-        value: mista.items[2].title,
-      },
-    ],
-  },
+  // q03_06_01: {
+  //   title:
+  //     'Vyfoťte klíčové detaily místa, které odkazují na minulost spjatou s komunismem (První foto)',
+  //   type: 'image',
+  //   photoCount: 1,
+  //   conditions: [
+  //     {
+  //       question: 'q00_01',
+  //       operator: 'in',
+  //       value: mista.items[2].title,
+  //     },
+  //   ],
+  // },
+  // q03_06_02: {
+  //   title:
+  //     'Vyfoťte klíčové detaily místa, které odkazují na minulost spjatou s komunismem (Druhé foto)',
+  //   type: 'image',
+  //   photoCount: 1,
+  //   conditions: [
+  //     {
+  //       question: 'q00_01',
+  //       operator: 'in',
+  //       value: mista.items[2].title,
+  //     },
+  //   ],
+  // },
+  // q03_06_03: {
+  //   title:
+  //     'Vyfoťte klíčové detaily místa, které odkazují na minulost spjatou s komunismem (Třetí foto)',
+  //   type: 'image',
+  //   photoCount: 1,
+  //   conditions: [
+  //     {
+  //       question: 'q00_01',
+  //       operator: 'in',
+  //       value: mista.items[2].title,
+  //     },
+  //   ],
+  // },
   q04_01: {
-    title: 'Jak vzní žitý název místa?',
+    title: 'Jak zní vžitý název budovy?',
     type: 'text',
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
         value: mista.items[3].title,
       },
     ],
   },
   q04_02: {
-    title: 'Zachyťte celek místa.',
+    title: 'Zachyťte celek budovy.',
     type: 'image',
     photoCount: 1,
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
         value: mista.items[3].title,
       },
@@ -362,68 +411,104 @@ const mapovaniUkolu = {
     inline: false,
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
         value: mista.items[3].title,
       },
     ],
   },
   q04_04: {
-    title: 'Jakým způsobem místo reprezentuje paměť současných obyvatel?',
+    title:
+      'Zapněte funkci nahrávat zvuk a zaznamenejte zvuky místa. Můžete nahrát svůj komentář ohledně vlastních pocitů z atmosféry',
+    type: 'audio',
+    conditions: [
+      {
+        question: 'q00_01',
+        operator: 'in',
+        value: mista.items[3].title,
+      },
+    ],
+  },
+  q04_05: {
+    title: 'Jakou má místo funkci?',
     type: 'text',
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
         value: mista.items[3].title,
       },
     ],
   },
-  q04_05_01: {
-    title:
-      'Vyfoťte klíčové detaily místa, které dokumentují paměť současných obyvatel (První foto)',
-    type: 'image',
-    photoCount: 1,
+  q04_06: {
+    title: 'Lze se na místě o jeho minulosti něco dozvědět?',
+    type: 'text',
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
         value: mista.items[3].title,
       },
     ],
   },
-  q04_05_02: {
+  q04_07: {
     title:
-      'Vyfoťte klíčové detaily místa, které dokumentují paměť současných obyvatel (Druhé foto)',
+      'Vyfoťte klíčové detaily místa, které odkazují na minulost spjatou s komunismem',
     type: 'image',
-    photoCount: 1,
+    photoCount: 3,
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
         value: mista.items[3].title,
       },
     ],
   },
-  q04_05_03: {
-    title:
-      'Vyfoťte klíčové detaily místa, které dokumentují paměť současných obyvatel (Třetí foto)',
-    type: 'image',
-    photoCount: 1,
-    conditions: [
-      {
-        question: 'q01_01',
-        operator: 'in',
-        value: mista.items[3].title,
-      },
-    ],
-  },
+  // q04_05_01: {
+  //   title:
+  //     'Vyfoťte klíčové detaily místa, které dokumentují paměť současných obyvatel (První foto)',
+  //   type: 'image',
+  //   photoCount: 1,
+  //   conditions: [
+  //     {
+  //       question: 'q00_01',
+  //       operator: 'in',
+  //       value: mista.items[3].title,
+  //     },
+  //   ],
+  // },
+  // q04_05_02: {
+  //   title:
+  //     'Vyfoťte klíčové detaily místa, které dokumentují paměť současných obyvatel (Druhé foto)',
+  //   type: 'image',
+  //   photoCount: 1,
+  //   conditions: [
+  //     {
+  //       question: 'q00_01',
+  //       operator: 'in',
+  //       value: mista.items[3].title,
+  //     },
+  //   ],
+  // },
+  // q04_05_03: {
+  //   title:
+  //     'Vyfoťte klíčové detaily místa, které dokumentují paměť současných obyvatel (Třetí foto)',
+  //   type: 'image',
+  //   photoCount: 1,
+  //   conditions: [
+  //     {
+  //       question: 'q00_01',
+  //       operator: 'in',
+  //       value: mista.items[3].title,
+  //     },
+  //   ],
+  // },
   q05_01: {
     title: 'Jak byste artefakt pojmenovali?',
     type: 'text',
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
         value: mista.items[4].title,
       },
@@ -435,7 +520,7 @@ const mapovaniUkolu = {
     photoCount: 1,
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
         value: mista.items[4].title,
       },
@@ -449,7 +534,7 @@ const mapovaniUkolu = {
     inline: false,
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
         value: mista.items[4].title,
       },
@@ -460,7 +545,7 @@ const mapovaniUkolu = {
     type: 'text',
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
         value: mista.items[4].title,
       },
@@ -468,21 +553,21 @@ const mapovaniUkolu = {
   },
   q05_05: {
     title: 'Máte s artefaktem spojenou nějakou vzpomínku?',
-    type: 'text',
+    type: 'audio',
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
         value: mista.items[4].title,
       },
     ],
   },
   q06_01: {
-    title: 'Na koho se vzpomíná?',
+    title: 'Jak zní žitý název místa?',
     type: 'text',
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
         value: mista.items[5].title,
       },
@@ -494,9 +579,9 @@ const mapovaniUkolu = {
     photoCount: 1,
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
-        value: mista.items[4].title,
+        value: mista.items[5].title,
       },
     ],
   },
@@ -508,32 +593,46 @@ const mapovaniUkolu = {
     inline: false,
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
-        value: mista.items[4].title,
+        value: mista.items[5].title,
       },
     ],
   },
   q06_04: {
-    title: 'Jaké informace se můžete dozvědět přímo na místě?',
-    type: 'text',
+    title:
+      'Zapněte funkci nahrávat zvuk a zaznamenejte zvuky místa. Můžete nahrát svůj komentář ohledně vlastních pocitů z atmosféry',
+    type: 'audio',
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
-        value: mista.items[4].title,
+        value: mista.items[5].title,
       },
     ],
   },
   q06_05: {
-    title: 'Vyfoťte detail pamětního místa',
-    type: 'image',
-    photoCount: 1,
+    title:
+      'Jakým způsobem místo reprezentuje paměť současných obyvatel? Namluvte krátký komentář',
+    type: 'audio',
     conditions: [
       {
-        question: 'q01_01',
+        question: 'q00_01',
         operator: 'in',
-        value: mista.items[4].title,
+        value: mista.items[5].title,
+      },
+    ],
+  },
+  q06_05: {
+    title:
+      'Vyfoťte klíčové detaily místa, které dokumentují paměť současných obyvatel ',
+    type: 'image',
+    photoCount: 3,
+    conditions: [
+      {
+        question: 'q00_01',
+        operator: 'in',
+        value: mista.items[5].title,
       },
     ],
   },
