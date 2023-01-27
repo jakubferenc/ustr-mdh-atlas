@@ -2,6 +2,7 @@
 nav.main-nav(:class="CssClasses" role="navigation" aria-label="Primary")
   NuxtLink(to="/").item Hlavní stránka
   NuxtLink(to="/prochazky/").item.item--prochazky Procházky
+  a(href="https://mdh.dejepis21.cz" target="_blank").item.item--prochazky Mapa
   NuxtLink(v-if="currentLoggedUserId" to="/me-objekty/" ).item.item--objekty Mé objekty
   NuxtLink(to="/o-projektu/" ).item O projektu
   NuxtLink(v-if="!currentLoggedUserId" to="/prihlaseni/").item.item--mobile-only Přihlásit / Registrovat
