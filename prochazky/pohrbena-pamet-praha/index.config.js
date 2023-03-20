@@ -157,7 +157,6 @@ const mapovaniUkolu = {
     dynamicBasedOn: 'q01_08',
   },
 };
-
 export default {
   id: '2bc7bd44-22b5-4633-826e-a64fe7e701ce', // UUID 4
   nazev:

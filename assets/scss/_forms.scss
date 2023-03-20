@@ -96,7 +96,9 @@
   padding-bottom: 0;
 }
 
-input {
+input[type='text'],
+input[type='password'],
+input[type='email'] {
   background-color: #fff;
   border-radius: 12px;
   width: 100%;

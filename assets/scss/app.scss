@@ -7,6 +7,23 @@ textarea {
   border-top: 1px solid #aaa;
 }
 
+.button-container-alt {
+  display: flex;
+  flex-direction: column;
+  @include from($desktop) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.button-container-homepage {
+  .button {
+    @include until($widescreen) {
+      width: 100%;
+    }
+  }
+}
+
 .button {
   background: #000;
   color: #fff;
@@ -16,6 +33,14 @@ textarea {
   line-height: 2em;
   font-size: 1.5rem;
   cursor: pointer;
+}
+
+.button-alt {
+  width: 20%;
+
+  @include from($desktop) {
+    min-width: 80px;
+  }
 }
 
 .content-container {
