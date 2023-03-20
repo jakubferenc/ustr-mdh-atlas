@@ -38,7 +38,7 @@
     "lodash": "^4.17.21",
     "nuxt": "^2.15.6",
     "nuxt-i18n": "^6.28.1",
-    "prettier": "^2.8.1"
+    "prettier": "^2.8.4"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.1",
