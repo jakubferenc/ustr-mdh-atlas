@@ -24,8 +24,9 @@
             p(v-html="$config.obsah.about.aboutText")
 
         .column.is-half-desktop
-          NuxtLink(to="/prochazky/").button Spustit aplikaci
-
+          .button-container-alt.button-container-homepage
+            NuxtLink(to="/prochazky/").button.button-ok.desaturated Spustit aplikaci
+            NuxtLink(to="/files/navod_k_aplikaci_atlas.pdf").button.button-alt Návod k aplikaci
 
 
 
